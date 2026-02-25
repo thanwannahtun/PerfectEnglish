@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:perfect_english/services/sound_service.dart';
 
 final List<Map<String, dynamic>> partsOfSpeech = const [
   {
@@ -544,11 +545,7 @@ class PartOfSpeechs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Perfect English Learning'),
-        actionsPadding: EdgeInsets.only(right: 16),
-        actions: [Text("v0.01")],
-      ),
+      appBar: AppBar(title: const Text('ဝါစင်္ဂ ၈ မျိုး (8 Parts of Speech)')),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Navigator.push(
           context,
@@ -558,11 +555,21 @@ class PartOfSpeechs extends StatelessWidget {
         icon: const Icon(Icons.play_arrow),
       ),
       body: ListView.builder(
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: MediaQuery.sizeOf(context).width * 0.05,
+        ),
         itemCount: partsOfSpeech.length,
         itemBuilder: (context, index) {
           final item = partsOfSpeech[index];
           return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            color: Theme.of(context).colorScheme.onPrimary,
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: Colors.grey.shade800),
+            ),
+            elevation: 0.0,
             child: ListTile(
               title: Text(
                 item['title'],
@@ -660,90 +667,92 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildSectionTitle('အဓိပ္ပာယ်သတ်မှတ်ချက် (Definition)', context),
-              const SizedBox(height: 8),
-              Text(definition, style: const TextStyle(fontSize: 16)),
-              const Divider(height: 32),
-              _buildSectionTitle('ဥပမာစကားလုံးများ (Example Words)', context),
-              const SizedBox(height: 10),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: examples
-                    .map(
-                      (ex) => Chip(
-                        label: Text("${ex['en']} (${ex['mm']})"),
-                        backgroundColor: Theme.of(
-                          context,
-                        ).colorScheme.onPrimaryContainer.withOpacity(0.1),
-                      ),
-                    )
-                    .toList(),
-              ),
-              const SizedBox(height: 10),
-
-              _buildSectionTitle('နမူနာဝါကျများ (Sample Sentences)', context),
-              SizedBox(height: 16),
-
-              ...examples.map(
-                (ex) => Container(
-                  margin: const EdgeInsets.only(bottom: 20),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.blue.withOpacity(0.2)),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            ex['en']!,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          const SizedBox(width: 10),
-                          Text(
-                            "(${ex['mm']!})",
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                        ],
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Divider(thickness: 0.5),
-                      ),
-
-                      const SizedBox(height: 4),
-                      _buildHighlightedSentence(
-                        ex['sentenceEn']!,
-                        ex['en']!,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: MediaQuery.sizeOf(context).width * 0.05,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSectionTitle('အဓိပ္ပာယ်သတ်မှတ်ချက် (Definition)', context),
+            const SizedBox(height: 8),
+            Text(definition, style: const TextStyle(fontSize: 16)),
+            const Divider(height: 32),
+            _buildSectionTitle('ဥပမာစကားလုံးများ (Example Words)', context),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: examples
+                  .map(
+                    (ex) => Chip(
+                      label: Text("${ex['en']} (${ex['mm']})"),
+                      backgroundColor: Theme.of(
                         context,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        ex['sentenceMM']!,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.onSecondaryContainer,
-                          // fontStyle: FontStyle.italic,
+                      ).colorScheme.onPrimaryContainer.withAlpha(25),
+                    ),
+                  )
+                  .toList(),
+            ),
+            const Divider(height: 32),
+
+            _buildSectionTitle('နမူနာဝါကျများ (Sample Sentences)', context),
+            SizedBox(height: 16),
+
+            ...examples.map(
+              (ex) => Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onPrimaryContainer.withAlpha(25),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          ex['en']!,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
+                        const SizedBox(width: 10),
+                        Text(
+                          "(${ex['mm']!})",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: Divider(thickness: 0.5),
+                    ),
+
+                    const SizedBox(height: 4),
+                    _buildHighlightedSentence(
+                      ex['sentenceEn']!,
+                      ex['en']!,
+                      context,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      ex['sentenceMM']!,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSecondaryContainer,
+                        // fontStyle: FontStyle.italic,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -767,6 +776,15 @@ class _QuizPageState extends State<QuizPage> {
   List<String> options = [];
   int score = 0;
   int totalAnswered = 0;
+
+  bool soundOn = true;
+
+  toggleSoundOn() {
+    setState(() {
+      soundOn = !soundOn;
+      SoundService.toggle();
+    });
+  }
 
   @override
   void initState() {
@@ -803,26 +821,44 @@ class _QuizPageState extends State<QuizPage> {
 
   void checkAnswer(String selected) {
     totalAnswered++;
+
     bool isCorrect = (selected == correctAnswer);
-    if (isCorrect) score++;
+
+    if (isCorrect) {
+      SoundService.playCorrect(); // no await
+      score++;
+    } else {
+      SoundService.playWrong(); // no await
+    }
+
+    if (!mounted) return;
 
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: Text(isCorrect ? "Correct! 🎉" : "Wrong! ❌"),
+        title: Text(
+          isCorrect ? "မှန်သွားပြီ! 🎉" : "မှားသွားပြီ! ❌",
+          style: TextStyle(
+            color: isCorrect
+                ? Theme.of(context).colorScheme.onPrimaryContainer
+                : Theme.of(context).colorScheme.onErrorContainer,
+          ),
+        ),
         content: Text(
           isCorrect
-              ? "'$currentWord' is indeed a $correctAnswer."
-              : "Actually, '$currentWord' is a $correctAnswer.",
+              ? "မှန်ပါတယ် '$currentWord' က $correctAnswer ဖြစ်ပါတယ်"
+              : "တကယ်တော့, '$currentWord' ဆိုတာ $correctAnswer တစ်ခုပါ",
         ),
         actions: [
-          TextButton(
+          TextButton.icon(
             onPressed: () {
               Navigator.pop(context);
               generateQuestion();
             },
-            child: const Text("Next Question"),
+            iconAlignment: IconAlignment.end,
+            icon: const Icon(Icons.navigate_next),
+            label: const Text("Next Question"),
           ),
         ],
       ),
@@ -832,16 +868,34 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Score: $score / $totalAnswered")),
+      appBar: AppBar(
+        title: Text("Score: $score / $totalAnswered"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              toggleSoundOn();
+            },
+            tooltip: "ဖွင့်/ပိတ်",
+            icon: Icon(soundOn ? Icons.volume_up : Icons.volume_off),
+          ),
+        ],
+        actionsPadding: EdgeInsets.only(
+          right: MediaQuery.sizeOf(context).width * 0.05,
+        ),
+      ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: EdgeInsets.symmetric(
+            vertical: 16,
+            horizontal: MediaQuery.sizeOf(context).width * 0.05,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Identify this Part of Speech:",
-                style: TextStyle(fontSize: 18),
+              Text(
+                "Identify this Part of Speech \n(အမျိုးအစားခွဲပြပါ)",
+                style: Theme.of(context).textTheme.titleLarge,
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 10),
               Text(

@@ -84,7 +84,10 @@ class GrammarHubScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('English Grammar Hub')),
       body: ListView.builder(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: MediaQuery.sizeOf(context).width * 0.05,
+        ),
         itemCount: grammarCategories.length,
         itemBuilder: (context, index) {
           final category = grammarCategories[index];
@@ -112,10 +115,11 @@ class GrammarHubScreen extends StatelessWidget {
               ),
               ...((category['topics'] as List).map(
                 (topic) => Card(
-                  elevation: 0,
+                  elevation: 0.0,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
-                    side: BorderSide(color: Colors.grey.shade300),
+                    side: BorderSide(color: Colors.grey.shade800),
                   ),
                   margin: const EdgeInsets.only(bottom: 10),
                   child: ListTile(

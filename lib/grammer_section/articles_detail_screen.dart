@@ -67,7 +67,10 @@ class ArticlesDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Articles (A, An, The)')),
       body: ListView.builder(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: MediaQuery.sizeOf(context).width * 0.05,
+        ),
         itemCount: articleRules.length,
         itemBuilder: (context, index) {
           final rule = articleRules[index];
@@ -105,7 +108,10 @@ class ArticlesDetailScreen extends StatelessWidget {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
+                    // color: Colors.grey.shade200,
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onPrimaryContainer.withAlpha(25),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
@@ -172,7 +178,7 @@ class ArticlesDetailScreen extends StatelessWidget {
             text: '$word ',
             style: TextStyle(
               fontWeight: isArticle ? FontWeight.bold : FontWeight.normal,
-              color: isArticle ? Colors.red : Colors.black,
+              color: isArticle ? Colors.red : Colors.green,
               backgroundColor: isArticle
                   ? Colors.yellow.shade100
                   : Colors.transparent,

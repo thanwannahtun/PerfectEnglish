@@ -91,13 +91,18 @@ class SubjectVerbAgreementScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Subject-Verb Agreement')),
       body: ListView.builder(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: MediaQuery.sizeOf(context).width * 0.05,
+        ),
         itemCount: rulesData.length,
         itemBuilder: (context, index) {
           final item = rulesData[index];
           return Card(
-            elevation: 3,
-            margin: const EdgeInsets.only(bottom: 20),
+            margin: const EdgeInsets.only(bottom: 10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -112,15 +117,14 @@ class SubjectVerbAgreementScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    item['desc'],
-                    style: const TextStyle(fontSize: 14, color: Colors.black87),
-                  ),
+                  Text(item['desc']),
                   const SizedBox(height: 12),
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.orange.shade50,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onPrimaryContainer.withAlpha(25),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
@@ -162,7 +166,10 @@ class SubjectVerbAgreementScreen extends StatelessWidget {
                                   ),
                                 ),
                                 const TextSpan(text: ' '),
-                                TextSpan(text: ex['rest']),
+                                TextSpan(
+                                  text: ex['rest'],
+                                  style: const TextStyle(color: Colors.green),
+                                ),
                               ],
                             ),
                           ),
@@ -187,6 +194,7 @@ class SubjectVerbAgreementScreen extends StatelessWidget {
     );
   }
 }
+
 // Strategic Tip for Learners:
 // In the app, you could add a small note: "Remember, if the Noun has an 's' (plural), the Verb usually doesn't. If the Noun doesn't have an 's' (singular), the Verb usually needs one!"
 //

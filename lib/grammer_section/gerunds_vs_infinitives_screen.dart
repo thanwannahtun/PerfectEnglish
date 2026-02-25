@@ -89,8 +89,10 @@ class GerundsVsInfinitivesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Gerunds vs Infinitives')),
       body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: MediaQuery.sizeOf(context).width * 0.05,
+        ),        children: [
           _buildComparisonHeader(),
           const SizedBox(height: 20),
           ...grammarData.map((data) => _buildGrammarCard(data)),
@@ -123,7 +125,7 @@ class GerundsVsInfinitivesScreen extends StatelessWidget {
   Widget _buildGrammarCard(Map<String, dynamic> data) {
     return Card(
       margin: const EdgeInsets.only(bottom: 24),
-      elevation: 5,
+      elevation: 1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
         padding: const EdgeInsets.all(16),

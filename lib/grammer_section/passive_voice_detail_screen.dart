@@ -7,26 +7,28 @@ class PassiveVoiceDetailScreen extends StatelessWidget {
     {
       'tense': 'Simple Present',
       'active': 'am/is/are + V3',
-      'usage': 'ယေဘုယျအမှန်တရားများ သို့မဟုတ် ပုံမှန်လုပ်ဆောင်ချက်များကို Passive အနေဖြင့်ဖော်ပြသည်။',
+      'usage':
+          'ယေဘုယျအမှန်တရားများ သို့မဟုတ် ပုံမှန်လုပ်ဆောင်ချက်များကို Passive အနေဖြင့်ဖော်ပြသည်။',
       'examples': [
         {
           'active': 'The chef prepares the food.',
           'passive': 'The food is prepared by the chef.',
-          'mm': 'အစားအစာကို စားဖိုမှူးမှ ပြင်ဆင်သည်။'
+          'mm': 'အစားအစာကို စားဖိုမှူးမှ ပြင်ဆင်သည်။',
         },
-      ]
+      ],
     },
     {
       'tense': 'Simple Past',
       'active': 'was/were + V3',
-      'usage': 'အတိတ်က ပြီးဆုံးခဲ့သော လုပ်ဆောင်ချက်ကို ခံရသူဘက်မှ အဓိကထားဖော်ပြသည်။',
+      'usage':
+          'အတိတ်က ပြီးဆုံးခဲ့သော လုပ်ဆောင်ချက်ကို ခံရသူဘက်မှ အဓိကထားဖော်ပြသည်။',
       'examples': [
         {
           'active': 'He wrote the letter.',
           'passive': 'The letter was written by him.',
-          'mm': 'စာကို သူ့ဖက်မှ ရေးသားခဲ့သည်။'
+          'mm': 'စာကို သူ့ဖက်မှ ရေးသားခဲ့သည်။',
         },
-      ]
+      ],
     },
     {
       'tense': 'Present Continuous',
@@ -36,9 +38,9 @@ class PassiveVoiceDetailScreen extends StatelessWidget {
         {
           'active': 'They are building the house.',
           'passive': 'The house is being built by them.',
-          'mm': 'အိမ်ကို သူတို့မှ ဆောက်လုပ်နေကြသည်။'
+          'mm': 'အိမ်ကို သူတို့မှ ဆောက်လုပ်နေကြသည်။',
         },
-      ]
+      ],
     },
     {
       'tense': 'Present Perfect',
@@ -48,9 +50,9 @@ class PassiveVoiceDetailScreen extends StatelessWidget {
         {
           'active': 'She has cleaned the room.',
           'passive': 'The room has been cleaned by her.',
-          'mm': 'အခန်းကို သူမမှ သန့်ရှင်းရေးလုပ်ပြီးသွားပြီ။'
+          'mm': 'အခန်းကို သူမမှ သန့်ရှင်းရေးလုပ်ပြီးသွားပြီ။',
         },
-      ]
+      ],
     },
   ];
 
@@ -59,20 +61,23 @@ class PassiveVoiceDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Passive Voice')),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: MediaQuery.sizeOf(context).width * 0.05,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'How to change to Passive Voice?',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 10),
-            _buildTransformationGuide(),
+            _buildTransformationGuide(context),
             const SizedBox(height: 25),
-            const Text(
+            Text(
               'Tense-wise Passive Rules',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 10),
             ...passiveRules.map((rule) => _buildPassiveCard(rule)),
@@ -82,27 +87,36 @@ class PassiveVoiceDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTransformationGuide() {
+  Widget _buildTransformationGuide(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.amber.shade50,
+        color: Theme.of(context).colorScheme.onPrimaryContainer.withAlpha(25),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.amber.shade200),
+        border: Border.all(color: Colors.green.shade800),
       ),
       child: const Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text("Active: Subject + Verb + Object", style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(
+                "Active: Subject + Verb + Object",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ],
           ),
-          Icon(Icons.swap_vert, size: 30, color: Colors.amber),
+          Icon(Icons.swap_vert, size: 30, color: Colors.green),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text("Passive: Object + be + V3 + (by Subject)", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.deepOrange)),
+              Text(
+                "Passive: Object + be + V3 + (by Subject)",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
+              ),
             ],
           ),
         ],
@@ -118,28 +132,60 @@ class PassiveVoiceDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(rule['tense'], style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-            Text("Formula: ${rule['active']}", style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.w600)),
+            Text(
+              rule['tense'],
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "Formula: ${rule['active']}",
+              style: const TextStyle(
+                color: Colors.blue,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             const SizedBox(height: 8),
-            Text(rule['usage'], style: const TextStyle(fontSize: 13, fontStyle: FontStyle.italic)),
+            Text(
+              rule['usage'],
+              style: const TextStyle(fontSize: 13, fontStyle: FontStyle.italic),
+            ),
             const Divider(),
-            ... (rule['examples'] as List).map((ex) => Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("A: ${ex['active']}", style: const TextStyle(color: Colors.grey)),
-                const SizedBox(height: 4),
-                RichText(
-                  text: TextSpan(
-                    style: const TextStyle(color: Colors.black, fontSize: 15),
-                    children: [
-                      const TextSpan(text: "P: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: ex['passive'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
-                    ],
+            ...(rule['examples'] as List).map(
+              (ex) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "A: ${ex['active']}",
+                    style: const TextStyle(color: Colors.grey),
                   ),
-                ),
-                Text(ex['mm'], style: TextStyle(fontSize: 13, color: Colors.grey.shade600)),
-              ],
-            )),
+                  const SizedBox(height: 4),
+                  RichText(
+                    text: TextSpan(
+                      style: const TextStyle(color: Colors.black, fontSize: 15),
+                      children: [
+                        const TextSpan(
+                          text: "P: ",
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ex['passive'],
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text(
+                    ex['mm'],
+                    style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:perfect_english/parts_of_speech.dart';
-import 'package:perfect_english/progress_tracker.dart';
-import 'package:perfect_english/sample_sentences.dart';
-
+import 'package:perfect_english/services/sound_service.dart';
 import 'certification/certification_quiz_screen.dart';
-import 'examples_sentences.dart';
 import 'grammer_section/grammer_hub.dart';
 import 'splash_screen.dart';
+import 'widgets/naya_group.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SoundService.init();
   runApp(const MyApp());
 }
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Perfect English',
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       theme: buildLightTheme(),
       darkTheme: buildDarkTheme(),
     );
@@ -45,7 +45,6 @@ ThemeData buildDarkTheme() {
     ),
     // ...
     fontFamily: "Pyidaungsu",
-
     snackBarTheme: SnackBarThemeData(
       backgroundColor: Colors.black87,
       contentTextStyle: TextStyle(color: Colors.green),
@@ -71,6 +70,10 @@ ThemeData buildLightTheme() {
     colorScheme: colorScheme,
     textTheme: TextTheme(
       titleLarge: TextStyle(color: colorScheme.primary),
+      titleMedium: TextStyle(
+        color: colorScheme.primary,
+        fontWeight: FontWeight.bold,
+      ),
       // ...
     ),
     fontFamily: "Pyidaungsu",
@@ -84,83 +87,54 @@ class BaseApplication extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: MediaQuery.sizeOf(context).width * 0.05,
         title: const Text('Perfect English Learning'),
-        actionsPadding: EdgeInsets.only(right: 16),
+        actionsPadding: EdgeInsets.only(
+          right: MediaQuery.sizeOf(context).width * 0.05,
+        ),
         actions: [Text("v0.01")],
       ),
-      body: Column(
-        children: [
-          ListTile(
-            title: Text("Parts Of Speech"),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () => Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (context) => PartOfSpeechs())),
-          ),
-          // ListTile(
-          //   title: Text("Progress Tracker"),
-          //   trailing: Icon(Icons.chevron_right),
-          //   onTap: () => Navigator.of(
-          //     context,
-          //   ).push(MaterialPageRoute(builder: (context) => ProgressTracker())),
-          // ),
-          ListTile(
-            title: Text("Example Sentences v1"),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => SampleSentencesExample()),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: MediaQuery.sizeOf(context).width * 0.05,
+        ),
+        child: Column(
+          children: [
+            ListTile(
+              title: Text("ဝါစင်္ဂ ၈ မျိုး (8 Parts Of Speech)"),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (context) => PartOfSpeechs())),
             ),
-          ),
-          ListTile(
-            title: Text("Example Sentences v2"),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => ExamplesSentences()),
-            ),
-          ),
-          Divider(),
-          ListTile(
-            title: Text("Grammar Hub"),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () => Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (context) => GrammarHubScreen())),
-          ),
-          Divider(),
-          ListTile(
-            title: Text("Take Quiz To Get Certification"),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => CertificationQuizScreen(),
+            Divider(height: 0.1, color: Colors.grey.shade800),
+            ListTile(
+              title: Text("သဒ္ဒါ (Grammar)"),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => GrammarHubScreen()),
               ),
             ),
-          ),
-          Spacer(),
-          // powered by NaYa Group
-          Container(
-            margin: const EdgeInsets.all(16),
-            child: RichText(
-              text: TextSpan(
-                text: 'Powered by ',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontStyle: FontStyle.italic,
+            // Divider(height: 0.1),
+            Divider(height: 0.1, color: Colors.grey.shade800),
+
+            ListTile(
+              title: Text("Take Quiz To Get Certification"),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => CertificationQuizScreen(),
                 ),
-                children: [
-                  TextSpan(
-                    text: 'NaYa Group',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                ],
               ),
             ),
-          ),
-        ],
+            // Divider(height: 0.1),
+            Divider(height: 0.1, color: Colors.grey.shade800),
+
+            Spacer(),
+            // NayaGroup(),
+          ],
+        ),
       ),
     );
   }
