@@ -103,55 +103,44 @@ class InversionDetailScreen extends StatelessWidget {
           horizontal: MediaQuery.sizeOf(context).width * 0.05,
         ),
         children: [
-          _buildInversionFormulaHeader(),
+          _buildInversionFormulaHeader(context),
           const SizedBox(height: 20),
-          ...inversionData.map((data) => _buildAdvancedCard(data)),
+          ...inversionData.map((data) => _buildAdvancedCard(data, context)),
           const SizedBox(height: 24),
-          _buildWarningNote(),
+          _buildWarningNote(context),
         ],
       ),
     );
   }
 
-  Widget _buildInversionFormulaHeader() {
+  Widget _buildInversionFormulaHeader(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.indigo,
+        color: Theme.of(context).colorScheme.onPrimary,
         borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 10,
-            offset: Offset(0, 4),
-          ),
-        ],
       ),
       child: Column(
         children: [
-          const Text(
+          Text(
             "The Inversion Equation",
-            style: TextStyle(
-              color: Colors.amber,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           const Divider(color: Colors.white30),
-          const Text(
+          Text(
             "[Negative Word/Expression] + [Auxiliary Verb] + [Subject] + [Main Verb]",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
               fontFamily: 'monospace',
               fontSize: 13,
             ),
           ),
           const SizedBox(height: 10),
-          const Text(
+          Text(
             "ပုံမှန်ဝါကျကို အမေးဝါကျပုံစံ ပြောင်းလဲရေးသားခြင်း ဖြစ်သည်။",
             style: TextStyle(
-              color: Colors.white70,
+              color: Theme.of(context).colorScheme.onSecondaryContainer,
               fontSize: 12,
               fontStyle: FontStyle.italic,
             ),
@@ -161,7 +150,7 @@ class InversionDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildAdvancedCard(Map<String, dynamic> data) {
+  Widget _buildAdvancedCard(Map<String, dynamic> data, BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(bottom: 25),
       elevation: 1,
@@ -173,17 +162,10 @@ class InversionDetailScreen extends StatelessWidget {
           children: [
             Text(
               data['category'],
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.indigo,
-              ),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 10),
-            Text(
-              data['desc'],
-              style: const TextStyle(fontSize: 14, color: Colors.black54),
-            ),
+            Text(data['desc'], style: const TextStyle(fontSize: 14)),
             const SizedBox(height: 15),
             if (data.containsKey('words'))
               Wrap(
@@ -193,12 +175,18 @@ class InversionDetailScreen extends StatelessWidget {
                       (w) => Chip(
                         label: Text(
                           w,
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onPrimaryContainer,
                             fontSize: 12,
                           ),
                         ),
-                        backgroundColor: Colors.indigoAccent,
+
+                        backgroundColor: Theme.of(
+                          context,
+                        ).colorScheme.onPrimaryContainer.withAlpha(25),
                       ),
                     )
                     .toList(),
@@ -238,14 +226,18 @@ class InversionDetailScreen extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.green.shade50,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onPrimaryContainer.withAlpha(25),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Text(
                         "Logic: ${ex['logic']}",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
-                          color: Colors.green,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onPrimaryContainer,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -260,21 +252,24 @@ class InversionDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildWarningNote() {
+  Widget _buildWarningNote(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Colors.red.shade50,
+        color: Theme.of(context).colorScheme.onError,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          Icon(Icons.warning_amber_rounded, color: Colors.red),
+          Icon(Icons.warning_amber_rounded),
           SizedBox(width: 10),
           Expanded(
             child: Text(
               "သတိပြုရန် - Inversion ကို ပုံမှန်စကားပြောတွင် အသုံးနည်းသည်။ စာမေးပွဲအဖြေလွှာများ၊ အရေးအသားများနှင့် မိန့်ခွန်းများတွင်သာ အဓိကထား သုံးစွဲသင့်သည်။",
-              style: TextStyle(fontSize: 12, color: Colors.red),
+              style: TextStyle(
+                fontSize: 12,
+                color: Theme.of(context).colorScheme.onErrorContainer,
+              ),
             ),
           ),
         ],

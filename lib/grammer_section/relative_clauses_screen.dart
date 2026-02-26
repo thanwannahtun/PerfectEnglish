@@ -80,7 +80,7 @@ class RelativeClausesScreen extends StatelessWidget {
         border: TableBorder.all(borderRadius: BorderRadius.circular(5)),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onPrimary,
-          borderRadius: BorderRadius.circular(5)
+          borderRadius: BorderRadius.circular(5),
         ),
         columns: const [
           DataColumn(
@@ -116,35 +116,25 @@ class RelativeClausesScreen extends StatelessWidget {
   Widget _buildClauseCard(Map<String, dynamic> data, BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
-      elevation: 2,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 4,
               children: [
-                Expanded(
-                  child: Text(
-                    textAlign: TextAlign.start,
-                    data['pronoun'],
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent,
-                    ),
-                  ),
+                Text(
+                  data['pronoun'],
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Chip(
-                      label: Text(
-                        data['use_for'],
-                        style: const TextStyle(fontSize: 12),
-                      ),
-                    ),
+                Chip(
+                  label: Text(
+                    data['use_for'],
+                    style: const TextStyle(fontSize: 12),
                   ),
                 ),
               ],
@@ -206,8 +196,8 @@ class RelativeClausesScreen extends StatelessWidget {
             TextSpan(text: text.split('[')[0]),
             TextSpan(
               text: '[${text.split('[')[1].split(']')[0]}]',
-              style: const TextStyle(
-                color: Colors.blue,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
                 fontWeight: FontWeight.bold,
               ),
             ),

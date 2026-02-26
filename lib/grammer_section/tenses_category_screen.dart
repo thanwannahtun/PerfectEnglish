@@ -1497,23 +1497,24 @@ class TenseCategoryScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final group = tensesData[index];
           return ExpansionTile(
+            backgroundColor: Theme.of(context).colorScheme.surface,
             shape: Border.all(width: 0.1, color: Colors.grey),
             initiallyExpanded: index == 0,
             title: Text(
               group['group'],
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
-              ),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             children: (group['items'] as List)
                 .map(
                   (tense) => ListTile(
                     title: Text(tense['title']),
                     subtitle: Text(tense['formula']),
+                    titleTextStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
                     subtitleTextStyle: TextStyle(
                       fontSize: 12,
-                      color: Colors.green,
+                      color: Colors.grey,
                     ),
                     trailing: const Icon(Icons.arrow_right),
                     onTap: () => Navigator.push(
@@ -1590,7 +1591,6 @@ class TenseDetailScreen extends StatelessWidget {
             ...(tense['examples'] as List).map((ex) {
               return Card(
                 margin: const EdgeInsets.only(bottom: 12),
-                elevation: 2,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -1601,10 +1601,7 @@ class TenseDetailScreen extends StatelessWidget {
                     children: [
                       RichText(
                         text: TextSpan(
-                          style: const TextStyle(
-                            // color: Colors.black,
-                            fontSize: 17,
-                          ),
+                          style: const TextStyle(fontSize: 17),
                           children: [
                             TextSpan(
                               text: ex['s'] + " ",

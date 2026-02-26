@@ -73,7 +73,6 @@ class _CertificationQuizScreenState extends State<CertificationQuizScreen> {
     double progress = (currentQuestionIndex + 1) / masterQuestions.length;
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text("Final Certification Exam"),
         bottom: PreferredSize(
@@ -112,8 +111,7 @@ class _CertificationQuizScreenState extends State<CertificationQuizScreen> {
                   height: 60,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      side: const BorderSide(color: Colors.indigo),
+                      backgroundColor: Theme.of(context).colorScheme.onPrimary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -121,9 +119,9 @@ class _CertificationQuizScreenState extends State<CertificationQuizScreen> {
                     onPressed: () => checkAnswer(opt),
                     child: Text(
                       opt,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
-                        color: Colors.indigo,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
                       ),
                     ),
                   ),
@@ -155,91 +153,94 @@ class CertificateView extends StatelessWidget {
 
     return Stack(
       children: [
-        Scaffold(
-          body: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.indigo.shade900, Colors.black],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: Center(
-              child: Container(
-                margin: const EdgeInsets.all(20),
-                padding: const EdgeInsets.all(30),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.amber, width: 8),
-                  borderRadius: BorderRadius.circular(20),
+        Theme(
+          data: ThemeData(),
+          child: Scaffold(
+            body: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.indigo.shade900, Colors.black],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(Icons.verified, size: 80, color: Colors.amber),
-                    const SizedBox(height: 20),
-                    const Text(
-                      "CERTIFICATE OF MERIT",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2,
+              ),
+              child: Center(
+                child: Container(
+                  margin: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(30),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.amber, width: 8),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.verified, size: 80, color: Colors.amber),
+                      const SizedBox(height: 20),
+                      const Text(
+                        "CERTIFICATE OF MERIT",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2,
+                        ),
                       ),
-                    ),
-                    const Divider(thickness: 2),
-                    const SizedBox(height: 20),
-                    const Text(
-                      "This is to certify that the user of",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    const Text(
-                      "PERFECT ENGLISH APP",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.indigo,
+                      const Divider(thickness: 2),
+                      const SizedBox(height: 20),
+                      const Text(
+                        "This is to certify that the user of",
+                        style: TextStyle(fontSize: 14),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      "Has successfully mastered English Grammar including",
-                      textAlign: TextAlign.center,
-                    ),
-                    const Text(
-                      "TENSES, PASSIVE VOICE, & INVERSION",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                      const Text(
+                        "PERFECT ENGLISH APP",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.indigo,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 30),
-                    Text(
-                      "Final Score: $percentage%",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: isExcellent ? Colors.green : Colors.orange,
+                      const SizedBox(height: 20),
+                      const Text(
+                        "Has successfully mastered English Grammar including",
+                        textAlign: TextAlign.center,
                       ),
-                    ),
-                    const SizedBox(height: 40),
-                    const Text(
-                      "Date: February 24, 2026",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        /* Add screenshot share logic here */
-                      },
-                      icon: const Icon(Icons.share),
-                      label: const Text("Share Your Achievement"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.amber,
-                        foregroundColor: Colors.black,
+                      const Text(
+                        "TENSES, PASSIVE VOICE, & INVERSION",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 30),
+                      Text(
+                        "Final Score: $percentage%",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: isExcellent ? Colors.green : Colors.orange,
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+                      const Text(
+                        "Date: February 24, 2026",
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          /* Add screenshot share logic here */
+                        },
+                        icon: const Icon(Icons.share),
+                        label: const Text("Share Your Achievement"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.amber,
+                          foregroundColor: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

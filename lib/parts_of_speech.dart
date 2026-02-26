@@ -573,7 +573,7 @@ class PartOfSpeechs extends StatelessWidget {
             child: ListTile(
               title: Text(
                 item['title'],
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
@@ -701,54 +701,50 @@ class DetailPage extends StatelessWidget {
             SizedBox(height: 16),
 
             ...examples.map(
-              (ex) => Container(
+              (ex) => Card(
                 margin: const EdgeInsets.only(bottom: 8),
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.onPrimaryContainer.withAlpha(25),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          ex['en']!,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          "(${ex['mm']!})",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8),
-                      child: Divider(thickness: 0.5),
-                    ),
-
-                    const SizedBox(height: 4),
-                    _buildHighlightedSentence(
-                      ex['sentenceEn']!,
-                      ex['en']!,
-                      context,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      ex['sentenceMM']!,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSecondaryContainer,
-                        // fontStyle: FontStyle.italic,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            ex['en']!,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            "(${ex['mm']!})",
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                        child: Divider(thickness: 0.5),
+                      ),
+
+                      const SizedBox(height: 4),
+                      _buildHighlightedSentence(
+                        ex['sentenceEn']!,
+                        ex['en']!,
+                        context,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        ex['sentenceMM']!,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onSecondaryContainer,
+                          // fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

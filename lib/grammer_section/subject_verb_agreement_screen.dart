@@ -110,11 +110,7 @@ class SubjectVerbAgreementScreen extends StatelessWidget {
                 children: [
                   Text(
                     item['rule'],
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent,
-                    ),
+                    style:Theme.of(context).textTheme.titleMedium
                   ),
                   const SizedBox(height: 8),
                   Text(item['desc']),
@@ -122,17 +118,21 @@ class SubjectVerbAgreementScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.onPrimaryContainer.withAlpha(25),
+                      // color: Theme.of(
+                      //   context,
+                      // ).colorScheme.inversePrimary,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onPrimaryContainer.withAlpha(25),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
                       item['formula'],
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.deepOrange,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer
                       ),
+                      // style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
                   const Divider(height: 30),

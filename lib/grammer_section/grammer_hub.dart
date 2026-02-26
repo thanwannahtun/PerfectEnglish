@@ -125,7 +125,8 @@ class GrammarHubScreen extends StatelessWidget {
                   child: ListTile(
                     title: Text(
                       topic['title'],
-                      style: const TextStyle(fontWeight: FontWeight.w600),
+                      style: Theme.of(context).textTheme.titleMedium,
+                      // style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     subtitle: Text(topic['desc']),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 14),

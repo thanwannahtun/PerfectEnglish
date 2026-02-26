@@ -110,7 +110,10 @@ class BaseApplication extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              title: Text("ဝါစင်္ဂ ၈ မျိုး (8 Parts Of Speech)"),
+              title: Text(
+                "ဝါစင်္ဂ ၈ မျိုး (8 Parts Of Speech)",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               trailing: Icon(Icons.chevron_right),
               onTap: () => Navigator.of(
                 context,
@@ -118,7 +121,10 @@ class BaseApplication extends StatelessWidget {
             ),
             Divider(height: 0.1, color: Colors.grey.shade800),
             ListTile(
-              title: Text("သဒ္ဒါ (Grammar)"),
+              title: Text(
+                "သဒ္ဒါ (Grammar)",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               trailing: Icon(Icons.chevron_right),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => GrammarHubScreen()),
@@ -128,7 +134,10 @@ class BaseApplication extends StatelessWidget {
             Divider(height: 0.1, color: Colors.grey.shade800),
 
             ListTile(
-              title: Text("Take Quiz To Get Certification"),
+              title: Text(
+                "Take A Exam To Get Certification",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               trailing: Icon(Icons.chevron_right),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(

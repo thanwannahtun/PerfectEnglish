@@ -126,31 +126,24 @@ class ConditionalsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              data['type'],
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
-              ),
-            ),
+            Text(data['type'], style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
             Text(data['usage'], style: const TextStyle(fontSize: 14)),
             const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onPrimaryContainer.withAlpha(25),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onPrimaryContainer.withAlpha(25),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 data['formula'],
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'monospace',
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueGrey,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
                 ),
               ),
             ),

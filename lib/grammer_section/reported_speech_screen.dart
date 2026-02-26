@@ -93,21 +93,27 @@ class ReportedSpeechScreen extends StatelessWidget {
           horizontal: MediaQuery.sizeOf(context).width * 0.05,
         ),
         children: [
-          const Text(
+          Text(
             "Advanced Transformation Guide",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontSize: 22),
           ),
           const SizedBox(height: 10),
-          ...reportingRules.map((rule) => _buildAdvancedRuleCard(rule)),
+          ...reportingRules.map(
+            (rule) => _buildAdvancedRuleCard(rule, context),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildAdvancedRuleCard(Map<String, dynamic> data) {
+  Widget _buildAdvancedRuleCard(
+    Map<String, dynamic> data,
+    BuildContext context,
+  ) {
     return Card(
       margin: const EdgeInsets.only(bottom: 24),
-      elevation: 1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -116,46 +122,39 @@ class ReportedSpeechScreen extends StatelessWidget {
           children: [
             Text(
               data['category'],
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.indigo,
-              ),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
-            Text(
-              data['desc'],
-              style: const TextStyle(fontSize: 14, color: Colors.black87),
-            ),
+            Text(data['desc'], style: const TextStyle(fontSize: 14)),
             const SizedBox(height: 12),
 
             // Render Conversion Table if exists
             if (data.containsKey('rules')) ...[
-              _buildConversionTable(data['rules']),
+              _buildConversionTable(data['rules'], context),
               const SizedBox(height: 16),
             ],
 
             const Text(
               "Advanced Samples:",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.blueGrey,
-              ),
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            ...(data['examples'] as List).map((ex) => _buildExampleBox(ex)),
+            ...(data['examples'] as List).map(
+              (ex) => _buildExampleBox(ex, context),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildConversionTable(List<dynamic> rules) {
+  Widget _buildConversionTable(List<dynamic> rules, BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.indigo.shade50,
+        // color: Theme.of(context).colorScheme.inversePrimary,
+        color: Theme.of(context).colorScheme.onPrimaryContainer.withAlpha(25),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Wrap(
@@ -171,7 +170,7 @@ class ReportedSpeechScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                backgroundColor: Colors.white,
+                backgroundColor: Theme.of(context).colorScheme.onPrimary,
               ),
             )
             .toList(),
@@ -179,7 +178,7 @@ class ReportedSpeechScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildExampleBox(Map<String, dynamic> ex) {
+  Widget _buildExampleBox(Map<String, dynamic> ex, BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.all(12),
@@ -187,7 +186,7 @@ class ReportedSpeechScreen extends StatelessWidget {
         border: Border(
           left: BorderSide(color: Colors.indigo.shade200, width: 4),
         ),
-        color: Colors.grey.shade50,
+        color: Theme.of(context).colorScheme.onPrimaryContainer.withAlpha(25),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,7 +197,7 @@ class ReportedSpeechScreen extends StatelessWidget {
                 "Direct: ",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.redAccent,
+                  // color: Colors.redAccent,
                 ),
               ),
               Expanded(
@@ -212,11 +211,11 @@ class ReportedSpeechScreen extends StatelessWidget {
           const SizedBox(height: 6),
           Row(
             children: [
-              const Text(
+              Text(
                 "Indirect: ",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.green,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
                 ),
               ),
               Expanded(
@@ -228,10 +227,7 @@ class ReportedSpeechScreen extends StatelessWidget {
             ],
           ),
           const Divider(),
-          Text(
-            ex['mm'],
-            style: TextStyle(fontSize: 13, color: Colors.grey.shade700),
-          ),
+          Text(ex['mm'], style: TextStyle(fontSize: 13)),
         ],
       ),
     );

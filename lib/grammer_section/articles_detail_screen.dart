@@ -108,7 +108,6 @@ class ArticlesDetailScreen extends StatelessWidget {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    // color: Colors.grey.shade200,
                     color: Theme.of(
                       context,
                     ).colorScheme.onPrimaryContainer.withAlpha(25),
