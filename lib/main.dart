@@ -38,6 +38,10 @@ ThemeData buildDarkTheme() {
     useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: colorScheme,
+    appBarTheme: AppBarTheme(
+      backgroundColor: colorScheme.onPrimary,
+      // foregroundColor: Colors.white,
+    ),
     textTheme: TextTheme(
       titleLarge: TextStyle(color: colorScheme.primary),
       titleMedium: TextStyle(color: colorScheme.primary),
@@ -68,6 +72,10 @@ ThemeData buildLightTheme() {
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: colorScheme,
+    appBarTheme: AppBarTheme(
+      backgroundColor: colorScheme.onPrimary,
+      // foregroundColor: Colors.amber,
+    ),
     textTheme: TextTheme(
       titleLarge: TextStyle(color: colorScheme.primary),
       titleMedium: TextStyle(
@@ -132,7 +140,7 @@ class BaseApplication extends StatelessWidget {
             Divider(height: 0.1, color: Colors.grey.shade800),
 
             Spacer(),
-            // NayaGroup(),
+            NayaGroup(),
           ],
         ),
       ),
