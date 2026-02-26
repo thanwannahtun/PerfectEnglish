@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:perfect_english/parts_of_speech.dart';
 import 'package:perfect_english/services/sound_service.dart';
+import 'package:perfect_english/widgets/app_drawer.dart';
 import 'certification/certification_quiz_screen.dart';
 import 'grammer_section/grammer_hub.dart';
 import 'splash_screen.dart';
@@ -94,8 +95,8 @@ class BaseApplication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: AppDrawer(),
       appBar: AppBar(
-        titleSpacing: MediaQuery.sizeOf(context).width * 0.05,
         title: const Text('Perfect English Learning'),
         actionsPadding: EdgeInsets.only(
           right: MediaQuery.sizeOf(context).width * 0.05,
