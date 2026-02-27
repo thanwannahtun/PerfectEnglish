@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'tense_matrix_data.dart';
-import 'tense_quiz_lesson_page.dart';
+import 'quiz_lesson_page.dart';
 
 class TenseCategoryScreen extends StatelessWidget {
   const TenseCategoryScreen({super.key});

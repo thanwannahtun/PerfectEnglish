@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:perfect_english/grammer_section/passive_voice_detail_screen.dart';
 import 'package:perfect_english/grammer_section/subject_verb_agreement_screen.dart';
 import 'package:perfect_english/grammer_section/tenses_category_screen.dart';
 
@@ -7,6 +6,7 @@ import 'articles_detail_screen.dart';
 import 'conditionals_screen.dart' show ConditionalsScreen;
 import 'gerunds_vs_infinitives_screen.dart' show GerundsVsInfinitivesScreen;
 import 'inversion_detail_screen.dart' show InversionDetailScreen;
+import 'passive_voice_screen.dart';
 import 'relative_clauses_screen.dart';
 import 'reported_speech_screen.dart';
 
@@ -42,7 +42,8 @@ class GrammarHubScreen extends StatelessWidget {
         {
           'title': 'Passive Voice',
           'desc': 'Changing focus from doer to receiver',
-          'detailScreen': PassiveVoiceDetailScreen(),
+          'detailScreen': PassiveVoiceScreen(),
+          // 'detailScreen': PassiveVoiceDetailScreen(),
         },
         {
           'title': 'Relative Clauses',
