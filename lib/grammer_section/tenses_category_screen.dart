@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'tense_matrix_data.dart';
+import 'tense_quiz_lesson_page.dart';
 
 class TenseCategoryScreen extends StatelessWidget {
   const TenseCategoryScreen({super.key});
@@ -134,6 +135,155 @@ class TenseCategoryScreen extends StatelessWidget {
               'note': 'ပုံပြင် သို့မဟုတ် ရုပ်ရှင်အကြောင်း ပြန်ပြောပြခြင်း။',
             },
           ],
+          'quizzes': [
+            // Declarative (Statements)
+            {
+              'q': 'She ___ (work) at a hospital.',
+              'a': 'works',
+              'options': ['work', 'works', 'working'],
+              'type': 'Declarative',
+              'mm': 'သူမ ဆေးရုံမှာ အလုပ်လုပ်တယ်။',
+            },
+            {
+              'q': 'The sun ___ (rise) in the east.',
+              'a': 'rises',
+              'options': ['rise', 'rises', 'rising'],
+              'type': 'Declarative',
+              'mm': 'နေသည် အရှေ့ဘက်မှ ထွက်သည်။',
+            },
+            {
+              'q': 'Cats ___ (hate) water.',
+              'a': 'hate',
+              'options': ['hates', 'hate', 'hating'],
+              'type': 'Declarative',
+              'mm': 'ကြောင်များသည် ရေကို မုန်းကြသည်။',
+            },
+            {
+              'q': 'Water ___ (freeze) at 0°C.',
+              'a': 'freezes',
+              'options': ['freeze', 'freezes', 'frozen'],
+              'type': 'Declarative',
+              'mm': 'ရေသည် ၀ ဒီဂရီတွင် ခဲသည်။',
+            },
+            {
+              'q': 'I ___ (play) football on Sundays.',
+              'a': 'play',
+              'options': ['play', 'plays', 'playing'],
+              'type': 'Declarative',
+              'mm': 'ကျွန်တော် တနင်္ဂနွေနေ့တိုင်း ဘောလုံးကစားသည်။',
+            },
+
+            // Interrogative (Questions)
+            {
+              'q': '___ you speak English?',
+              'a': 'Do',
+              'options': ['Do', 'Does', 'Are'],
+              'type': 'Interrogative',
+              'mm': 'မင်း အင်္ဂလိပ်စကား ပြောတတ်သလား။',
+            },
+            {
+              'q': '___ he like pizza?',
+              'a': 'Does',
+              'options': ['Do', 'Does', 'Is'],
+              'type': 'Interrogative',
+              'mm': 'သူ ပီဇာ ကြိုက်သလား။',
+            },
+            {
+              'q': 'Where ___ they live?',
+              'a': 'do',
+              'options': ['do', 'does', 'are'],
+              'type': 'Interrogative',
+              'mm': 'သူတို့ ဘယ်မှာ နေကြတာလဲ။',
+            },
+            {
+              'q': 'What time ___ the train leave?',
+              'a': 'does',
+              'options': ['do', 'does', 'is'],
+              'type': 'Interrogative',
+              'mm': 'ရထား ဘယ်အချိန် ထွက်မှာလဲ။',
+            },
+            {
+              'q': '___ it rain often here?',
+              'a': 'Does',
+              'options': ['Do', 'Does', 'Is'],
+              'type': 'Interrogative',
+              'mm': 'ဒီမှာ မိုးခဏခဏ ရွာသလား။',
+            },
+
+            // Negative Sentences
+            {
+              'q': 'I ___ (not/like) coffee.',
+              'a': 'do not like',
+              'options': ['not like', 'do not like', 'does not like'],
+              'type': 'Negative',
+              'mm': 'ကျွန်တော် ကော်ဖီ မကြိုက်ဘူး။',
+            },
+            {
+              'q': 'She ___ (not/watch) TV often.',
+              'a': 'does not watch',
+              'options': ['do not watch', 'not watch', 'does not watch'],
+              'type': 'Negative',
+              'mm': 'သူမ တီဗွီ ခဏခဏ မကြည့်ဘူး။',
+            },
+            {
+              'q': 'They ___ (not/know) the answer.',
+              'a': 'do not know',
+              'options': ['does not know', 'do not know', 'no know'],
+              'type': 'Negative',
+              'mm': 'သူတို့ အဖြေကို မသိကြဘူး။',
+            },
+            {
+              'q': 'He ___ (not/have) a car.',
+              'a': 'does not have',
+              'options': ['does not has', 'do not have', 'does not have'],
+              'type': 'Negative',
+              'mm': 'သူ့မှာ ကားမရှိဘူး။',
+            },
+            {
+              'q': 'Birds ___ (not/swim).',
+              'a': 'do not swim',
+              'options': ['does not swim', 'do not swim', 'not swimming'],
+              'type': 'Negative',
+              'mm': 'ငှက်များသည် ရေမကူးကြပါ။',
+            },
+
+            // Imperative & Exclamatory
+            {
+              'q': '___ (Close) the door, please.',
+              'a': 'Close',
+              'options': ['Close', 'Closes', 'Closing'],
+              'type': 'Imperative',
+              'mm': 'တံခါးပိတ်ပေးပါဦး။',
+            },
+            {
+              'q': '___ (Be) quiet in the library!',
+              'a': 'Be',
+              'options': ['Be', 'Is', 'Am'],
+              'type': 'Imperative',
+              'mm': 'စာကြည့်တိုက်ထဲမှာ ငြိမ်ငြိမ်နေပါ။',
+            },
+            {
+              'q': 'Look how fast he ___ (run)!',
+              'a': 'runs',
+              'options': ['run', 'runs', 'running'],
+              'type': 'Exclamatory',
+              'mm': 'ကြည့်စမ်း၊ သူ ဘယ်လောက်တောင် မြန်မြန်ပြေးနေလဲ။',
+            },
+            {
+              'q': 'How beautiful she ___ (look)!',
+              'a': 'looks',
+              'style': 'Exclamatory',
+              'options': ['look', 'looks', 'looking'],
+              'mm': 'သူမ ဘယ်လောက်တောင် လှနေလဲ။',
+            },
+            {
+              'q': 'Help! My house ___ (be) on fire!',
+              'a': 'is',
+              'options': ['is', 'are', 'be'],
+              'type': 'Exclamatory',
+              'mm': 'ကယ်ကြပါဦး! ကျွန်တော့်အိမ် မီးလောင်နေလို့ပါ။',
+            },
+          ],
         },
         {
           'title': 'Present Continuous (ပစ္စုပ္ပန်ကာလဖြစ်ဆဲ)',
@@ -260,6 +410,167 @@ class TenseCategoryScreen extends StatelessWidget {
               'mm': 'မမှန်ကန်ပါ။ "She knows the answer" ဟုသာ သုံးရမည်။',
               'note':
                   'အသိဉာဏ်ဆိုင်ရာ သိရှိနားလည်မှုကို ဖော်ပြလျှင် Simple Present သာသုံးပါ။',
+            },
+          ],
+          'quizzes': [
+            // --- Declarative (Statements) ---
+            {
+              'q': 'Right now, the children ___ (play) in the garden.',
+              'a': 'are playing',
+              'options': ['play', 'is playing', 'are playing'],
+              'type': 'Declarative',
+              'mm': 'အခုကလေးတွေ ဥယျာဉ်ထဲမှာ ကစားနေကြတယ်။',
+            },
+            {
+              'q': 'Listen! The bird ___ (sing) beautifully.',
+              'a': 'is singing',
+              'options': ['sings', 'is singing', 'are singing'],
+              'type': 'Declarative',
+              'mm': 'နားထောင်စမ်း! ငှက်လေး သာယာစွာ သီချင်းဆိုနေတယ်။',
+            },
+            {
+              'q': 'I ___ (study) for my exams this month.',
+              'a': 'am studying',
+              'options': ['study', 'am studying', 'is studying'],
+              'type': 'Declarative',
+              'mm': 'ဒီလမှာ ကျွန်တော် စာမေးပွဲအတွက် စာဖတ်နေပါတယ်။',
+            },
+            {
+              'q': 'My father ___ (cook) dinner in the kitchen.',
+              'a': 'is cooking',
+              'options': ['is cooking', 'cooks', 'are cooking'],
+              'type': 'Declarative',
+              'mm': 'ကျွန်တော့်အဖေ မီးဖိုချောင်မှာ ညစာချက်နေတယ်။',
+            },
+            {
+              'q': 'Technology ___ (change) the way we live.',
+              'a': 'is changing',
+              'options': ['change', 'is changing', 'are changing'],
+              'type': 'Declarative',
+              'mm': 'နည်းပညာက ငါတို့ရဲ့ နေထိုင်မှုပုံစံကို ပြောင်းလဲပေးနေတယ်။',
+            },
+
+            // --- Interrogative (Questions) ---
+            {
+              'q': '___ you ___ (watch) a movie right now?',
+              'a': 'Are / watching',
+              'options': ['Is / watching', 'Are / watching', 'Do / watching'],
+              'type': 'Interrogative',
+              'mm': 'မင်းအခု ရုပ်ရှင်ကြည့်နေတာလား။',
+            },
+            {
+              'q': 'Why ___ she ___ (cry) over there?',
+              'a': 'is / crying',
+              'options': ['is / crying', 'are / crying', 'does / crying'],
+              'type': 'Interrogative',
+              'mm': 'သူမ ဟိုမှာ ဘာလို့ ငိုနေတာလဲ။',
+            },
+            {
+              'q': '___ it ___ (rain) outside at the moment?',
+              'a': 'Is / raining',
+              'options': ['Is / raining', 'Are / raining', 'Does / raining'],
+              'type': 'Interrogative',
+              'mm': 'အခု အပြင်မှာ မိုးရွာနေလား။',
+            },
+            {
+              'q': 'Where ___ they ___ (go) for their vacation?',
+              'a': 'are / going',
+              'options': ['is / going', 'are / going', 'do / going'],
+              'type': 'Interrogative',
+              'mm': 'သူတို့ အားလပ်ရက်အတွက် ဘယ်ကို သွားနေကြတာလဲ။',
+            },
+            {
+              'q': '___ I ___ (speak) too loud?',
+              'a': 'Am / speaking',
+              'options': ['Am / speaking', 'Is / speaking', 'Are / speaking'],
+              'type': 'Interrogative',
+              'mm': 'ငါ စကားပြောတာ အရမ်းကျယ်နေသလား။',
+            },
+
+            // --- Negative Sentences ---
+            {
+              'q': 'He ___ (not/do) his homework; he is sleeping.',
+              'a': 'is not doing',
+              'options': ['not doing', 'is not doing', 'are not doing'],
+              'type': 'Negative',
+              'mm': 'သူ အိမ်စာမလုပ်နေဘူး၊ သူ အိပ်နေတယ်။',
+            },
+            {
+              'q': 'We ___ (not/go) to the party tonight.',
+              'a': 'are not going',
+              'options': ['is not going', 'are not going', 'do not going'],
+              'type': 'Negative',
+              'mm': 'ကျွန်တော်တို့ ဒီည ပါတီမသွားတော့ဘူး။',
+            },
+            {
+              'q': 'I ___ (not/use) the computer at the moment.',
+              'a': 'am not using',
+              'options': ['am not using', 'is not using', 'not using'],
+              'type': 'Negative',
+              'mm': 'ကျွန်တော် အခု ကွန်ပျူတာ မသုံးနေပါဘူး။',
+            },
+            {
+              'q': 'The workers ___ (not/build) the bridge today.',
+              'a': 'are not building',
+              'options': [
+                'is not building',
+                'are not building',
+                'not building',
+              ],
+              'type': 'Negative',
+              'mm': 'အလုပ်သမားတွေ ဒီနေ့ တံတားမဆောက်နေကြဘူး။',
+            },
+            {
+              'q': 'She ___ (not/feeling) very well lately.',
+              'a': 'is not feeling',
+              'options': [
+                'is not feeling',
+                'am not feeling',
+                'are not feeling',
+              ],
+              'type': 'Negative',
+              'mm': 'ဒီရက်ပိုင်း သူမ နေလို့ သိပ်မကောင်းဘူး။',
+            },
+
+            // --- Imperative & Exclamatory (Strong Feelings / Attention) ---
+            {
+              'q': 'Hurry up! The bus ___ (come)!',
+              'a': 'is coming',
+              'options': ['comes', 'is coming', 'are coming'],
+              'type': 'Exclamatory',
+              'mm': 'မြန်မြန်လုပ်! ဘတ်စ်ကား လာနေပြီ။',
+            },
+            {
+              'q': 'Be quiet! The baby ___ (sleep).',
+              'a': 'is sleeping',
+              'options': ['sleeps', 'is sleeping', 'are sleeping'],
+              'type': 'Imperative',
+              'mm': 'တိတ်တိတ်နေ! ကလေး အိပ်နေတယ်။',
+            },
+            {
+              'q': 'Look! The airplane ___ (land) now!',
+              'a': 'is landing',
+              'options': ['land', 'is landing', 'lands'],
+              'type': 'Exclamatory',
+              'mm': 'ကြည့်စမ်း! လေယာဉ်ကြီး အခု ဆင်းသက်နေပြီ။',
+            },
+            {
+              'q': 'Stop it! You ___ (always/complain) about everything!',
+              'a': 'are always complaining',
+              'options': [
+                'is always complaining',
+                'are always complaining',
+                'always complain',
+              ],
+              'type': 'Exclamatory',
+              'mm': 'တော်တော့! မင်းက အရာရာကို အမြဲ အပြစ်တင်နေတာပဲ။',
+            },
+            {
+              'q': 'Stay here! The teacher ___ (check) our names.',
+              'a': 'is checking',
+              'options': ['checks', 'is checking', 'checking'],
+              'type': 'Imperative',
+              'mm': 'ဒီမှာနေဦး! ဆရာက ငါတို့ နာမည်တွေ စစ်နေတယ်။',
             },
           ],
         },
@@ -398,6 +709,172 @@ class TenseCategoryScreen extends StatelessWidget {
               'note': 'Gone = သွားပြီး မပြန်လာသေးပါ။',
             },
           ],
+          'quizzes': [
+            // --- Declarative (Experience & Completion) ---
+            {
+              'q': 'I ___ (finish) my lunch, so I am full now.',
+              'a': 'have finished',
+              'options': ['have finished', 'has finished', 'finished'],
+              'type': 'Declarative',
+              'mm':
+                  'ကျွန်တော် နေ့လယ်စာ စားပြီးသွားပြီ၊ ဒါကြောင့် အခု ဗိုက်ပြည့်နေပြီ။',
+            },
+            {
+              'q': 'She ___ (write) three books so far.',
+              'a': 'has written',
+              'options': ['have written', 'has written', 'has wrote'],
+              'type': 'Declarative',
+              'mm': 'သူမ အခုထိ စာအုပ်သုံးအုပ် ရေးပြီးပြီ။',
+            },
+            {
+              'q': 'They ___ (live) in this house since 1990.',
+              'a': 'have lived',
+              'options': ['has lived', 'lived', 'have lived'],
+              'type': 'Declarative',
+              'mm': 'သူတို့ ဒီအိမ်မှာနေတာ ၁၉၉၀ ကတည်းကပါ။',
+            },
+            {
+              'q': 'The cat ___ (drink) all the milk.',
+              'a': 'has drunk',
+              'options': ['has drunk', 'have drunk', 'has drank'],
+              'type': 'Declarative',
+              'mm': 'ကြောင်က နို့တွေအကုန် သောက်လိုက်ပြီ။',
+            },
+            {
+              'q': 'We ___ (see) this movie many times.',
+              'a': 'have seen',
+              'options': ['has seen', 'have seen', 'have saw'],
+              'type': 'Declarative',
+              'mm': 'ဒီရုပ်ရှင်ကို ကျွန်တော်တို့ အကြိမ်ကြိမ် ကြည့်ဖူးပါတယ်။',
+            },
+
+            // --- Interrogative (Experience Questions) ---
+            {
+              'q': '___ you ever ___ (be) to Paris?',
+              'a': 'Have / been',
+              'options': ['Has / been', 'Have / been', 'Have / gone'],
+              'type': 'Interrogative',
+              'mm': 'မင်း ပဲရစ်ကို ရောက်ဖူးသလား။',
+            },
+            {
+              'q': '___ he ___ (finish) the report yet?',
+              'a': 'Has / finished',
+              'options': ['Have / finished', 'Has / finished', 'Has / finish'],
+              'type': 'Interrogative',
+              'mm': 'သူ အစီရင်ခံစာ ရေးပြီးပြီလား။',
+            },
+            {
+              'q': 'How long ___ they ___ (know) each other?',
+              'a': 'have / known',
+              'options': ['has / known', 'have / known', 'do / known'],
+              'type': 'Interrogative',
+              'mm': 'သူတို့ သိလာကြတာ ဘယ်လောက်ကြာပြီလဲ။',
+            },
+            {
+              'q': '___ it ___ (stop) raining yet?',
+              'a': 'Has / stopped',
+              'options': ['Has / stopped', 'Have / stopped', 'Is / stopped'],
+              'type': 'Interrogative',
+              'mm': 'မိုးတိတ်သွားပြီလား။',
+            },
+            {
+              'q': 'Where ___ she ___ (go)? I can\'t find her.',
+              'a': 'has / gone',
+              'options': ['has / gone', 'has / been', 'have / gone'],
+              'type': 'Interrogative',
+              'mm': 'သူမ ဘယ်သွားလိုက်တာလဲ။ ကျွန်တော် သူမကို ရှာမတွေ့တော့ဘူး။',
+            },
+
+            // --- Negative Sentences (Not finished / Not experienced) ---
+            {
+              'q': 'I ___ (not/see) him today.',
+              'a': 'have not seen',
+              'options': ['has not seen', 'have not seen', 'not have seen'],
+              'type': 'Negative',
+              'mm': 'ကျွန်တော် ဒီနေ့ သူ့ကို မတွေ့ရသေးဘူး။',
+            },
+            {
+              'q': 'He ___ (not/call) me since last week.',
+              'a': 'has not called',
+              'options': [
+                'have not called',
+                'not has called',
+                'has not called',
+              ],
+              'type': 'Negative',
+              'mm': 'သူ ပြီးခဲ့တဲ့အပတ်ကတည်းက ကျွန်တော့်ကို ဖုန်းမဆက်တော့ဘူး။',
+            },
+            {
+              'q': 'We ___ (not/receive) the package yet.',
+              'a': 'have not received',
+              'options': [
+                'have not received',
+                'has not received',
+                'not received',
+              ],
+              'type': 'Negative',
+              'mm': 'ကျွန်တော်တို့ ပါဆယ် မရသေးပါဘူး။',
+            },
+            {
+              'q': 'The rain ___ (not/stop) for three hours.',
+              'a': 'has not stopped',
+              'options': [
+                'has not stopped',
+                'have not stopped',
+                'is not stopped',
+              ],
+              'type': 'Negative',
+              'mm': 'မိုးမတိတ်တာ ၃ နာရီရှိပြီ။',
+            },
+            {
+              'q': 'They ___ (not/visit) us lately.',
+              'a': 'have not visited',
+              'options': [
+                'has not visited',
+                'have not visited',
+                'not visiting',
+              ],
+              'type': 'Negative',
+              'mm': 'သူတို့ ကျွန်တော်တို့ဆီ မလာတာ ကြာပြီ။',
+            },
+
+            // --- Imperative & Exclamatory (Results & Strong Feelings) ---
+            {
+              'q': 'Be careful! Someone ___ (break) the window!',
+              'a': 'has broken',
+              'options': ['has broken', 'have broken', 'broke'],
+              'type': 'Exclamatory',
+              'mm': 'သတိထား! တစ်ယောက်ယောက် ပြတင်းပေါက်ကို ခွဲလိုက်ပြီ။',
+            },
+            {
+              'q': 'Look! I ___ (buy) a new car!',
+              'a': 'have bought',
+              'options': ['has bought', 'have bought', 'am buying'],
+              'type': 'Exclamatory',
+              'mm': 'ကြည့်စမ်း! ငါ ကားအသစ်တစ်စီး ဝယ်လိုက်ပြီ။',
+            },
+            {
+              'q': 'Don\'t enter! I ___ (just/wash) the floor.',
+              'a': 'have just washed',
+              'options': ['have just washed', 'just washed', 'am washing'],
+              'type': 'Imperative',
+              'mm': 'မဝင်နဲ့ဦး! ကျွန်တော် ခုလေးတင် ကြမ်းတိုက်ထားလို့။',
+            },
+            {
+              'q': 'Wow! You ___ (grow) so much!',
+              'a': 'have grown',
+              'options': ['has grown', 'have grown', 'is grown'],
+              'type': 'Exclamatory',
+              'mm': 'ဝါး! မင်း တော်တော်လေး အရွယ်ရောက်လာပြီပဲ။',
+            },
+            {
+              'q': 'Stop! You ___ (do) enough work for today.',
+              'a': 'have done',
+              'options': ['has done', 'have done', 'did'],
+              'type': 'Imperative',
+              'mm': 'တော်ပြီ! မင်း ဒီနေ့အတွက် အလုပ်လုပ်တာ လုံလောက်သွားပြီ။',
+            },
+          ],
         },
         {
           'title': 'Present Perfect Continuous (ပစ္စုပ္ပန်ကာလပြီးစီးဖြစ်ဆဲ)',
@@ -528,6 +1005,191 @@ class TenseCategoryScreen extends StatelessWidget {
                   'Know, Love, Believe ကဲ့သို့သော အခြေအနေပြကြိယာ (Stative Verbs) များတွင် -ing မသုံးရပါ။',
             },
           ],
+          'quizzes': [
+            // --- Declarative (Duration & Continuity) ---
+            {
+              'q': 'I ___ (wait) for the bus for thirty minutes.',
+              'a': 'have been waiting',
+              'options': ['have waited', 'have been waiting', 'am waiting'],
+              'type': 'Declarative',
+              'mm': 'ကျွန်တော် ဘတ်စ်ကားစောင့်နေတာ မိနစ်သုံးဆယ်ရှိပြီ။',
+            },
+            {
+              'q': 'It ___ (snow) since last night.',
+              'a': 'has been snowing',
+              'options': ['has been snowing', 'has snowed', 'is snowing'],
+              'type': 'Declarative',
+              'mm': 'မနေ့ညကတည်းက နှင်းတွေကျနေတာ။',
+            },
+            {
+              'q': 'They ___ (work) on this project for months.',
+              'a': 'have been working',
+              'options': ['have worked', 'have been working', 'are working'],
+              'type': 'Declarative',
+              'mm': 'သူတို့ ဒီပရောဂျက်ကို လုပ်နေကြတာ လပေါင်းများစွာရှိပြီ။',
+            },
+            {
+              'q': 'She ___ (practice) the piano all morning.',
+              'a': 'has been practicing',
+              'options': [
+                'has practiced',
+                'is practicing',
+                'has been practicing',
+              ],
+              'type': 'Declarative',
+              'mm': 'သူမ တစ်မနက်ခင်းလုံး ပီယာနိုလေ့ကျင့်နေတာ။',
+            },
+            {
+              'q': 'We ___ (look) for a new house recently.',
+              'a': 'have been looking',
+              'options': ['have been looking', 'looked', 'are looking'],
+              'type': 'Declarative',
+              'mm': 'ကျွန်တော်တို့ ဒီရက်ပိုင်း အိမ်အသစ်ရှာနေကြတယ်။',
+            },
+
+            // --- Interrogative (How Long questions) ---
+            {
+              'q': 'How long ___ you ___ (learn) English?',
+              'a': 'have / been learning',
+              'options': [
+                'do / learn',
+                'have / been learning',
+                'are / learning',
+              ],
+              'type': 'Interrogative',
+              'mm': 'မင်း အင်္ဂလိပ်စာသင်နေတာ ဘယ်လောက်ကြာပြီလဲ။',
+            },
+            {
+              'q': '___ he ___ (watch) TV since he got home?',
+              'a': 'Has / been watching',
+              'options': [
+                'Has / been watching',
+                'Is / watching',
+                'Does / watch',
+              ],
+              'type': 'Interrogative',
+              'mm': 'သူ အိမ်ပြန်ရောက်ကတည်းက တီဗွီကြည့်နေတာလား။',
+            },
+            {
+              'q': 'What ___ they ___ (do) for the past hour?',
+              'a': 'have / been doing',
+              'options': ['are / doing', 'have / been doing', 'did / do'],
+              'type': 'Interrogative',
+              'mm': 'ပြီးခဲ့တဲ့ တစ်နာရီလုံး သူတို့ ဘာတွေလုပ်နေကြတာလဲ။',
+            },
+            {
+              'q': '___ it ___ (rain) all day?',
+              'a': 'Has / been raining',
+              'options': ['Is / raining', 'Has / been raining', 'Does / rain'],
+              'type': 'Interrogative',
+              'mm': 'တစ်နေကုန် မိုးရွာနေတာလား။',
+            },
+            {
+              'q': 'How long ___ she ___ (stay) at this hotel?',
+              'a': 'has / been staying',
+              'options': ['is / staying', 'has / been staying', 'does / stay'],
+              'type': 'Interrogative',
+              'mm': 'သူမ ဒီဟိုတယ်မှာ တည်းနေတာ ဘယ်လောက်ကြာပြီလဲ။',
+            },
+
+            // --- Negative Sentences ---
+            {
+              'q': 'I ___ (not/feel) very well lately.',
+              'a': 'have not been feeling',
+              'options': [
+                'am not feeling',
+                'have not been feeling',
+                'not been feeling',
+              ],
+              'type': 'Negative',
+              'mm': 'ဒီရက်ပိုင်း ကျွန်တော် နေလို့ သိပ်မကောင်းဘူး။',
+            },
+            {
+              'q': 'He ___ (not/take) his medicine regularly.',
+              'a': 'has not been taking',
+              'options': [
+                'is not taking',
+                'has not been taking',
+                'not has taken',
+              ],
+              'type': 'Negative',
+              'mm': 'သူ ဆေးကို ပုံမှန် မသောက်ဖြစ်ဘူး။',
+            },
+            {
+              'q': 'We ___ (not/talk) to each other for a while.',
+              'a': 'have not been talking',
+              'options': [
+                'don\'t talk',
+                'are not talking',
+                'have not been talking',
+              ],
+              'type': 'Negative',
+              'mm': 'ကျွန်တော်တို့ စကားမပြောဖြစ်တာ ခဏရှိပြီ။',
+            },
+            {
+              'q': 'They ___ (not/exercise) much these days.',
+              'a': 'have not been exercising',
+              'options': [
+                'not exercising',
+                'have not been exercising',
+                'don\'t exercise',
+              ],
+              'type': 'Negative',
+              'mm': 'သူတို့ ဒီရက်ပိုင်း လေ့ကျင့်ခန်း သိပ်မလုပ်ဖြစ်ကြဘူး။',
+            },
+            {
+              'q': 'She ___ (not/read) as much as she used to.',
+              'a': 'has not been reading',
+              'options': [
+                'is not reading',
+                'has not been reading',
+                'not has read',
+              ],
+              'type': 'Negative',
+              'mm': 'သူမ အရင်ကလောက် စာမဖတ်ဖြစ်တော့ဘူး။',
+            },
+
+            // --- Visible Results & Exclamatory (The "Proof" Category) ---
+            {
+              'q': 'You are out of breath! ___ you ___ (run)?',
+              'a': 'Have / been running',
+              'options': ['Do / run', 'Are / running', 'Have / been running'],
+              'type': 'Interrogative',
+              'mm': 'မင်း အမောတကော ဖြစ်နေပါလား။ ပြေးနေခဲ့တာလား။',
+            },
+            {
+              'q': 'Your clothes are wet! ___ you ___ (swim)?',
+              'a': 'Have / been swimming',
+              'options': [
+                'Have / been swimming',
+                'Are / swimming',
+                'Did / swim',
+              ],
+              'type': 'Exclamatory',
+              'mm': 'မင်းအင်္ကျီတွေ စိုနေပါလား။ ရေကူးနေခဲ့တာလား။',
+            },
+            {
+              'q': 'Look at the garden! It ___ (rain) hard.',
+              'a': 'has been raining',
+              'options': ['is raining', 'has been raining', 'rains'],
+              'type': 'Exclamatory',
+              'mm': 'ဥယျာဉ်ထဲကို ကြည့်ဦး! မိုးတွေ အပြင်းအထန် ရွာထားတာပဲ။',
+            },
+            {
+              'q': 'The kitchen smells great! Mom ___ (bake).',
+              'a': 'has been baking',
+              'options': ['is baking', 'bakes', 'has been baking'],
+              'type': 'Exclamatory',
+              'mm': 'မီးဖိုချောင်ထဲမှာ မွှေးနေတာပဲ! အမေ မုန့်ဖုတ်နေခဲ့တာနေမှာ။',
+            },
+            {
+              'q': 'My eyes hurt because I ___ (use) the phone too much.',
+              'a': 'have been using',
+              'options': ['am using', 'have been using', 'used'],
+              'type': 'Declarative',
+              'mm': 'ဖုန်းအကြည့်များနေလို့ ကျွန်တော့်မျက်လုံးတွေ အောင့်နေတယ်။',
+            },
+          ],
         },
       ],
     },
@@ -647,6 +1309,157 @@ class TenseCategoryScreen extends StatelessWidget {
               'note': 'ရုတ်တရက် ဖြစ်ရပ်။',
             },
           ],
+          'quizzes': [
+            // --- Declarative (Completed Actions) ---
+            {
+              'q': 'I ___ (visit) my grandmother last Sunday.',
+              'a': 'visited',
+              'options': ['visit', 'visited', 'was visit'],
+              'type': 'Declarative',
+              'mm': 'ပြီးခဲ့တဲ့ တနင်္ဂနွေနေ့က အဘွားဆီ သွားလည်ခဲ့တယ်။',
+            },
+            {
+              'q': 'They ___ (buy) a new house in 2020.',
+              'a': 'bought',
+              'options': ['buy', 'buyed', 'bought'],
+              'type': 'Declarative',
+              'mm': 'သူတို့ ၂၀၂၀ မှာ အိမ်အသစ်တစ်လုံး ဝယ်ခဲ့တယ်။',
+            },
+            {
+              'q': 'The bus ___ (leave) five minutes ago.',
+              'a': 'left',
+              'options': ['leave', 'left', 'leaves'],
+              'type': 'Declarative',
+              'mm': 'ဘတ်စ်ကားက လွန်ခဲ့တဲ့ ၅ မိနစ်က ထွက်သွားပြီ။',
+            },
+            {
+              'q': 'He ___ (be) a famous singer in the 90s.',
+              'a': 'was',
+              'options': ['is', 'was', 'were'],
+              'type': 'Declarative',
+              'mm':
+                  'သူက ကိုးဆယ်ကျော်ကာလတွေမှာ နာမည်ကြီးအဆိုတော်တစ်ယောက် ဖြစ်ခဲ့တယ်။',
+            },
+            {
+              'q': 'We ___ (eat) dinner at a fancy restaurant yesterday.',
+              'a': 'ate',
+              'options': ['eat', 'eaten', 'ate'],
+              'type': 'Declarative',
+              'mm':
+                  'မနေ့က ကျွန်တော်တို့ ဆိုင်ကောင်းကောင်းတစ်ခုမှာ ညစာစားခဲ့ကြတယ်။',
+            },
+
+            // --- Interrogative (Did + V1) ---
+            {
+              'q': '___ you ___ (see) the news this morning?',
+              'a': 'Did / see',
+              'options': ['Did / saw', 'Did / see', 'Do / see'],
+              'type': 'Interrogative',
+              'mm': 'ဒီမနက် သတင်းကြည့်ခဲ့လား။',
+            },
+            {
+              'q': 'Where ___ she ___ (go) after the party?',
+              'a': 'did / go',
+              'options': ['did / go', 'did / went', 'does / go'],
+              'type': 'Interrogative',
+              'mm': 'ပါတီပြီးတော့ သူမ ဘယ်သွားခဲ့လဲ။',
+            },
+            {
+              'q': '___ they ___ (finish) the work on time?',
+              'a': 'Did / finish',
+              'options': ['Did / finish', 'Do / finish', 'Did / finished'],
+              'type': 'Interrogative',
+              'mm': 'သူတို့ အလုပ်ကို အချိန်မီ ပြီးခဲ့ကြလား။',
+            },
+            {
+              'q': 'What time ___ the movie ___ (start)?',
+              'a': 'did / start',
+              'options': ['did / start', 'does / start', 'did / started'],
+              'type': 'Interrogative',
+              'mm': 'ရုပ်ရှင် ဘယ်အချိန်မှာ စခဲ့တာလဲ။',
+            },
+            {
+              'q': '___ he ___ (call) you yesterday?',
+              'a': 'Did / call',
+              'options': ['Did / call', 'Did / called', 'Does / call'],
+              'type': 'Interrogative',
+              'mm': 'သူ မနေ့က မင်းကို ဖုန်းဆက်ခဲ့လား။',
+            },
+
+            // --- Negative Sentences (Did not + V1) ---
+            {
+              'q': 'I ___ (not/sleep) well last night.',
+              'a': 'did not sleep',
+              'options': ['did not slept', 'not sleep', 'did not sleep'],
+              'type': 'Negative',
+              'mm': 'မနေ့ညက ကျွန်တော် ကောင်းကောင်း အိပ်မပျော်ခဲ့ဘူး။',
+            },
+            {
+              'q': 'She ___ (not/like) the food at the wedding.',
+              'a': 'did not like',
+              'options': ['did not liked', 'not liked', 'did not like'],
+              'type': 'Negative',
+              'mm': 'မင်္ဂလာဆောင်က အစားအစာကို သူမ မကြိုက်ခဲ့ဘူး။',
+            },
+            {
+              'q': 'They ___ (not/come) to the meeting.',
+              'a': 'did not come',
+              'options': ['did not came', 'not come', 'did not come'],
+              'type': 'Negative',
+              'mm': 'သူတို့ အစည်းအဝေးကို မလာခဲ့ကြဘူး။',
+            },
+            {
+              'q': 'We ___ (not/have) enough time to talk.',
+              'a': 'did not have',
+              'options': ['did not had', 'not have', 'did not have'],
+              'type': 'Negative',
+              'mm': 'ကျွန်တော်တို့ စကားပြောဖို့ အချိန်အလုံအလောက် မရခဲ့ဘူး။',
+            },
+            {
+              'q': 'The cat ___ (not/catch) the mouse.',
+              'a': 'did not catch',
+              'options': ['did not caught', 'not catch', 'did not catch'],
+              'type': 'Negative',
+              'mm': 'ကြောင်က ကြွက်ကို မမိခဲ့ဘူး။',
+            },
+
+            // --- Imperative & Exclamatory (Narrative / Strong Emotion) ---
+            {
+              'q': 'Wait! You ___ (forget) your umbrella!',
+              'a': 'forgot',
+              'options': ['forgot', 'forget', 'forgotten'],
+              'type': 'Exclamatory',
+              'mm': 'နေဦး! မင်း ထီးကျန်ခဲ့ပြီ (မေ့ခဲ့ပြီ)။',
+            },
+            {
+              'q': 'Help! That man ___ (steal) my bag!',
+              'a': 'stole',
+              'options': ['steal', 'stolen', 'stole'],
+              'type': 'Exclamatory',
+              'mm': 'ကယ်ကြပါဦး! ဟိုလူ ကျွန်တော့်အိတ်ကို ခိုးသွားပြီ။',
+            },
+            {
+              'q': 'Don\'t worry, I ___ (lock) the door before leaving.',
+              'a': 'locked',
+              'options': ['lock', 'locked', 'was lock'],
+              'type': 'Imperative',
+              'mm': 'မစိုးရိမ်နဲ့၊ မထွက်ခင် ကျွန်တော် တံခါးပိတ်ခဲ့ပါတယ်။',
+            },
+            {
+              'q': 'Oh no! The vase ___ (break)!',
+              'a': 'broke',
+              'options': ['break', 'broken', 'broke'],
+              'type': 'Exclamatory',
+              'mm': 'ဒုက္ခပါပဲ! ပန်းအိုး ကွဲသွားပြီ။',
+            },
+            {
+              'q': 'Stop! I ___ (tell) you not to do that!',
+              'a': 'told',
+              'options': ['tell', 'told', 'telled'],
+              'type': 'Imperative',
+              'mm': 'ရပ်လိုက်! အဲ့ဒါမလုပ်ဖို့ ငါ မင်းကို ပြောခဲ့တယ်နော်။',
+            },
+          ],
         },
         {
           'title': 'Past Continuous (အတိတ်ကာလဖြစ်ဆဲ)',
@@ -760,6 +1573,171 @@ class TenseCategoryScreen extends StatelessWidget {
               'rest': 'a beautiful dream.',
               'mm': 'ကျွန်တော် အိပ်မက်လှလှလေးတစ်ခု မက်နေခဲ့တယ်။',
               'note': 'Ongoing past experience.',
+            },
+          ],
+          'quizzes': [
+            // --- Declarative (Actions in Progress) ---
+            {
+              'q': 'I ___ (watch) TV when you called me.',
+              'a': 'was watching',
+              'options': ['watched', 'was watching', 'were watching'],
+              'type': 'Declarative',
+              'mm': 'မင်းဖုန်းဆက်တဲ့အချိန်မှာ ငါတီဗွီကြည့်နေခဲ့တာ။',
+            },
+            {
+              'q': 'The birds ___ (sing) at 6 AM this morning.',
+              'a': 'were singing',
+              'options': ['was singing', 'were singing', 'sang'],
+              'type': 'Declarative',
+              'mm': 'ဒီမနက် ၆ နာရီမှာ ငှက်လေးတွေ သီချင်းဆိုနေခဲ့ကြတယ်။',
+            },
+            {
+              'q': 'She ___ (wear) a beautiful dress at the party.',
+              'a': 'was wearing',
+              'options': ['is wearing', 'was wearing', 'were wearing'],
+              'type': 'Declarative',
+              'mm': 'ပါတီမှာ သူမ ဝတ်စုံလှလှလေးတစ်ထည် ဝတ်ထားခဲ့တယ်။',
+            },
+            {
+              'q': 'It ___ (rain) while we were driving home.',
+              'a': 'was raining',
+              'options': ['was raining', 'were raining', 'rained'],
+              'type': 'Declarative',
+              'mm': 'ကျွန်တော်တို့ အိမ်ပြန်မောင်းနေတုန်း မိုးရွာနေခဲ့တယ်။',
+            },
+            {
+              'q': 'They ___ (play) football when the rain started.',
+              'a': 'were playing',
+              'options': ['was playing', 'were playing', 'played'],
+              'type': 'Declarative',
+              'mm': 'မိုးစရွာတဲ့အချိန်မှာ သူတို့ ဘောလုံးကစားနေခဲ့ကြတယ်။',
+            },
+
+            // --- Interrogative (Was/Were + Subject + V-ing) ---
+            {
+              'q': '___ you ___ (sleep) when I knocked on the door?',
+              'a': 'Were / sleeping',
+              'options': ['Was / sleeping', 'Were / sleeping', 'Did / sleep'],
+              'type': 'Interrogative',
+              'mm': 'ငါ တံခါးခေါက်တဲ့အချိန်မှာ မင်း အိပ်နေခဲ့တာလား။',
+            },
+            {
+              'q': 'What ___ she ___ (do) at 10 PM last night?',
+              'a': 'was / doing',
+              'options': ['was / doing', 'were / doing', 'is / doing'],
+              'type': 'Interrogative',
+              'mm': 'မနေ့ည ၁၀ နာရီမှာ သူမ ဘာလုပ်နေခဲ့တာလဲ။',
+            },
+            {
+              'q': '___ the sun ___ (shine) when you woke up?',
+              'a': 'Was / shining',
+              'options': ['Was / shining', 'Were / shining', 'Did / shine'],
+              'type': 'Interrogative',
+              'mm': 'မင်းနိုးလာတဲ့အချိန်မှာ နေသာနေခဲ့လား။',
+            },
+            {
+              'q': 'Where ___ they ___ (go) when we saw them?',
+              'a': 'were / going',
+              'options': ['was / going', 'were / going', 'did / go'],
+              'type': 'Interrogative',
+              'mm':
+                  'ငါတို့ သူတို့ကို မြင်လိုက်တဲ့အချိန်မှာ သူတို့ ဘယ်သွားနေခဲ့တာလဲ။',
+            },
+            {
+              'q': '___ I ___ (snore) last night?',
+              'a': 'Was / snoring',
+              'options': ['Was / snoring', 'Were / snoring', 'Am / snoring'],
+              'type': 'Interrogative',
+              'mm': 'မနေ့ညက ငါ ဟောက်နေခဲ့သလား။',
+            },
+
+            // --- Negative (Was not / Were not + V-ing) ---
+            {
+              'q': 'I ___ (not/work) when the boss walked in.',
+              'a': 'was not working',
+              'options': ['were not working', 'was not working', 'not working'],
+              'type': 'Negative',
+              'mm': 'မန်နေဂျာဝင်လာတဲ့အချိန်မှာ ကျွန်တော် အလုပ်မလုပ်နေခဲ့ဘူး။',
+            },
+            {
+              'q': 'We ___ (not/listening) to the teacher.',
+              'a': 'were not listening',
+              'options': [
+                'was not listening',
+                'were not listening',
+                'didn\'t listening',
+              ],
+              'type': 'Negative',
+              'mm': 'ကျွန်တော်တို့ ဆရာပြောတာကို နားမထောင်နေခဲ့ကြဘူး။',
+            },
+            {
+              'q': 'He ___ (not/driving) fast when the accident happened.',
+              'a': 'was not driving',
+              'options': [
+                'was not driving',
+                'were not driving',
+                'isn\'t driving',
+              ],
+              'type': 'Negative',
+              'mm': 'မတော်တဆဖြစ်တဲ့အချိန်မှာ သူ ကားကို အမြန်မမောင်းနေခဲ့ပါဘူး။',
+            },
+            {
+              'q': 'The kids ___ (not/making) noise while the baby slept.',
+              'a': 'were not making',
+              'options': ['was not making', 'were not making', 'not making'],
+              'type': 'Negative',
+              'mm': 'ကလေးအိပ်နေတုန်းမှာ တခြားကလေးတွေက ဆူညံမနေခဲ့ကြဘူး။',
+            },
+            {
+              'q': 'She ___ (not/feeling) well yesterday afternoon.',
+              'a': 'was not feeling',
+              'options': [
+                'were not feeling',
+                'was not feeling',
+                'wasn\'t feel',
+              ],
+              'type': 'Negative',
+              'mm': 'မနေ့က နေ့လယ်ပိုင်းမှာ သူမ နေလို့သိပ်မကောင်းနေခဲ့ဘူး။',
+            },
+
+            // --- Two Actions Happening Simultaneously (While) ---
+            {
+              'q': 'While I was cooking, my husband ___ (set) the table.',
+              'a': 'was setting',
+              'options': ['set', 'was setting', 'were setting'],
+              'type': 'Declarative',
+              'mm':
+                  'ကျွန်မ ဟင်းချက်နေတုန်း ကျွန်မအမျိုးသားက စားပွဲပြင်နေခဲ့တယ်။',
+            },
+            {
+              'q': 'They ___ (dance) while the band was playing.',
+              'a': 'were dancing',
+              'options': ['danced', 'were dancing', 'was dancing'],
+              'type': 'Declarative',
+              'mm': 'တီးဝိုင်းက တီးနေတုန်း သူတို့ ကနေခဲ့ကြတယ်။',
+            },
+            {
+              'q': 'What were you doing while it ___ (snow)?',
+              'a': 'was snowing',
+              'options': ['snowed', 'was snowing', 'were snowing'],
+              'type': 'Interrogative',
+              'mm': 'နှင်းတွေကျနေတုန်း မင်း ဘာလုပ်နေခဲ့တာလဲ။',
+            },
+            {
+              'q': 'I ___ (study) while they were partying next door.',
+              'a': 'was studying',
+              'options': ['was studying', 'were studying', 'studied'],
+              'type': 'Declarative',
+              'mm':
+                  'ဘေးခန်းမှာ သူတို့ ပါတီလုပ်နေတုန်း ကျွန်တော်ကတော့ စာဖတ်နေခဲ့တယ်။',
+            },
+            {
+              'q': 'Look! Even though it was late, he ___ (still/work).',
+              'a': 'was still working',
+              'options': ['is still working', 'was still working', 'worked'],
+              'type': 'Exclamatory',
+              'mm':
+                  'ကြည့်စမ်း! အချိန်နှောင်းနေပြီဆိုရင်တောင် သူကတော့ အလုပ်လုပ်နေတုန်းပဲ။',
             },
           ],
         },
@@ -878,6 +1856,174 @@ class TenseCategoryScreen extends StatelessWidget {
               'note': 'Completed state.',
             },
           ],
+          'quizzes': [
+            // --- Declarative (The First of Two Actions) ---
+            {
+              'q':
+                  'When I arrived at the station, the train ___ (already/leave).',
+              'a': 'had already left',
+              'options': ['has already left', 'had already left', 'left'],
+              'type': 'Declarative',
+              'mm':
+                  'ကျွန်တော် ဘူတာရုံရောက်တဲ့အချိန်မှာ ရထားက ထွက်သွားနှင့်ပြီ။',
+            },
+            {
+              'q': 'She failed the test because she ___ (not/study).',
+              'a': 'had not studied',
+              'options': [
+                'has not studied',
+                'did not study',
+                'had not studied',
+              ],
+              'type': 'Declarative',
+              'mm': 'သူမ စာမလုပ်ခဲ့လို့ စာမေးပွဲကျခဲ့တာ။',
+            },
+            {
+              'q': 'I ___ (finish) my work before the boss arrived.',
+              'a': 'had finished',
+              'options': ['had finished', 'have finished', 'finished'],
+              'type': 'Declarative',
+              'mm': 'မန်နေဂျာမလာခင် ကျွန်တော့်အလုပ်တွေ ပြီးနှင့်နေပြီ။',
+            },
+            {
+              'q': 'By the time we got home, the rain ___ (stop).',
+              'a': 'had stopped',
+              'options': ['has stopped', 'had stopped', 'was stopped'],
+              'type': 'Declarative',
+              'mm': 'ကျွန်တော်တို့ အိမ်ရောက်တဲ့အချိန်မှာ မိုးတိတ်သွားပြီ။',
+            },
+            {
+              'q': 'He told me that he ___ (see) the movie before.',
+              'a': 'had seen',
+              'options': ['has seen', 'had seen', 'saw'],
+              'type': 'Declarative',
+              'mm':
+                  'သူက အဲ့ဒီရုပ်ရှင်ကို အရင်က မြင်ဖူးတယ်လို့ ကျွန်တော့်ကို ပြောခဲ့တယ်။',
+            },
+
+            // --- Interrogative (Checking the First Action) ---
+            {
+              'q': '___ he ___ (eat) dinner before you called him?',
+              'a': 'Had / eaten',
+              'options': ['Has / eaten', 'Had / eaten', 'Did / eat'],
+              'type': 'Interrogative',
+              'mm': 'မင်းဖုန်းမဆက်ခင် သူ ညစာစားပြီးပြီလား။',
+            },
+            {
+              'q': '___ she ___ (live) in London before moving to Yangon?',
+              'a': 'Had / lived',
+              'options': ['Has / lived', 'Had / lived', 'Did / live'],
+              'type': 'Interrogative',
+              'mm': 'ရန်ကုန်ကို မပြောင်းခင် သူမ လန်ဒန်မှာ နေခဲ့ဖူးလား။',
+            },
+            {
+              'q': 'How many times ___ you ___ (visit) Paris before 2020?',
+              'a': 'had / visited',
+              'options': ['have / visited', 'had / visited', 'did / visit'],
+              'type': 'Interrogative',
+              'mm': '၂၀၂၀ မတိုင်ခင် ပဲရစ်ကို မင်းဘယ်နှစ်ခါရောက်ဖူးလဲ။',
+            },
+            {
+              'q': '___ the meeting ___ (start) when you arrived?',
+              'a': 'Had / started',
+              'options': ['Had / started', 'Has / started', 'Was / starting'],
+              'type': 'Interrogative',
+              'mm': 'မင်းရောက်တဲ့အချိန်မှာ အစည်းအဝေး စနေပြီလား။',
+            },
+            {
+              'q': 'What ___ they ___ (do) before the police came?',
+              'a': 'had / done',
+              'options': ['have / done', 'had / done', 'did / do'],
+              'type': 'Interrogative',
+              'mm': 'ရဲတွေမလာခင် သူတို့ ဘာတွေလုပ်ခဲ့ကြတာလဲ။',
+            },
+
+            // --- Negative (Action had not happened yet) ---
+            {
+              'q': 'We ___ (not/hear) the news until you told us.',
+              'a': 'had not heard',
+              'options': ['have not heard', 'did not hear', 'had not heard'],
+              'type': 'Negative',
+              'mm':
+                  'မင်းပြောမှပဲ အဲ့ဒီသတင်းကို ကျွန်တော်တို့ သိရတာ (အရင်က မကြားဖူးဘူး)။',
+            },
+            {
+              'q': 'The plants died because it ___ (not/rain) for weeks.',
+              'a': 'had not rained',
+              'options': [
+                'has not rained',
+                'had not rained',
+                'was not raining',
+              ],
+              'type': 'Negative',
+              'mm':
+                  'အပင်တွေ သေကုန်တယ်၊ ဘာလို့လဲဆိုတော့ အပတ်ပေါင်းများစွာ မိုးမရွာခဲ့လို့ပဲ။',
+            },
+            {
+              'q': 'I ___ (not/meet) him before the party last night.',
+              'a': 'had not met',
+              'options': ['have not met', 'did not meet', 'had not met'],
+              'type': 'Negative',
+              'mm': 'မနေ့ညက ပါတီမတိုင်ခင် သူ့ကို ကျွန်တော် တစ်ခါမှ မဆုံဖူးဘူး။',
+            },
+            {
+              'q': 'She ___ (not/finish) her coffee when the taxi arrived.',
+              'a': 'had not finished',
+              'options': [
+                'has not finished',
+                'had not finished',
+                'was not finishing',
+              ],
+              'type': 'Negative',
+              'mm': 'တက္ကစီရောက်လာတော့ သူမ ကော်ဖီ မသောက်ရသေးဘူး။',
+            },
+            {
+              'q': 'They ___ (not/booked) the hotel, so they stayed with us.',
+              'a': 'had not booked',
+              'options': ['had not booked', 'have not booked', 'not booked'],
+              'type': 'Negative',
+              'mm':
+                  'သူတို့ ဟိုတယ် မကြိုတင်ထားခဲ့လို့ ကျွန်တော်တို့နဲ့အတူ တည်းခဲ့ကြတယ်။',
+            },
+
+            // --- Conditional & Reported Speech (Complex Uses) ---
+            {
+              'q': 'If I ___ (know) you were coming, I would have cooked.',
+              'a': 'had known',
+              'options': ['knew', 'had known', 'have known'],
+              'type': 'Declarative',
+              'mm': 'မင်းလာမယ်ဆိုတာသာ ငါသိခဲ့ရင် ငါ ချက်ထားမှာပေါ့။',
+            },
+            {
+              'q': 'I wished I ___ (study) harder for the exam.',
+              'a': 'had studied',
+              'options': ['studied', 'had studied', 'have studied'],
+              'type': 'Exclamatory',
+              'mm':
+                  'ငါ စာမေးပွဲအတွက် ပိုကြိုးစားခဲ့ရင် ကောင်းမှာလို့ ဆန္ဒရှိခဲ့တယ်။',
+            },
+            {
+              'q': 'The teacher asked if we ___ (do) our homework.',
+              'a': 'had done',
+              'options': ['have done', 'had done', 'did'],
+              'type': 'Declarative',
+              'mm': 'ဆရာက ငါတို့ အိမ်စာလုပ်ပြီးပြီလားလို့ မေးခဲ့တယ်။',
+            },
+            {
+              'q': 'I couldn\'t pay because I ___ (forget) my wallet.',
+              'a': 'had forgotten',
+              'options': ['forgot', 'had forgotten', 'forgotten'],
+              'type': 'Declarative',
+              'mm': 'ပိုက်ဆံအိတ် မေ့ခဲ့လို့ ကျွန်တော် ပိုက်ဆံမပေးနိုင်ခဲ့ဘူး။',
+            },
+            {
+              'q': 'The thief ___ (escape) before the police arrived!',
+              'a': 'had escaped',
+              'options': ['has escaped', 'had escaped', 'escaped'],
+              'type': 'Exclamatory',
+              'mm': 'ရဲတွေမရောက်ခင် သူခိုးက လွတ်သွားနှင့်ပြီ။',
+            },
+          ],
         },
         {
           'title': 'Past Perfect Continuous (အတိတ်ကာလပြီးစီးဖြစ်ဆဲ)',
@@ -993,6 +2139,223 @@ class TenseCategoryScreen extends StatelessWidget {
               'rest': '.',
               'mm': 'မြေကြီးတွေ စိုနေတာ မိုးရွာနေခဲ့လို့ပါ။',
               'note': 'Visible evidence in the past.',
+            },
+          ],
+          'quizzes': [
+            // --- Declarative (Duration before a Past Point) ---
+            {
+              'q': 'He was exhausted because he ___ (work) for twelve hours.',
+              'a': 'had been working',
+              'options': [
+                'has been working',
+                'had been working',
+                'was working',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'သူ ၁၂ နာရီကြာအောင် အလုပ်လုပ်နေခဲ့လို့ အရမ်းပင်ပန်းနေခဲ့တာ။',
+            },
+            {
+              'q': 'The ground was wet because it ___ (rain) all night.',
+              'a': 'had been raining',
+              'options': [
+                'had been raining',
+                'has been raining',
+                'was raining',
+              ],
+              'type': 'Declarative',
+              'mm': 'တစ်ညလုံး မိုးရွာနေခဲ့လို့ မြေကြီးတွေ စိုနေခဲ့တာ။',
+            },
+            {
+              'q': 'I ___ (wait) for an hour when the bus finally arrived.',
+              'a': 'had been waiting',
+              'options': ['was waiting', 'had waited', 'had been waiting'],
+              'type': 'Declarative',
+              'mm':
+                  'ဘတ်စ်ကားရောက်လာတဲ့အချိန်မှာ ကျွန်တော် စောင့်နေတာ တစ်နာရီရှိနေပြီ။',
+            },
+            {
+              'q':
+                  'She ___ (study) English for years before she moved to London.',
+              'a': 'had been studying',
+              'options': [
+                'had been studying',
+                'has been studying',
+                'was studying',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'လန်ဒန်ကို မပြောင်းခင် သူမ အင်္ဂလိပ်စာကို နှစ်ပေါင်းများစွာ သင်ယူနေခဲ့တာ။',
+            },
+            {
+              'q': 'They ___ (talk) for over an hour before Tony arrived.',
+              'a': 'had been talking',
+              'options': ['were talking', 'had been talking', 'had talked'],
+              'type': 'Declarative',
+              'mm': 'တိုနီရောက်မလာခင် သူတို့ စကားပြောနေကြတာ တစ်နာရီကျော်နေပြီ။',
+            },
+
+            // --- Interrogative (How long / Questions) ---
+            {
+              'q': 'How long ___ you ___ (wait) when the doctor called you?',
+              'a': 'had / been waiting',
+              'options': [
+                'had / been waiting',
+                'were / waiting',
+                'have / been waiting',
+              ],
+              'type': 'Interrogative',
+              'mm': 'ဆရာဝန်ခေါ်တဲ့အချိန်မှာ မင်းစောင့်နေတာ ဘယ်လောက်ကြာပြီလဲ။',
+            },
+            {
+              'q': '___ he ___ (drive) for long before the car broke down?',
+              'a': 'Had / been driving',
+              'options': [
+                'Was / driving',
+                'Has / been driving',
+                'Had / been driving',
+              ],
+              'type': 'Interrogative',
+              'mm': 'ကားမပျက်ခင် သူ ကားမောင်းနေတာ ကြာပြီလား။',
+            },
+            {
+              'q': '___ she ___ (cry) before you apologized?',
+              'a': 'Had / been crying',
+              'options': [
+                'Had / been crying',
+                'Was / crying',
+                'Has / been crying',
+              ],
+              'type': 'Interrogative',
+              'mm': 'မင်းတောင်းပန်ခြင်းမပြုခင် သူမ ငိုနေခဲ့တာလား။',
+            },
+            {
+              'q': 'Where ___ they ___ (live) before they bought this house?',
+              'a': 'had / been living',
+              'options': [
+                'were / living',
+                'had / been living',
+                'have / been living',
+              ],
+              'type': 'Interrogative',
+              'mm': 'ဒီအိမ်ကိုမဝယ်ခင် သူတို့ ဘယ်မှာ နေထိုင်နေခဲ့ကြတာလဲ။',
+            },
+            {
+              'q': '___ the birds ___ (sing) before the sun rose?',
+              'a': 'Had / been singing',
+              'options': ['Had / been singing', 'Were / singing', 'Did / sing'],
+              'type': 'Interrogative',
+              'mm': 'နေမထွက်ခင် ငှက်လေးတွေ သီချင်းဆိုနေခဲ့ကြတာလား။',
+            },
+
+            // --- Negative (Duration not happening) ---
+            {
+              'q': 'I ___ (not/feel) well for days before I saw a doctor.',
+              'a': 'had not been feeling',
+              'options': [
+                'was not feeling',
+                'had not been feeling',
+                'not been feeling',
+              ],
+              'type': 'Negative',
+              'mm':
+                  'ဆရာဝန်နဲ့မပြခင် ရက်အတော်ကြာ ကျွန်တော် နေလို့မကောင်းဖြစ်နေခဲ့တာ။',
+            },
+            {
+              'q': 'We ___ (not/expect) any visitors that day.',
+              'a': 'had not been expecting',
+              'options': [
+                'were not expecting',
+                'had not been expecting',
+                'not expected',
+              ],
+              'type': 'Negative',
+              'mm':
+                  'အဲ့ဒီနေ့က ဘယ်သူမှလာလည်လိမ့်မယ်လို့ ကျွန်တော်တို့ မမျှော်လင့်ထားခဲ့ဘူး။',
+            },
+            {
+              'q': 'He ___ (not/working) there for very long when he quit.',
+              'a': 'had not been working',
+              'options': [
+                'was not working',
+                'had not been working',
+                'has not been working',
+              ],
+              'type': 'Negative',
+              'mm': 'သူ အလုပ်ထွက်တဲ့အချိန်မှာ ဟိုမှာ လုပ်နေတာ သိပ်မကြာသေးဘူး။',
+            },
+            {
+              'q': 'She ___ (not/practicing) enough before the competition.',
+              'a': 'had not been practicing',
+              'options': [
+                'had not been practicing',
+                'was not practicing',
+                'didn\'t practice',
+              ],
+              'type': 'Negative',
+              'mm':
+                  'ပြိုင်ပွဲမတိုင်ခင် သူမ လုံလုံလောက်လောက် လေ့ကျင့်မနေခဲ့ဘူး။',
+            },
+            {
+              'q':
+                  'They ___ (not/living) together for long when they split up.',
+              'a': 'had not been living',
+              'options': [
+                'were not living',
+                'had not been living',
+                'not lived',
+              ],
+              'type': 'Negative',
+              'mm': 'သူတို့ လမ်းခွဲတဲ့အချိန်မှာ အတူနေလာတာ သိပ်မကြာသေးဘူး။',
+            },
+
+            // --- Causality & Emphasis (Why things were a certain way) ---
+            {
+              'q': 'The kitchen was a mess because the kids ___ (cook).',
+              'a': 'had been cooking',
+              'options': [
+                'were cooking',
+                'had been cooking',
+                'have been cooking',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'ကလေးတွေ ဟင်းချက်နေခဲ့ကြလို့ မီးဖိုချောင်တစ်ခုလုံး ရှုပ်ပွနေခဲ့တာ။',
+            },
+            {
+              'q': 'Her eyes were red because she ___ (smoke).',
+              'a': 'had been smoking',
+              'options': ['was smoking', 'had been smoking', 'had smoked'],
+              'type': 'Declarative',
+              'mm': 'သူမ ဆေးလိပ်သောက်နေခဲ့လို့ မျက်လုံးတွေ နီနေခဲ့တာ။',
+            },
+            {
+              'q': 'Oh! So you ___ (hide) from me all this time!',
+              'a': 'had been hiding',
+              'options': ['were hiding', 'had been hiding', 'have been hiding'],
+              'type': 'Exclamatory',
+              'mm':
+                  'အော်! ဒါဆို မင်း တစ်ချိန်လုံး ငါ့ဆီကနေ ပုန်းနေခဲ့တာပေါ့လေ။',
+            },
+            {
+              'q': 'He was out of breath! He ___ (run) for miles!',
+              'a': 'had been running',
+              'options': ['was running', 'had been running', 'ran'],
+              'type': 'Exclamatory',
+              'mm':
+                  'သူ အမောတကော ဖြစ်နေတယ်! သူ မိုင်ပေါင်းများစွာ ပြေးလာခဲ့တာဖြစ်မယ်။',
+            },
+            {
+              'q': 'We were so tired! We ___ (travel) for 24 hours straight.',
+              'a': 'had been traveling',
+              'options': [
+                'had been traveling',
+                'were traveling',
+                'had traveled',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'ကျွန်တော်တို့ တအားပင်ပန်းနေပြီ! ၂၄ နာရီဆက်တိုက် ခရီးသွားနေခဲ့ကြလို့ပါ။',
             },
           ],
         },
@@ -1113,6 +2476,161 @@ class TenseCategoryScreen extends StatelessWidget {
               'note': 'Optimistic prediction.',
             },
           ],
+          'quizzes': [
+            // --- Declarative (Predictions & Facts) ---
+            {
+              'q':
+                  'I think artificial intelligence ___ (change) the world even more.',
+              'a': 'will change',
+              'options': ['changes', 'will change', 'is change'],
+              'type': 'Declarative',
+              'mm':
+                  'AI က ကမ္ဘာကြီးကို ပိုပြီး ပြောင်းလဲစေလိမ့်မယ်လို့ ကျွန်တော်ထင်တယ်။',
+            },
+            {
+              'q': 'The sun ___ (rise) at 6:30 AM tomorrow.',
+              'a': 'will rise',
+              'options': ['will rise', 'rises', 'will rose'],
+              'type': 'Declarative',
+              'mm': 'မနက်ဖြန် မနက် ၆ နာရီခွဲမှာ နေထွက်လိမ့်မယ်။',
+            },
+            {
+              'q': 'One day, people ___ (travel) to Mars.',
+              'a': 'will travel',
+              'options': ['travel', 'will travel', 'travelled'],
+              'type': 'Declarative',
+              'mm': 'တစ်နေ့မှာ လူတွေ အင်္ဂါဂြိုဟ်ကို ခရီးသွားကြလိမ့်မယ်။',
+            },
+            {
+              'q': 'The price of iPhones ___ (go) up next year.',
+              'a': 'will go',
+              'options': ['goes', 'will go', 'will gone'],
+              'type': 'Declarative',
+              'mm': 'လာမယ့်နှစ်မှာ iPhone ဈေးတွေ တက်လိမ့်မယ်။',
+            },
+            {
+              'q': 'I ___ (be) at the office by 9 o\'clock.',
+              'a': 'will be',
+              'options': ['will be', 'am', 'was'],
+              'type': 'Declarative',
+              'mm': 'ကိုးနာရီမှာ ကျွန်တော် ရုံးမှာ ရှိနေပါလိမ့်မယ်။',
+            },
+
+            // --- Interrogative (Asking for Favors & Predictions) ---
+            {
+              'q': '___ you ___ (help) me with this heavy box?',
+              'a': 'Will / help',
+              'options': ['Do / help', 'Will / help', 'Are / help'],
+              'type': 'Interrogative',
+              'mm': 'ဒီလေးတဲ့သေတ္တာကို သယ်ဖို့ ကူညီမလား။',
+            },
+            {
+              'q': 'When ___ the package ___ (arrive)?',
+              'a': 'will / arrive',
+              'options': ['does / arrive', 'will / arrive', 'is / arriving'],
+              'type': 'Interrogative',
+              'mm': 'ပါဆယ်က ဘယ်တော့ ရောက်မှာလဲ။',
+            },
+            {
+              'q': '___ it ___ (be) cold in London next week?',
+              'a': 'Will / be',
+              'options': ['Is / be', 'Will / be', 'Does / be'],
+              'type': 'Interrogative',
+              'mm': 'လာမယ့်အပတ် လန်ဒန်မှာ အေးမလား။',
+            },
+            {
+              'q': 'Who ___ (win) the match tonight, do you think?',
+              'a': 'will win',
+              'options': ['wins', 'will win', 'winning'],
+              'type': 'Interrogative',
+              'mm': 'ဒီညပွဲစဉ်မှာ ဘယ်သူနိုင်မယ်လို့ မင်းထင်သလဲ။',
+            },
+            {
+              'q': '___ you ___ (send) me the link via Viber?',
+              'a': 'Will / send',
+              'options': ['Do / send', 'Will / send', 'Are / send'],
+              'type': 'Interrogative',
+              'mm': 'ငါ့ကို Viber ကနေ လင့်ခ်ပို့ပေးမလား။',
+            },
+
+            // --- Negative (Won't / Refusal) ---
+            {
+              'q': 'I ___ (not/tell) anyone your secret, I promise!',
+              'a': 'will not tell',
+              'options': ['am not tell', 'don\'t tell', 'will not tell'],
+              'type': 'Negative',
+              'mm':
+                  'မင်းရဲ့လျှို့ဝှက်ချက်ကို ဘယ်သူ့ကိုမှ မပြောပါဘူး၊ ကတိပေးတယ်။',
+            },
+            {
+              'q': 'The car ___ (not/start); I think the battery is dead.',
+              'a': 'will not start',
+              'options': ['doesn\'t start', 'will not start', 'not start'],
+              'type': 'Negative',
+              'mm':
+                  'ကားက စက်နှိုးလို့မရဘူး (နှိုးမှာမဟုတ်ဘူး)၊ ဘက်ထရီကုန်နေပြီထင်တယ်။',
+            },
+            {
+              'q': 'They ___ (not/agree) to these terms.',
+              'a': 'will not agree',
+              'options': ['won\'t agree', 'don\'t agree', 'not agree'],
+              'type': 'Negative',
+              'mm': 'သူတို့ ဒီအချက်အလက်တွေကို သဘောတူမှာ မဟုတ်ဘူး။',
+            },
+            {
+              'q': 'We ___ (not/have) enough time to visit the museum.',
+              'a': 'will not have',
+              'options': ['won\'t have', 'don\'t have', 'not have'],
+              'type': 'Negative',
+              'mm':
+                  'ပြတိုက်ကို လည်ပတ်ဖို့ ကျွန်တော်တို့မှာ အချိန်အလုံအလောက် ရှိမှာမဟုတ်ဘူး။',
+            },
+            {
+              'q': 'She ___ (not/forget) what you did for her.',
+              'a': 'will not forget',
+              'options': ['won\'t forget', 'doesn\'t forget', 'not forget'],
+              'type': 'Negative',
+              'mm':
+                  'မင်းသူမအတွက် လုပ်ပေးခဲ့တာတွေကို သူမ ဘယ်တော့မှ မေ့မှာမဟုတ်ဘူး။',
+            },
+
+            // --- Instant Decisions & Promises (Real World Usage) ---
+            {
+              'q': 'The phone is ringing. I ___ (get) it!',
+              'a': 'will get',
+              'options': ['get', 'will get', 'am getting'],
+              'type': 'Declarative',
+              'mm': 'ဖုန်းမြည်နေတယ်၊ ငါသွားကိုင်လိုက်မယ်။',
+            },
+            {
+              'q': 'I\'m hungry. I think I ___ (order) a pizza.',
+              'a': 'will order',
+              'options': ['order', 'will order', 'am order'],
+              'type': 'Declarative',
+              'mm': 'ဗိုက်ဆာလိုက်တာ၊ ပီဇာတစ်လုံး မှာလိုက်တော့မယ်။',
+            },
+            {
+              'q': 'Wait! I ___ (drive) you to the airport.',
+              'a': 'will drive',
+              'options': ['drive', 'will drive', 'am driving'],
+              'type': 'Declarative',
+              'mm': 'နေဦး! လေဆိပ်ကို ငါလိုက်ပို့ပေးမယ်။',
+            },
+            {
+              'q': 'I ___ (text) you when I get home.',
+              'a': 'will text',
+              'options': ['text', 'will text', 'am texting'],
+              'type': 'Declarative',
+              'mm': 'အိမ်ရောက်ရင် ဖုန်းလှမ်းဆက်လိုက်မယ် (စာပို့လိုက်မယ်)။',
+            },
+            {
+              'q': 'Don\'t worry! I ___ (pay) for the coffee today.',
+              'a': 'will pay',
+              'options': ['pay', 'will pay', 'paid'],
+              'type': 'Declarative',
+              'mm': 'စိတ်မပူနဲ့! ဒီနေ့ ကော်ဖီဖိုး ငါရှင်းလိုက်မယ်။',
+            },
+          ],
         },
         {
           'title': 'Future Continuous (အနာဂတ်ကာလဖြစ်ဆဲ)',
@@ -1226,6 +2744,175 @@ class TenseCategoryScreen extends StatelessWidget {
               'rest': 'brightly tonight.',
               'mm': 'ဒီည ကြယ်လေးတွေ လင်းလက်နေလိမ့်မယ်။',
               'note': 'Atmospheric prediction.',
+            },
+          ],
+          'quizzes': [
+            // --- Declarative (Future Progress) ---
+            {
+              'q': 'This time tomorrow, I ___ (fly) to Singapore.',
+              'a': 'will be flying',
+              'options': ['will fly', 'will be flying', 'am flying'],
+              'type': 'Declarative',
+              'mm':
+                  'မနက်ဖြန် ဒီအချိန်ဆိုရင် ကျွန်တော် စင်ကာပူကို လေယာဉ်နဲ့ သွားနေမှာပါ။',
+            },
+            {
+              'q': 'Don\'t call me at 8 PM. I ___ (watch) my favorite show.',
+              'a': 'will be watching',
+              'options': ['will be watching', 'will watch', 'watch'],
+              'type': 'Declarative',
+              'mm':
+                  'ည ၈ နာရီမှာ ဖုန်းမဆက်ပါနဲ့ဦး။ ကျွန်တော် ကြိုက်တဲ့ အစီအစဉ် ကြည့်နေမှာမို့လို့ပါ။',
+            },
+            {
+              'q': 'They ___ (stay) at the Hilton Hotel during the trip.',
+              'a': 'will be staying',
+              'options': ['will stay', 'will be staying', 'staying'],
+              'type': 'Declarative',
+              'mm':
+                  'ခရီးစဉ်အတွင်းမှာ သူတို့ ဟေလ်တန်ဟိုတယ်မှာ တည်းခိုနေပါလိမ့်မယ်။',
+            },
+            {
+              'q': 'At midnight, most of the city ___ (sleep).',
+              'a': 'will be sleeping',
+              'options': ['will be sleeping', 'will sleep', 'is sleep'],
+              'type': 'Declarative',
+              'mm':
+                  'သန်းခေါင်ယံအချိန်မှာ မြို့သူမြို့သားအများစု အိပ်ပျော်နေကြမှာပါ။',
+            },
+            {
+              'q': 'She ___ (work) in the garden all afternoon.',
+              'a': 'will be working',
+              'options': ['will work', 'will be working', 'works'],
+              'type': 'Declarative',
+              'mm': 'သူမ တစ်နေကုန် ဥယျာဉ်ထဲမှာ အလုပ်လုပ်နေပါလိမ့်မယ်။',
+            },
+
+            // --- Interrogative (Polite Inquiries) ---
+            {
+              'q': '___ you ___ (use) your car tomorrow?',
+              'a': 'Will / be using',
+              'options': ['Will / use', 'Will / be using', 'Are / use'],
+              'type': 'Interrogative',
+              'mm': 'မနက်ဖြန် မင်းရဲ့ကားကို သုံးနေမှာလား (သုံးဖို့ရှိသလား)။',
+            },
+            {
+              'q': 'What ___ you ___ (do) this time next year?',
+              'a': 'will / be doing',
+              'options': ['will / do', 'will / be doing', 'are / doing'],
+              'type': 'Interrogative',
+              'mm': 'လာမယ့်နှစ် ဒီအချိန်မှာ မင်း ဘာတွေလုပ်နေမှာလဲ။',
+            },
+            {
+              'q': '___ they ___ (join) us for dinner later?',
+              'a': 'Will / be joining',
+              'options': ['Will / join', 'Will / be joining', 'Do / join'],
+              'type': 'Interrogative',
+              'mm': 'ခဏနေရင် သူတို့ ငါတို့နဲ့အတူ ညစာစားဖို့ လာပူးပေါင်းမှာလား။',
+            },
+            {
+              'q': 'Where ___ he ___ (live) after graduation?',
+              'a': 'will / be living',
+              'options': ['will / be living', 'will / live', 'is / living'],
+              'type': 'Interrogative',
+              'mm': 'ဘွဲ့ရပြီးရင် သူ ဘယ်မှာ နေထိုင်နေမှာလဲ။',
+            },
+            {
+              'q': '___ it ___ (rain) when we arrive?',
+              'a': 'Will / be raining',
+              'options': ['Will / rain', 'Will / be raining', 'Is / raining'],
+              'type': 'Interrogative',
+              'mm': 'ငါတို့ရောက်တဲ့အချိန်မှာ မိုးရွာနေမှာလား။',
+            },
+
+            // --- Negative (Planned Absence of Action) ---
+            {
+              'q': 'I ___ (not/doing) anything special this weekend.',
+              'a': 'will not be doing',
+              'options': [
+                'won\'t be doing',
+                'not will be doing',
+                'am not doing',
+              ],
+              'type': 'Negative',
+              'mm':
+                  'ဒီအပတ်ပိတ်ရက်မှာ ကျွန်တော် ထူးထူးခြားခြား ဘာမှလုပ်နေမှာ မဟုတ်ပါဘူး။',
+            },
+            {
+              'q': 'She ___ (not/coming) to the party tonight.',
+              'a': 'will not be coming',
+              'options': ['won\'t be coming', 'doesn\'t come', 'not coming'],
+              'type': 'Negative',
+              'mm': 'သူမ ဒီညပါတီကို လာနေမှာ မဟုတ်ဘူး။',
+            },
+            {
+              'q': 'They ___ (not/working) on Monday because it\'s a holiday.',
+              'a': 'will not be working',
+              'options': ['won\'t be working', 'not work', 'won\'t working'],
+              'type': 'Negative',
+              'mm':
+                  'တနင်္လာနေ့က ရုံးပိတ်ရက်ဖြစ်လို့ သူတို့ အလုပ်လုပ်နေမှာ မဟုတ်ဘူး။',
+            },
+            {
+              'q': 'We ___ (not/using) the meeting room tomorrow morning.',
+              'a': 'will not be using',
+              'options': ['won\'t be using', 'won\'t use', 'not use'],
+              'type': 'Negative',
+              'mm':
+                  'မနက်ဖြန်မနက်မှာ ကျွန်တော်တို့ အစည်းအဝေးခန်းကို သုံးနေမှာ မဟုတ်ပါဘူး။',
+            },
+            {
+              'q': 'The children ___ (not/going) to school during the summer.',
+              'a': 'will not be going',
+              'options': ['won\'t be going', 'won\'t go', 'not going'],
+              'type': 'Negative',
+              'mm': 'နွေရာသီမှာ ကလေးတွေ ကျောင်းသွားနေမှာ မဟုတ်ဘူး။',
+            },
+
+            // --- Predicting Future Atmospheres (Real World) ---
+            {
+              'q': 'Wait! If you go now, everyone ___ (have) lunch.',
+              'a': 'will be having',
+              'options': ['will have', 'will be having', 'is having'],
+              'type': 'Declarative',
+              'mm': 'နေဦး! အခုသွားမယ်ဆိုရင် အားလုံးက နေ့လယ်စာ စားနေကြမှာ။',
+            },
+            {
+              'q': 'I suspect the team ___ (celebrate) their win right now.',
+              'a': 'will be celebrating',
+              'options': [
+                'will be celebrating',
+                'celebrates',
+                'will celebrate',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'အခုအချိန်ဆို အဖွဲ့သားတွေ သူတို့အောင်ပွဲကို အောင်ပွဲခံနေကြမှာလို့ ငါထင်တယ်။',
+            },
+            {
+              'q':
+                  'Don\'t go there! The construction workers ___ (make) a lot of noise.',
+              'a': 'will be making',
+              'options': ['will be making', 'make', 'will make'],
+              'type': 'Declarative',
+              'mm':
+                  'ဟိုကိုမသွားနဲ့! ဆောက်လုပ်ရေးသမားတွေက ဆူညံသံတွေ အများကြီး ထွက်နေမှာ။',
+            },
+            {
+              'q': 'In 2050, we ___ (ride) flying cars.',
+              'a': 'will be riding',
+              'options': ['will ride', 'will be riding', 'are riding'],
+              'type': 'Declarative',
+              'mm':
+                  '၂၀၅၀ ခုနှစ်မှာ ငါတို့ ပျံသန်းနိုင်တဲ့ကားတွေကို စီးနေကြမှာပါ။',
+            },
+            {
+              'q': 'I promise I ___ (think) of you while I am away.',
+              'a': 'will be thinking',
+              'options': ['will be thinking', 'will think', 'am thinking'],
+              'type': 'Declarative',
+              'mm':
+                  'ခရီးသွားနေတဲ့အချိန်မှာ မင်းအကြောင်းကို ငါတွေးနေမှာပါလို့ ကတိပေးတယ်။',
             },
           ],
         },
@@ -1347,6 +3034,198 @@ class TenseCategoryScreen extends StatelessWidget {
               'note': 'Encouragement!',
             },
           ],
+          'quizzes': [
+            // --- Declarative (Deadlines & Milestones) ---
+            {
+              'q': 'By next month, I ___ (save) enough money for a new laptop.',
+              'a': 'will have saved',
+              'options': ['will save', 'will have saved', 'have saved'],
+              'type': 'Declarative',
+              'mm':
+                  'နောက်လဆိုရင် ကျွန်တော် လပ်တော့ပ်အသစ်အတွက် ပိုက်ဆံ လုံလုံလောက်လောက် စုမိပြီးသား ဖြစ်လိမ့်မယ်။',
+            },
+            {
+              'q': 'The movie ___ (start) by the time we get to the cinema.',
+              'a': 'will have started',
+              'options': ['will start', 'will have started', 'starts'],
+              'type': 'Declarative',
+              'mm':
+                  'ကျွန်တော်တို့ ရုပ်ရှင်ရုံရောက်တဲ့အချိန်ဆို ရုပ်ရှင်က စနှင့်နေပြီ ဖြစ်လိမ့်မယ်။',
+            },
+            {
+              'q': 'By 2030, scientists ___ (find) a cure for many diseases.',
+              'a': 'will have found',
+              'options': ['will find', 'will have found', 'found'],
+              'type': 'Declarative',
+              'mm':
+                  '၂၀၃၀ ခုနှစ်လောက်ဆိုရင် သိပ္ပံပညာရှင်တွေ ရောဂါအတော်များများအတွက် ကုထုံးကို ရှာဖွေတွေ့ရှိပြီးသား ဖြစ်လိမ့်မယ်။',
+            },
+            {
+              'q': 'I ___ (finish) this report by Friday afternoon.',
+              'a': 'will have finished',
+              'options': ['will have finished', 'will finish', 'finish'],
+              'type': 'Declarative',
+              'mm':
+                  'သောကြာနေ့ နေ့လယ်ဆိုရင် ကျွန်တော် ဒီအစီရင်ခံစာကို အပြီးသတ်ပြီးသား ဖြစ်လိမ့်မယ်။',
+            },
+            {
+              'q': 'They ___ (leave) before you arrive at the airport.',
+              'a': 'will have left',
+              'options': ['will leave', 'will have left', 'leave'],
+              'type': 'Declarative',
+              'mm':
+                  'မင်းလေဆိပ်ရောက်တဲ့အချိန်မှာ သူတို့က ထွက်သွားနှင့်ပြီးသား ဖြစ်လိမ့်မယ်။',
+            },
+
+            // --- Interrogative (Checking Completion) ---
+            {
+              'q': '___ you ___ (do) your homework by dinner time?',
+              'a': 'Will / have done',
+              'options': ['Will / do', 'Will / have done', 'Have / done'],
+              'type': 'Interrogative',
+              'mm': 'ညစာမစားခင် မင်းအိမ်စာတွေ ပြီးနှင့်မှာလား။',
+            },
+            {
+              'q': 'How many books ___ she ___ (write) by the end of the year?',
+              'a': 'will / have written',
+              'options': [
+                'will / write',
+                'will / have written',
+                'does / write',
+              ],
+              'type': 'Interrogative',
+              'mm': 'ဒီနှစ်ကုန်ရင် သူမ စာအုပ်ဘယ်နှစ်အုပ် ရေးပြီးသား ဖြစ်နေမလဲ။',
+            },
+            {
+              'q': '___ the rain ___ (stop) by tomorrow morning?',
+              'a': 'Will / have stopped',
+              'options': [
+                'Will / stop',
+                'Will / have stopped',
+                'Is / stopping',
+              ],
+              'type': 'Interrogative',
+              'mm': 'မနက်ဖြန်မနက်ဆို မိုးက တိတ်သွားပြီးသား ဖြစ်နေမလား။',
+            },
+            {
+              'q': '___ you ___ (live) here for ten years by next July?',
+              'a': 'Will / have lived',
+              'options': ['Will / have lived', 'Will / live', 'Do / live'],
+              'type': 'Interrogative',
+              'mm':
+                  'လာမယ့် ဇူလိုင်ဆိုရင် မင်းဒီမှာနေတာ ၁၀ နှစ် ပြည့်သွားပြီလား။',
+            },
+            {
+              'q': 'When ___ the workers ___ (complete) the bridge?',
+              'a': 'will / have completed',
+              'options': [
+                'will / complete',
+                'will / have completed',
+                'are / completing',
+              ],
+              'type': 'Interrogative',
+              'mm':
+                  'အလုပ်သမားတွေက တံတားကို ဘယ်အချိန်မှာ အပြီးသတ်ပြီးသား ဖြစ်မလဲ။',
+            },
+
+            // --- Negative (Expected Non-Completion) ---
+            {
+              'q': 'I ___ (not/finish) the project by tomorrow morning.',
+              'a': 'will not have finished',
+              'options': [
+                'won\'t have finished',
+                'won\'t finish',
+                'not finished',
+              ],
+              'type': 'Negative',
+              'mm':
+                  'မနက်ဖြန်မနက်အထိတော့ ကျွန်တော် ဒီပရောဂျက်ကို အပြီးသတ်နိုင်ဦးမှာ မဟုတ်ဘူး။',
+            },
+            {
+              'q': 'She ___ (not/read) the whole book by the deadline.',
+              'a': 'will not have read',
+              'options': ['won\'t have read', 'won\'t read', 'not reading'],
+              'type': 'Negative',
+              'mm':
+                  'သတ်မှတ်ရက်အမီ သူမ စာအုပ်တစ်အုပ်လုံးကို ဖတ်ပြီးသား ဖြစ်မှာမဟုတ်ဘူး။',
+            },
+            {
+              'q': 'They ___ (not/return) from vacation until next week.',
+              'a': 'will not have returned',
+              'options': [
+                'won\'t have returned',
+                'won\'t return',
+                'not return',
+              ],
+              'type': 'Negative',
+              'mm':
+                  'နောက်အပတ်အထိ သူတို့က အားလပ်ရက်ကနေ ပြန်ရောက်ဦးမှာ မဟုတ်ဘူး။',
+            },
+            {
+              'q': 'We ___ (not/save) enough money by the end of this year.',
+              'a': 'will not have saved',
+              'options': ['won\'t have saved', 'won\'t save', 'not save'],
+              'type': 'Negative',
+              'mm':
+                  'ဒီနှစ်ကုန်အထိတော့ ကျွန်တော်တို့ ပိုက်ဆံ လုံလုံလောက်လောက် စုမိဦးမှာ မဟုတ်ဘူး။',
+            },
+            {
+              'q': 'He ___ (not/receive) the package by the time he leaves.',
+              'a': 'will not have received',
+              'options': [
+                'won\'t have received',
+                'won\'t receive',
+                'doesn\'t receive',
+              ],
+              'type': 'Negative',
+              'mm': 'သူ ထွက်မသွားခင်အထိ ပါဆယ်ကို ရရှိဦးမှာ မဟုတ်ဘူး။',
+            },
+
+            // --- Real World: Estimates & Accomplishments ---
+            {
+              'q': 'By the time you wake up, I ___ (already/arrive) in London.',
+              'a': 'will have already arrived',
+              'options': [
+                'will have already arrived',
+                'will already arrive',
+                'already arrived',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'မင်းနိုးလာတဲ့အချိန်ဆိုရင် ငါ လန်ဒန်ကို ရောက်နှင့်ပြီးသား ဖြစ်နေလိမ့်မယ်။',
+            },
+            {
+              'q': 'I ___ (cook) dinner by the time you get home.',
+              'a': 'will have cooked',
+              'options': ['will cook', 'will have cooked', 'am cooking'],
+              'type': 'Declarative',
+              'mm':
+                  'မင်းအိမ်ပြန်ရောက်တဲ့အချိန်ဆိုရင် ငါ ညစာ ချက်ပြီးသား ဖြစ်နေပါလိမ့်မယ်။',
+            },
+            {
+              'q': 'Within two hours, the sun ___ (set).',
+              'a': 'will have set',
+              'options': ['will set', 'will have set', 'sets'],
+              'type': 'Declarative',
+              'mm': 'နှစ်နာရီအတွင်းမှာ နေက ဝင်သွားပြီးသား ဖြစ်လိမ့်မယ်။',
+            },
+            {
+              'q': 'I hope you ___ (recover) from your cold by the party.',
+              'a': 'will have recovered',
+              'options': ['will have recovered', 'will recover', 'recover'],
+              'type': 'Declarative',
+              'mm':
+                  'ပါတီမတိုင်ခင် မင်း အအေးမိတာ သက်သာပြီးသား ဖြစ်လိမ့်မယ်လို့ ငါ မျှော်လင့်ပါတယ်။',
+            },
+            {
+              'q': 'The construction ___ (end) before the rainy season starts.',
+              'a': 'will have ended',
+              'options': ['will end', 'will have ended', 'ends'],
+              'type': 'Declarative',
+              'mm':
+                  'မိုးရာသီမစခင် ဆောက်လုပ်ရေး အလုပ်တွေ ပြီးဆုံးသွားပြီးသား ဖြစ်လိမ့်မယ်။',
+            },
+          ],
         },
         {
           'title': 'Future Perfect Continuous (အနာဂတ်ကာလပြီးစီးဖြစ်ဆဲ)',
@@ -1466,6 +3345,264 @@ class TenseCategoryScreen extends StatelessWidget {
               'note': 'Positive outlook!',
             },
           ],
+          'quizzes': [
+            // --- Declarative (Duration at a Future Point) ---
+            {
+              'q': 'By next year, I ___ (live) in Yangon for ten years.',
+              'a': 'will have been living',
+              'options': [
+                'will have been living',
+                'will be living',
+                'will have lived',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'လာမယ့်နှစ်ဆိုရင် ကျွန်တော် ရန်ကုန်မှာ နေလာတာ ၁၀ နှစ် ပြည့်သွားပါလိမ့်မယ်။',
+            },
+            {
+              'q': 'By 5 PM, she ___ (work) for eight hours straight.',
+              'a': 'will have been working',
+              'options': [
+                'will be working',
+                'will have been working',
+                'has been working',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'ညနေ ၅ နာရီဆိုရင် သူမ အလုပ်လုပ်နေတာ မနားတမ်း ၈ နာရီ ရှိသွားပါလိမ့်မယ်။',
+            },
+            {
+              'q': 'At the end of this month, we ___ (date) for two years.',
+              'a': 'will have been dating',
+              'options': [
+                'will have been dating',
+                'will be dating',
+                'have been dating',
+              ],
+              'type': 'Declarative',
+              'mm': 'ဒီလကုန်ရင် ကျွန်တော်တို့ တွဲလာတာ ၂ နှစ် ပြည့်ပါပြီ။',
+            },
+            {
+              'q':
+                  'By the time the plane lands, they ___ (fly) for twelve hours.',
+              'a': 'will have been flying',
+              'options': [
+                'will be flying',
+                'will have flying',
+                'will have been flying',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'လေယာဉ်ဆင်းသက်တဲ့အချိန်မှာ သူတို့ ပျံသန်းနေခဲ့တာ ၁၂ နာရီ ရှိသွားပါလိမ့်မယ်။',
+            },
+            {
+              'q': 'He ___ (study) for three hours by the time you arrive.',
+              'a': 'will have been studying',
+              'options': [
+                'will have been studying',
+                'will be studying',
+                'is studying',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'မင်းရောက်လာတဲ့အချိန်ဆိုရင် သူ စာဖတ်နေတာ ၃ နာရီ ရှိသွားပါလိမ့်မယ်။',
+            },
+
+            // --- Interrogative (Asking about Duration) ---
+            {
+              'q': 'How long ___ you ___ (wait) when the bus finally arrives?',
+              'a': 'will / have been waiting',
+              'options': [
+                'will / be waiting',
+                'will / have been waiting',
+                'are / waiting',
+              ],
+              'type': 'Interrogative',
+              'mm':
+                  'ဘတ်စ်ကားရောက်လာတဲ့အချိန်မှာ မင်းစောင့်နေတာ ဘယ်လောက်ကြာသွားပြီ ဖြစ်မလဲ။',
+            },
+            {
+              'q':
+                  '___ she ___ (teach) for thirty years by the time she retires?',
+              'a': 'Will / have been teaching',
+              'options': [
+                'Will / be teaching',
+                'Will / have been teaching',
+                'Is / teaching',
+              ],
+              'type': 'Interrogative',
+              'mm':
+                  'သူမ အငြိမ်းစားယူတဲ့အချိန်မှာ စာသင်လာတာ နှစ် ၃၀ ရှိသွားပြီလား။',
+            },
+            {
+              'q':
+                  'By next January, ___ they ___ (renovate) this house for a year?',
+              'a': 'will / have been renovating',
+              'options': [
+                'will / be renovating',
+                'will / have been renovating',
+                'do / renovate',
+              ],
+              'type': 'Interrogative',
+              'mm':
+                  'လာမယ့် ဇန်နဝါရီဆိုရင် သူတို့ ဒီအိမ်ကို ပြင်ဆင်နေတာ ၁ နှစ် ရှိသွားပြီလား။',
+            },
+            {
+              'q':
+                  'How long ___ he ___ (play) for this team by the end of the season?',
+              'a': 'will / have been playing',
+              'options': [
+                'will / play',
+                'will / be playing',
+                'will / have been playing',
+              ],
+              'type': 'Interrogative',
+              'mm':
+                  'ရာသီကုန်တဲ့အချိန်မှာ သူ ဒီအသင်းအတွက် ကစားပေးနေတာ ဘယ်လောက်ကြာသွားပြီလဲ။',
+            },
+            {
+              'q':
+                  '___ we ___ (drive) for five hours by the time we reach Bagan?',
+              'a': 'Will / have been driving',
+              'options': [
+                'Will / be driving',
+                'Will / have been driving',
+                'Are / driving',
+              ],
+              'type': 'Interrogative',
+              'mm':
+                  'ပုဂံရောက်တဲ့အချိန်မှာ ငါတို့ ကားမောင်းနေတာ ၅ နာရီ ရှိသွားမှာလား။',
+            },
+
+            // --- Negative (Duration not reached) ---
+            {
+              'q':
+                  'I ___ (not/working) here for very long by the time I leave.',
+              'a': 'will not have been working',
+              'options': [
+                'won\'t have been working',
+                'won\'t be working',
+                'not working',
+              ],
+              'type': 'Negative',
+              'mm':
+                  'ကျွန်တော် ထွက်သွားတဲ့အချိန်မှာ ဒီမှာ အလုပ်လုပ်သက်က သိပ်မကြာသေးဘူး ဖြစ်လိမ့်မယ်။',
+            },
+            {
+              'q':
+                  'She ___ (not/living) in London for a year yet by next week.',
+              'a': 'will not have been living',
+              'options': [
+                'won\'t have been living',
+                'won\'t be living',
+                'not lived',
+              ],
+              'type': 'Negative',
+              'mm':
+                  'လာမယ့်အပတ်ဆိုရင် သူမ လန်ဒန်မှာ နေတာ ၁ နှစ် မပြည့်သေးပါဘူး။',
+            },
+            {
+              'q': 'They ___ (not/practicing) for long before the show starts.',
+              'a': 'will not have been practicing',
+              'options': [
+                'won\'t have been practicing',
+                'won\'t practice',
+                'don\'t practice',
+              ],
+              'type': 'Negative',
+              'mm': 'ပွဲမစခင် သူတို့ လေ့ကျင့်နေတာ သိပ်မကြာသေးပါဘူး။',
+            },
+            {
+              'q':
+                  'We ___ (not/traveling) for even a day by the time we get there.',
+              'a': 'will not have been traveling',
+              'options': [
+                'won\'t have been traveling',
+                'won\'t be traveling',
+                'not travel',
+              ],
+              'type': 'Negative',
+              'mm':
+                  'ဟိုကိုရောက်တဲ့အချိန်ဆိုရင် ကျွန်တော်တို့ ခရီးသွားနေတာ တစ်ရက်တောင် မပြည့်သေးပါဘူး။',
+            },
+            {
+              'q': 'He ___ (not/sleeping) for long when the alarm goes off.',
+              'a': 'will not have been sleeping',
+              'options': [
+                'won\'t have been sleeping',
+                'won\'t sleep',
+                'isn\'t sleeping',
+              ],
+              'type': 'Negative',
+              'mm':
+                  'အချက်ပေးသံမြည်တဲ့အချိန်မှာ သူ အိပ်ပျော်နေတာ သိပ်မကြာသေးပါဘူး။',
+            },
+
+            // --- Realistic Scenarios: Milestones & Effort ---
+            {
+              'q':
+                  'By the time I finish this course, I ___ (learn) English for six months.',
+              'a': 'will have been learning',
+              'options': [
+                'will have been learning',
+                'will be learning',
+                'learned',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'ဒီသင်တန်းပြီးတဲ့အချိန်မှာ ကျွန်တော် အင်္ဂလိပ်စာ သင်ယူနေတာ ၆ လ ရှိသွားပါလိမ့်မယ်။',
+            },
+            {
+              'q':
+                  'You ___ (stand) in the queue for an hour before you get a ticket.',
+              'a': 'will have been standing',
+              'options': [
+                'will be standing',
+                'will have been standing',
+                'stood',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'လက်မှတ်မရခင်အထိ မင်း တန်းစီစောင့်နေရတာ ၁ နာရီလောက် ရှိသွားလိမ့်မယ်။',
+            },
+            {
+              'q': 'My parents ___ (marry) for 40 years next December.',
+              'a': 'will have been married',
+              'options': [
+                'will have been marrying',
+                'will have been married',
+                'will marry',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'လာမယ့် ဒီဇင်ဘာဆိုရင် ကျွန်တော့်မိဘတွေ အိမ်ထောင်သက် ၄၀ ရှိပါပြီ။',
+            },
+            {
+              'q': 'I ___ (wait) for you for ages by the time you arrive!',
+              'a': 'will have bpeen waiting',
+              'options': [
+                'will be waiting',
+                'will have been waiting',
+                'waited',
+              ],
+              'type': 'Exclamatory',
+              'mm':
+                  'မင်းရောက်လာတဲ့အချိန်ဆိုရင် ငါ စောင့်နေတာ ကမ္ဘာပျက်မတတ် ကြာနေလိမ့်မယ်။',
+            },
+            {
+              'q':
+                  'By next year, the team ___ (develop) this app for two years.',
+              'a': 'will have been developing',
+              'options': [
+                'will have been developing',
+                'will be developing',
+                'developed',
+              ],
+              'type': 'Declarative',
+              'mm':
+                  'လာမယ့်နှစ်ဆိုရင် အဖွဲ့သားတွေ ဒီ App ကို ဖန်တီးနေတာ ၂ နှစ် ရှိသွားပါလိမ့်မယ်။',
+            },
+          ],
         },
       ],
     },
@@ -1542,6 +3679,19 @@ class TenseDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(tense['title'])),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => QuizLessonPage(
+              quizData: tense['quizzes'],
+              tenseTitle: tense['title'],
+            ),
+          ),
+        ),
+        label: const Text("Take a Quiz"),
+        icon: const Icon(Icons.play_arrow),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
           vertical: 16,

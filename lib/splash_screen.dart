@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:perfect_english/main.dart';
+import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -84,13 +85,36 @@ class _SplashScreenState extends State<SplashScreen>
           opacity: _fade,
           child: ScaleTransition(
             scale: _scale,
-            child: Text(
-              "NaYa Group",
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w900,
-                color: Colors.blue.shade900,
-                letterSpacing: 1.5,
+            // child: Text(
+            //   "NaYa Group",
+            //   textAlign: TextAlign.center,
+            //   style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            //     fontWeight: FontWeight.w900,
+            //     color: Colors.blue.shade900,
+            //     letterSpacing: 1.5,
+            //   ),
+            // ),
+            child: Container(
+              width: MediaQuery.sizeOf(context).width * 0.5,
+              height: MediaQuery.sizeOf(context).width * 0.5,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                color: Theme.of(context).colorScheme.surface,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.15),
+                    blurRadius: 30,
+                    offset: Offset(0, 15),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.all(12),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(
+                  'assets/images/perfect_english_logo.png',
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
