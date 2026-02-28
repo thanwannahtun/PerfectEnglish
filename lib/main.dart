@@ -44,8 +44,14 @@ ThemeData buildDarkTheme() {
       // foregroundColor: Colors.white,
     ),
     textTheme: TextTheme(
-      titleLarge: TextStyle(color: colorScheme.primary),
-      titleMedium: TextStyle(color: colorScheme.primary),
+      titleLarge: TextStyle(
+        color: colorScheme.primary,
+        fontWeight: FontWeight.bold,
+      ),
+      titleMedium: TextStyle(
+        color: colorScheme.primary,
+        fontWeight: FontWeight.bold,
+      ),
       // ...
     ),
     // ...
@@ -78,7 +84,10 @@ ThemeData buildLightTheme() {
       // foregroundColor: Colors.amber,
     ),
     textTheme: TextTheme(
-      titleLarge: TextStyle(color: colorScheme.primary),
+      titleLarge: TextStyle(
+        color: colorScheme.primary,
+        fontWeight: FontWeight.bold,
+      ),
       titleMedium: TextStyle(
         color: colorScheme.primary,
         fontWeight: FontWeight.bold,

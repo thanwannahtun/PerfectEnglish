@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:perfect_english/grammer_section/subject_verb_agreement_screen.dart';
 import 'package:perfect_english/grammer_section/tenses_category_screen.dart';
+import 'package:perfect_english/grammer_section/verb_forms.dart';
 
 import 'articles_detail_screen.dart';
 import 'conditionals_screen.dart' show ConditionalsScreen;
@@ -18,6 +19,11 @@ class GrammarHubScreen extends StatelessWidget {
       'level': 'Basic (အခြေခံ)',
       'icon': Icons.child_care,
       'topics': [
+        {
+          'title': 'Verb Forms (ကြိယာပုံစံများ)',
+          'desc': 'V1, V2, V3, V4, V5 and Summary Table',
+          'detailScreen': VerbFormsScreen(),
+        },
         {
           'title': 'Tenses (ကာလများ)',
           'desc': 'Present, Past, Future basics',
