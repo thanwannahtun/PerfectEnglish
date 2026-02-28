@@ -117,14 +117,20 @@ class TenseMatrixScreen extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: DataTable(
+                dataRowColor: WidgetStateProperty.all(
+                  Theme.of(context).colorScheme.onPrimary,
+                ),
+                headingTextStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
                 columnSpacing: 20,
                 showCheckboxColumn: true,
                 showBottomBorder: true,
                 dataRowMinHeight: 60,
                 dataRowMaxHeight: 60,
-                headingRowColor: WidgetStateProperty.all(Theme.of(
-                  context,
-                ).colorScheme.onPrimary),
+                headingRowColor: WidgetStateProperty.all(
+                  Theme.of(context).colorScheme.onPrimary,
+                ),
                 border: TableBorder.all(color: Colors.grey.shade300),
                 columns: columns
                     .map(
@@ -204,15 +210,16 @@ class TenseMatrixScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            _buildQuickLegend(),
+            _buildQuickLegend(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildQuickLegend() {
+  Widget _buildQuickLegend(BuildContext context) {
     return Card(
+      color: Theme.of(context).colorScheme.onPrimary,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

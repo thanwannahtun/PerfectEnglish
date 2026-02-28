@@ -2060,6 +2060,7 @@ class PassiveVoiceDetailScreen extends StatelessWidget {
             // Inside your TenseDetailScreen loop:
             ...(tense['examples'] as List).map((ex) {
               return Card(
+                color: Theme.of(context).colorScheme.onPrimary,
                 margin: const EdgeInsets.only(bottom: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -2075,7 +2076,8 @@ class PassiveVoiceDetailScreen extends StatelessWidget {
                         "Active: ${ex['active']}",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue,
+                          // color: Colors.blue,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                       Text(

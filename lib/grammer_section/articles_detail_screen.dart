@@ -226,6 +226,9 @@ class ArticlesDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(title: const Text('Articles (A, An, The)')),
       floatingActionButton: FloatingActionButton.extended(
@@ -253,8 +256,12 @@ class ArticlesDetailScreen extends StatelessWidget {
           return Container(
             margin: const EdgeInsets.only(bottom: 24),
             decoration: BoxDecoration(
+              color: colorScheme.onPrimary,
               border: Border(
-                left: BorderSide(color: _getColor(index), width: 5),
+                left: BorderSide(
+                  color: _getColor(colorScheme, index),
+                  width: 5,
+                ),
               ),
             ),
             padding: const EdgeInsets.only(left: 16),
@@ -263,17 +270,15 @@ class ArticlesDetailScreen extends StatelessWidget {
               children: [
                 Text(
                   rule['title'],
-                  style: TextStyle(
-                    fontSize: 20,
+                  style: textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: _getColor(index),
+                    color: _getColor(colorScheme, index),
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   rule['usage'],
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: textTheme.bodyMedium?.copyWith(
                     fontStyle: FontStyle.italic,
                   ),
                 ),
@@ -284,16 +289,15 @@ class ArticlesDetailScreen extends StatelessWidget {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.onPrimaryContainer.withAlpha(25),
+                    color: colorScheme.onPrimaryContainer.withAlpha(25),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
                     rule['formula'],
-                    style: const TextStyle(
+                    style: textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       fontFamily: 'monospace',
+                      color: colorScheme.onPrimaryContainer,
                     ),
                   ),
                 ),
@@ -306,22 +310,22 @@ class ArticlesDetailScreen extends StatelessWidget {
                       children: [
                         Text(
                           ex['word'],
-                          style: const TextStyle(
+                          style: textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.blueGrey,
+                            color: colorScheme.secondary,
                           ),
                         ),
                         const SizedBox(height: 4),
                         _buildHighlightedExample(
+                          context,
                           ex['sentence'],
                           ex['word'].split(' ')[0],
                         ),
                         Text(
                           ex['mm'],
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.grey.shade600,
+                          style: textTheme.bodySmall?.copyWith(
+                            fontStyle: FontStyle.italic,
+                            color: colorScheme.outline,
                           ),
                         ),
                       ],
@@ -336,26 +340,39 @@ class ArticlesDetailScreen extends StatelessWidget {
     );
   }
 
-  Color _getColor(int index) {
-    List<Color> colors = [Colors.blue, Colors.green, Colors.purple];
+  Color _getColor(ColorScheme colorScheme, int index) {
+    final List<Color> colors = [
+      colorScheme.primary,
+      colorScheme.secondary,
+      colorScheme.tertiary,
+    ];
     return colors[index % colors.length];
   }
 
-  Widget _buildHighlightedExample(String sentence, String article) {
-    // Logic to highlight the article in the sentence
+  Widget _buildHighlightedExample(
+    BuildContext context,
+    String sentence,
+    String article,
+  ) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     List<String> words = sentence.split(' ');
     return RichText(
       text: TextSpan(
-        style: const TextStyle(color: Colors.black, fontSize: 15),
+        style: textTheme.bodyMedium?.copyWith(
+          color: colorScheme.onSurface,
+          fontSize: 15,
+        ),
         children: words.map((word) {
           bool isArticle = word.toLowerCase() == article.toLowerCase();
           return TextSpan(
             text: '$word ',
             style: TextStyle(
               fontWeight: isArticle ? FontWeight.bold : FontWeight.normal,
-              color: isArticle ? Colors.red : Colors.green,
+              color: isArticle ? colorScheme.error : colorScheme.secondary,
               backgroundColor: isArticle
-                  ? Colors.yellow.shade100
+                  ? colorScheme.errorContainer.withAlpha(40)
                   : Colors.transparent,
             ),
           );

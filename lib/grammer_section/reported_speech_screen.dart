@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'quiz_lesson_page.dart';
+
 class ReportedSpeechScreen extends StatelessWidget {
   const ReportedSpeechScreen({super.key});
 
@@ -83,10 +85,194 @@ class ReportedSpeechScreen extends StatelessWidget {
     },
   ];
 
+  /// Quiz dataset: 20 questions for Direct & Indirect Speech.
+  final List<Map<String, dynamic>> reportedSpeechQuizzes = const [
+    // Tense Backshift (5)
+    {
+      'q': 'He said, "I am tired." → He said that he __ tired.',
+      'a': 'was',
+      'options': ['was', 'is', 'will be', 'has been'],
+      'type': 'Tense Backshift',
+      'mm': 'Present (am) ကို Past (was) သို့ နောက်ဆုတ်ရသည်။',
+    },
+    {
+      'q':
+          'She said, "I have finished my homework." → She said that she __ finished her homework.',
+      'a': 'had',
+      'options': ['have', 'has', 'had', 'having'],
+      'type': 'Tense Backshift',
+      'mm':
+          'Present Perfect (have finished) → Past Perfect (had finished) သို့ ပြောင်းသည်။',
+    },
+    {
+      'q':
+          'They said, "We will travel next month." → They said that they __ travel the next month.',
+      'a': 'would',
+      'options': ['will', 'would', 'can', 'could'],
+      'type': 'Tense Backshift',
+      'mm': 'Will → Would သို့ နောက်ဆုတ်ရသည်။',
+    },
+    {
+      'q':
+          'He said, "I can swim very well." → He said that he __ swim very well.',
+      'a': 'could',
+      'options': ['can', 'could', 'will', 'would'],
+      'type': 'Tense Backshift',
+      'mm': 'Can → Could သို့ ပြောင်းရသည်။',
+    },
+    {
+      'q':
+          'She said, "I am reading a book." → She said that she __ reading a book.',
+      'a': 'was',
+      'options': ['is', 'was', 'were', 'has been'],
+      'type': 'Tense Backshift',
+      'mm':
+          'Present Continuous (am reading) → Past Continuous (was reading) ဖြစ်ရသည်။',
+    },
+
+    // Time & Place Shift (5)
+    {
+      'q':
+          '"We are meeting here today," he said. → He said that they were meeting __ __.',
+      'a': 'there that day',
+      'options': [
+        'here today',
+        'there that day',
+        'there tomorrow',
+        'here that day',
+      ],
+      'type': 'Time & Place',
+      'mm': 'Here → There, Today → That day သို့ ပြောင်းရန်လိုသည်။',
+    },
+    {
+      'q':
+          '"I will see you tomorrow," she said. → She said that she would see me __ __.',
+      'a': 'the next day',
+      'options': ['tomorrow', 'the next day', 'that day', 'the previous day'],
+      'type': 'Time & Place',
+      'mm': 'Tomorrow → The next day သို့ ပြောင်းရသည်။',
+    },
+    {
+      'q':
+          '"I met him yesterday," he said. → He said that he had met him __ __.',
+      'a': 'the day before',
+      'options': ['yesterday', 'the day before', 'last day', 'the next day'],
+      'type': 'Time & Place',
+      'mm': 'Yesterday → The day before သို့ ပြောင်းရသည်။',
+    },
+    {
+      'q': '"We live here," they said. → They said that they lived __.',
+      'a': 'there',
+      'options': ['here', 'there', 'where', 'anywhere'],
+      'type': 'Time & Place',
+      'mm': 'Here ကို indirect မှာ There သို့ ပြောင်းရသည်။',
+    },
+    {
+      'q':
+          '"This book is interesting," she said. → She said that __ book was interesting.',
+      'a': 'that',
+      'options': ['this', 'these', 'that', 'those'],
+      'type': 'Time & Place',
+      'mm': 'This → That သို့ ပြောင်းရသည်။',
+    },
+
+    // Reporting Questions (5)
+    {
+      'q': '"Where do you work?" he asked. → He asked me where I __.',
+      'a': 'worked',
+      'options': ['work', 'worked', 'was working', 'had worked'],
+      'type': 'Reporting Questions',
+      'mm':
+          'Wh-question တွင် word order ကို statement ပုံစံလို ပြောင်းပြီး Tense ကို backshift လုပ်ရသည်။',
+    },
+    {
+      'q': '"Do you like coffee?" she asked. → She asked if I __ coffee.',
+      'a': 'liked',
+      'options': ['like', 'liked', 'was liking', 'had liked'],
+      'type': 'Reporting Questions',
+      'mm':
+          'Yes/No question မှာ If/Whether သုံးပြီး Present → Past သို့ ပြောင်းရသည်။',
+    },
+    {
+      'q':
+          '"Why are you late?" the teacher asked. → The teacher asked why I __ late.',
+      'a': 'was',
+      'options': ['am', 'was', 'were', 'had been'],
+      'type': 'Reporting Questions',
+      'mm': 'Are → Was သို့ နောက်ဆုတ်ရသည်။',
+    },
+    {
+      'q': '"Can you help me?" he asked. → He asked if I __ help him.',
+      'a': 'could',
+      'options': ['can', 'could', 'will', 'would'],
+      'type': 'Reporting Questions',
+      'mm': 'Can → Could သို့ ပြောင်းရသည်။',
+    },
+    {
+      'q': '"What are you doing?" she asked. → She asked what I __ doing.',
+      'a': 'was',
+      'options': ['am', 'was', 'were', 'had been'],
+      'type': 'Reporting Questions',
+      'mm':
+          'Present Continuous ကို Past Continuous (was doing) သို့ နောက်ဆုတ်ရသည်။',
+    },
+
+    // Commands & Requests (5)
+    {
+      'q': '"Please open the window," she said. → She told me __ the window.',
+      'a': 'to open',
+      'options': ['open', 'to open', 'opening', 'to opening'],
+      'type': 'Commands & Requests',
+      'mm': 'Command/Request တွင် told/asked + object + to V1 သုံးရသည်။',
+    },
+    {
+      'q': '"Don\'t be late," he said. → He told me __ late.',
+      'a': 'not to be',
+      'options': ['to not be', 'not be', 'not to be', 'no be'],
+      'type': 'Commands & Requests',
+      'mm': 'Negative command တွင် not to V1 သုံးရသည်။',
+    },
+    {
+      'q': '"Sit down," the teacher said. → The teacher told us __ down.',
+      'a': 'to sit',
+      'options': ['sit', 'to sit', 'sitting', 'to sitting'],
+      'type': 'Commands & Requests',
+      'mm': 'Imperative ကနေ Indirect သို့ပြောင်းရာတွင် to V1 သုံးရသည်။',
+    },
+    {
+      'q': '"Please don\'t touch that," she said. → She asked me __ that.',
+      'a': 'not to touch',
+      'options': ['to not touch', 'not touch', 'not to touch', 'no touch'],
+      'type': 'Commands & Requests',
+      'mm': 'Don\'t + V1 ကို Indirect မှာ not to V1 အဖြစ် ပြောင်းရသည်။',
+    },
+    {
+      'q': '"Be quiet," he said. → He told us __ quiet.',
+      'a': 'to be',
+      'options': ['be', 'to be', 'being', 'to being'],
+      'type': 'Commands & Requests',
+      'mm': 'Be quiet → told us to be quiet အဖြစ်ပြောင်းရသည်။',
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Direct & Indirect Speech (Advanced)')),
+      floatingActionButton: FloatingActionButton.extended(
+        heroTag: 'reported-speech-quiz',
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => QuizLessonPage(
+              quizData: reportedSpeechQuizzes,
+              tenseTitle: 'Direct & Indirect Speech',
+            ),
+          ),
+        ),
+        label: const Text('Take a Quiz'),
+        icon: const Icon(Icons.play_arrow),
+      ),
       body: ListView(
         padding: EdgeInsets.symmetric(
           vertical: 16,
@@ -113,6 +299,7 @@ class ReportedSpeechScreen extends StatelessWidget {
     BuildContext context,
   ) {
     return Card(
+      color: Theme.of(context).colorScheme.onPrimary,
       margin: const EdgeInsets.only(bottom: 24),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(

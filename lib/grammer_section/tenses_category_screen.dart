@@ -3741,6 +3741,8 @@ class TenseDetailScreen extends StatelessWidget {
             ...(tense['examples'] as List).map((ex) {
               return Card(
                 margin: const EdgeInsets.only(bottom: 12),
+                color: Theme.of(context).colorScheme.onPrimary,
+
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -3755,9 +3757,12 @@ class TenseDetailScreen extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: ex['s'] + " ",
-                              style: const TextStyle(
+                              style: TextStyle(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimaryContainer,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.indigo,
+                                // color: Colors.indigo,
                               ),
                             ),
                             TextSpan(
@@ -3782,10 +3787,9 @@ class TenseDetailScreen extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         ex['mm'],
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey.shade700,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontStyle: FontStyle.italic,
+                          color: Theme.of(context).colorScheme.outline,
                         ),
                       ),
                       if (ex.containsKey('note')) ...[
@@ -3797,13 +3801,19 @@ class TenseDetailScreen extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             // color: Colors.green.shade50,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onPrimaryContainer.withAlpha(25),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
                             "💡 Tip: ${ex['note']}",
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
                               // color: Colors.brown,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onPrimaryContainer,
                               fontWeight: FontWeight.w500,
                             ),
                           ),

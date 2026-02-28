@@ -106,11 +106,11 @@ class BaseApplication extends StatelessWidget {
     return Scaffold(
       drawer: AppDrawer(),
       appBar: AppBar(
-        title: const Text('Perfect English Learning'),
+        title: const Text('Perfect English'),
         actionsPadding: EdgeInsets.only(
           right: MediaQuery.sizeOf(context).width * 0.05,
         ),
-        actions: [Text("v0.01")],
+        actions: [Text("v1.0.0")],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -145,7 +145,7 @@ class BaseApplication extends StatelessWidget {
 
             ListTile(
               title: Text(
-                "Take A Exam To Get Certification",
+                "အောင်မှတ်လက်မှတ် စစ်ဆေးမှု (Certification Quiz)",
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               trailing: Icon(Icons.chevron_right),

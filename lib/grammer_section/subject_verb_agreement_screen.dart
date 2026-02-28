@@ -272,6 +272,7 @@ class SubjectVerbAgreementScreen extends StatelessWidget {
           final item = rulesData[index];
           return Card(
             margin: const EdgeInsets.only(bottom: 16),
+            color: Theme.of(context).colorScheme.onPrimary,
             elevation: 1,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),

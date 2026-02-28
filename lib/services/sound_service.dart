@@ -4,6 +4,7 @@ class SoundService {
   static late AudioPool _correctPool;
   static late AudioPool _wrongPool;
   static late AudioPool _achievementPool;
+  static late AudioPool _levelUpgradePool;
 
   static bool _enabled = true; // 🔥 sound state
 
@@ -22,6 +23,11 @@ class SoundService {
 
     _achievementPool = await AudioPool.create(
       source: AssetSource('sounds/archievement.mp3'),
+      maxPlayers: 3,
+    );
+
+    _levelUpgradePool = await AudioPool.create(
+      source: AssetSource('sounds/level_upgrade.mp3'),
       maxPlayers: 3,
     );
   }
@@ -44,5 +50,10 @@ class SoundService {
   static void playWrong() {
     if (!_enabled) return;
     _wrongPool.start();
+  }
+
+  static void playLevelUpgrade() {
+    if (!_enabled) return;
+    _levelUpgradePool.start();
   }
 }

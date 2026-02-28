@@ -327,7 +327,7 @@ class VerbFormsScreen extends StatelessWidget {
           horizontal: MediaQuery.sizeOf(context).width * 0.05,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _buildIntroCard(context),
             const SizedBox(height: 20),
@@ -624,7 +624,11 @@ class VerbFormsScreen extends StatelessWidget {
             ),
             dataRowMinHeight: 44,
             dataRowMaxHeight: 52,
-            border: TableBorder.all(color: Colors.grey.shade400),
+            border: TableBorder.all(
+              color: Theme.of(
+                context,
+              ).colorScheme.onPrimaryContainer.withAlpha(25),
+            ),
             columns: columnLabels
                 .map(
                   (label) => DataColumn(

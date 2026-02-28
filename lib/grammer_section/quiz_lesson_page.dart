@@ -1,4 +1,4 @@
-import 'dart:async'; // Required for Timer
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../services/sound_service.dart';
@@ -16,8 +16,6 @@ class QuizLessonPage extends StatefulWidget {
   @override
   State<QuizLessonPage> createState() => _QuizLessonPageState();
 }
-
-// ... imports stay the same
 
 class _QuizLessonPageState extends State<QuizLessonPage> {
   int currentIdx = 0;
@@ -43,10 +41,10 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
       }
     });
 
-    // Dynamic delay: Longer delay if wrong so they can study the correct answer
-    int delaySeconds = isCorrect! ? 1 : 3;
+    // Dynamic delay: slightly longer if wrong so they can study the correct answer
+    final delayMs = isCorrect! ? 900 : 2000;
 
-    _nextPageTimer = Timer(Duration(seconds: delaySeconds), () {
+    _nextPageTimer = Timer(Duration(milliseconds: delayMs), () {
       if (mounted) {
         if (currentIdx < widget.quizData.length - 1) {
           setState(() {
@@ -61,7 +59,6 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
     });
   }
 
-  // ... dispose and navigation methods
   @override
   void dispose() {
     _nextPageTimer?.cancel(); // Clean up timer on exit
@@ -73,9 +70,6 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
     if (currentIdx > 0) {
       setState(() {
         currentIdx--;
-        // We keep the selectedOption and isCorrect from the previous state
-        // if you want them to see their old answer, but usually,
-        // we reset it or let it stay "frozen" for review.
         selectedOption = null;
         isCorrect = null;
       });
@@ -83,23 +77,72 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
   }
 
   void showResultDialog() {
-    SoundService.playAchievement();
+    SoundService.playLevelUpgrade();
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        title: Text(
-          "Quiz Completed! 🎉",
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        content: Text("You scored $score out of ${widget.quizData.length}"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Finish"),
+      builder: (context) {
+        final theme = Theme.of(context);
+        final colorScheme = theme.colorScheme;
+        final textTheme = theme.textTheme;
+
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
           ),
-        ],
-      ),
+          title: Row(
+            children: [
+              CircleAvatar(
+                backgroundColor: colorScheme.primaryContainer,
+                backgroundImage: AssetImage(
+                  'assets/images/perfect_english_logo.png',
+                ),
+                radius: 25,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  "Quiz Completed!",
+                  style: textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "You scored $score out of ${widget.quizData.length}",
+                style: textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Icon(Icons.stars_rounded, color: colorScheme.primary),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      "Keep practicing with Perfect English!",
+                      style: textTheme.bodySmall?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Finish"),
+            ),
+          ],
+        );
+      },
     ).then((_) => Navigator.pop(context));
   }
 
@@ -113,6 +156,9 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
     }
 
     final quiz = widget.quizData[currentIdx];
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
 
     return Scaffold(
       appBar: AppBar(
@@ -132,26 +178,54 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
           children: [
             LinearProgressIndicator(
               value: (currentIdx + 1) / widget.quizData.length,
+              backgroundColor: colorScheme.surfaceVariant,
+              valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
             ),
             const SizedBox(height: 10),
-            Text(
-              "Question ${currentIdx + 1}/${widget.quizData.length}",
-              textAlign: TextAlign.end,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Chip(
+                  label: Text(quiz['type'] ?? 'Practice'),
+                  backgroundColor: colorScheme.secondaryContainer,
+                  labelStyle: textTheme.labelMedium?.copyWith(
+                    color: colorScheme.onSecondaryContainer,
+                  ),
+                ),
+                Text(
+                  "Question ${currentIdx + 1}/${widget.quizData.length}",
+                  style: textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 20),
-            Chip(label: Text(quiz['type'] ?? 'Practice')),
-            const SizedBox(height: 16),
-            Text(
-              quiz['q'] ?? "-",
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) =>
+                  FadeTransition(opacity: animation, child: child),
+              child: Text(
+                quiz['q'] ?? "-",
+                key: ValueKey(quiz['q']),
+                style: textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             const SizedBox(height: 10),
-            Text(
-              quiz['mm'] ?? "-",
-              style: TextStyle(
-                color: Colors.grey.shade600,
-                fontStyle: FontStyle.italic,
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) =>
+                  FadeTransition(opacity: animation, child: child),
+              child: Text(
+                quiz['mm'] ?? "-",
+                key: ValueKey(quiz['mm']),
+                style: textTheme.bodySmall?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
             ),
             const Spacer(),
@@ -165,20 +239,20 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
               bool showFeedback = (selectedOption != null);
 
               // Define colors based on state
-              Color backgroundColor = Theme.of(context).colorScheme.surface;
-
-              Color borderColor = Colors.grey.shade300;
-              Color textColor = Theme.of(context).colorScheme.onSurface;
+              // Color backgroundColor = colorScheme.surface;
+              Color backgroundColor = colorScheme.onPrimary;
+              Color borderColor = colorScheme.outline.withOpacity(0.3);
+              Color textColor = colorScheme.onSurface;
 
               if (showFeedback) {
                 if (isCorrectAnswer) {
-                  backgroundColor = Theme.of(context).colorScheme.onSurface;
-                  borderColor = Colors.green;
-                  textColor = Colors.green.shade900;
+                  backgroundColor = colorScheme.primaryContainer;
+                  borderColor = colorScheme.primary;
+                  textColor = colorScheme.onPrimaryContainer;
                 } else if (isSelected) {
-                  backgroundColor = Theme.of(context).colorScheme.onSurface;
-                  borderColor = Colors.red;
-                  textColor = Colors.red.shade900;
+                  backgroundColor = colorScheme.errorContainer;
+                  borderColor = colorScheme.error;
+                  textColor = colorScheme.onErrorContainer;
                 }
               }
 
@@ -198,7 +272,7 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
                       boxShadow: isSelected
                           ? [
                               BoxShadow(
-                                color: borderColor.withOpacity(0.3),
+                                color: borderColor.withOpacity(0.35),
                                 blurRadius: 8,
                               ),
                             ]
@@ -228,7 +302,9 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
                               : 0.0,
                           child: Icon(
                             isCorrectAnswer ? Icons.check_circle : Icons.cancel,
-                            color: isCorrectAnswer ? Colors.green : Colors.red,
+                            color: isCorrectAnswer
+                                ? colorScheme.primary
+                                : colorScheme.error,
                           ),
                         ),
                       ],

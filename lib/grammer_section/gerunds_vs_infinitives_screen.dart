@@ -5,6 +5,7 @@
 // using the wrong one can make a sentence sound unnatural.
 
 import 'package:flutter/material.dart';
+import 'quiz_lesson_page.dart';
 
 // Why this is "Advanced":
 // Meaning Change Section: This is the hallmark of advanced English.
@@ -101,10 +102,177 @@ class GerundsVsInfinitivesScreen extends StatelessWidget {
     },
   ];
 
+  /// Quiz dataset: 20 questions (4 types) for Gerunds vs Infinitives.
+  final List<Map<String, dynamic>> gerundInfinitiveQuizzes = const [
+    // Gerund Only (V-ing) – 5 questions
+    {
+      'q': 'I enjoy ___ (swim) in the sea.',
+      'a': 'swimming',
+      'options': ['swim', 'to swim', 'swimming', 'to swimming'],
+      'type': 'Gerund Only',
+      'mm': 'Enjoy နောက်မှာ V-ing သာ လိုက်ရပါသည်။',
+    },
+    {
+      'q': 'She finished ___ (do) her homework.',
+      'a': 'doing',
+      'options': ['do', 'to do', 'doing', 'did'],
+      'type': 'Gerund Only',
+      'mm': 'Finish + V-ing ကို သုံးရပါသည်။',
+    },
+    {
+      'q': 'They avoided ___ (talk) about the problem.',
+      'a': 'talking',
+      'options': ['talk', 'to talk', 'talking', 'to talking'],
+      'type': 'Gerund Only',
+      'mm': 'Avoid နောက်မှာ V-ing သာ သုံးရပါသည်။',
+    },
+    {
+      'q': 'Would you mind ___ (open) the window?',
+      'a': 'opening',
+      'options': ['open', 'to open', 'opening', 'to opening'],
+      'type': 'Gerund Only',
+      'mm': 'Mind + V-ing သာ အသုံးများသည်။',
+    },
+    {
+      'q': 'He keeps ___ (practice) English every day.',
+      'a': 'practicing',
+      'options': ['practice', 'to practice', 'practicing', 'practised'],
+      'type': 'Gerund Only',
+      'mm': 'Keep + V-ing = ဆက်လက် လုပ်နေသည်။',
+    },
+
+    // Infinitive Only (to + V1) – 5 questions
+    {
+      'q': 'She decided ___ (move) to another country.',
+      'a': 'to move',
+      'options': ['move', 'to move', 'moving', 'to moving'],
+      'type': 'Infinitive Only',
+      'mm': 'Decide နောက်ပိုင်း Infinitive (to + V1) သုံးရပါသည်။',
+    },
+    {
+      'q': 'I hope ___ (see) you again soon.',
+      'a': 'to see',
+      'options': ['seeing', 'to see', 'see', 'to seeing'],
+      'type': 'Infinitive Only',
+      'mm': 'Hope + to V1 သာ သုံးရသည်။',
+    },
+    {
+      'q': 'They agreed ___ (help) us with the project.',
+      'a': 'to help',
+      'options': ['help', 'to help', 'helping', 'to helping'],
+      'type': 'Infinitive Only',
+      'mm': 'Agree နောက်မှာ to V1 သုံးရပါတယ်။',
+    },
+    {
+      'q': 'He promised ___ (call) me tonight.',
+      'a': 'to call',
+      'options': ['calling', 'to call', 'call', 'to calling'],
+      'type': 'Infinitive Only',
+      'mm': 'Promise + to V1 သာ သုံးသင့်သည်။',
+    },
+    {
+      'q': 'You need ___ (study) harder for the exam.',
+      'a': 'to study',
+      'options': ['study', 'to study', 'studying', 'to studying'],
+      'type': 'Infinitive Only',
+      'mm':
+          'Need နောက်မှာ to V1 သို့မဟုတ် passive V3 ဆက်နိုင်ပေမယ့် ဒီမှာ Infinitive ဖြစ်သည်။',
+    },
+
+    // Meaning Change (Stop / Remember / Forget / Try) – 5 questions
+    {
+      'q': 'I stopped ___ (smoke) last year.',
+      'a': 'smoking',
+      'options': ['smoke', 'to smoke', 'smoking', 'to smoking'],
+      'type': 'Meaning Change',
+      'mm': 'Stop + V-ing = လုပ်နေတဲ့ အလုပ်ကို ရပ်လိုက်သည်။',
+    },
+    {
+      'q': 'I stopped ___ (smoke) on the way home.',
+      'a': 'to smoke',
+      'options': ['smoke', 'to smoke', 'smoking', 'to smoking'],
+      'type': 'Meaning Change',
+      'mm': 'Stop + to V1 = အခြား အလုပ်တစ်ခု လုပ်ရန် ရပ်လိုက်သည်။',
+    },
+    {
+      'q': 'I remembered ___ (lock) the door before I left.',
+      'a': 'to lock',
+      'options': ['locking', 'to lock', 'lock', 'to locking'],
+      'type': 'Meaning Change',
+      'mm': 'Remember + to V1 = မလုပ်မီ မမေ့ဖို့ အကြို သတိပြုခြင်း။',
+    },
+    {
+      'q': 'I remember ___ (meet) her at the party.',
+      'a': 'meeting',
+      'options': ['meet', 'to meet', 'meeting', 'to meeting'],
+      'type': 'Meaning Change',
+      'mm': 'Remember + V-ing = လုပ်ပြီးသား အတိတ်ကို သတိရနေခြင်း။',
+    },
+    {
+      'q': 'He tried ___ (open) the door, but it was stuck.',
+      'a': 'to open',
+      'options': ['open', 'to open', 'opening', 'to opening'],
+      'type': 'Meaning Change',
+      'mm': 'Try + to V1 = ကြိုးစား လုပ်ကြည့်သည်။',
+    },
+
+    // Common Error Mix (Gerund vs Infinitive) – 5 questions
+    {
+      'q': 'She suggested ___ (go) to the cinema.',
+      'a': 'going',
+      'options': ['go', 'to go', 'going', 'to going'],
+      'type': 'Common Error',
+      'mm': 'Suggest နောက်မှာ V-ing သာ သုံးရပြီး *to go* မသုံးကြပါ။',
+    },
+    {
+      'q': 'I\'m learning ___ (play) the guitar.',
+      'a': 'to play',
+      'options': ['play', 'playing', 'to play', 'to playing'],
+      'type': 'Common Error',
+      'mm': 'Learn နောက်မှာ to V1 သာ သုံးရသည်။',
+    },
+    {
+      'q': 'He admitted ___ (cheat) in the exam.',
+      'a': 'cheating',
+      'options': ['cheat', 'to cheat', 'cheating', 'to cheating'],
+      'type': 'Common Error',
+      'mm': 'Admit + V-ing သာ သုံးရသည်။',
+    },
+    {
+      'q': 'They decided ___ (not / buy) the car.',
+      'a': 'not to buy',
+      'options': ['to not buy', 'not to buy', 'not buying', 'no buy'],
+      'type': 'Common Error',
+      'mm':
+          'Negative Infinitive သုံးရာမှာ *not to buy* ဟာ သတ်မှတ်ပုံစံ ဖြစ်တယ်။',
+    },
+    {
+      'q': 'She is interested in ___ (learn) English.',
+      'a': 'learning',
+      'options': ['learn', 'to learn', 'learning', 'to learning'],
+      'type': 'Common Error',
+      'mm': 'Preposition (in) နောက်မှာ V-ing သာ လိုက်ရပါသည်။',
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Gerunds vs Infinitives')),
+      floatingActionButton: FloatingActionButton.extended(
+        heroTag: 'gerunds-vs-infinitives-quiz',
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => QuizLessonPage(
+              quizData: gerundInfinitiveQuizzes,
+              tenseTitle: 'Gerunds vs Infinitives',
+            ),
+          ),
+        ),
+        label: const Text('Take a Quiz'),
+        icon: const Icon(Icons.play_arrow),
+      ),
       body: ListView(
         padding: EdgeInsets.symmetric(
           vertical: 16,
@@ -120,31 +288,31 @@ class GerundsVsInfinitivesScreen extends StatelessWidget {
   }
 
   Widget _buildComparisonHeader(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainer,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        children: [
-          Text(
-            "Quick Memory Tip",
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          SizedBox(height: 8),
-          Text(
-            "Gerunds are often about 'Real/Past' experiences.\nInfinitives are often about 'Future/Potential' actions.",
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
-        ],
+    return Card(
+      color: Theme.of(context).colorScheme.onPrimary,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Text(
+              "Quick Memory Tip",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            SizedBox(height: 8),
+            Text(
+              "Gerunds are often about 'Real/Past' experiences.\nInfinitives are often about 'Future/Potential' actions.",
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildGrammarCard(Map<String, dynamic> data, BuildContext context) {
     return Card(
+      color: Theme.of(context).colorScheme.onPrimary,
       margin: const EdgeInsets.only(bottom: 24),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
@@ -164,17 +332,17 @@ class GerundsVsInfinitivesScreen extends StatelessWidget {
                       (word) => Chip(
                         label: Text(
                           word,
-                          style: TextStyle(
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.onPrimaryContainer,
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimaryContainer,
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                         backgroundColor: Theme.of(
                           context,
-                        ).colorScheme.onPrimary,
+                        ).colorScheme.onPrimaryContainer.withAlpha(25),
                       ),
                     )
                     .toList(),
