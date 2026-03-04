@@ -69,7 +69,9 @@ class PatternDetailScreen extends StatelessWidget {
             const SizedBox(height: 6),
             Text(
               ex["burmese"] ?? "",
-              style: TextStyle(color: Colors.grey.shade700),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSecondaryContainer,
+              ),
             ),
           ],
         ),
