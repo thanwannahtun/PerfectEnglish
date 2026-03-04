@@ -7,6 +7,7 @@ import 'articles_detail_screen.dart';
 import 'conditionals_screen.dart' show ConditionalsScreen;
 import 'gerunds_vs_infinitives_screen.dart' show GerundsVsInfinitivesScreen;
 import 'inversion_detail_screen.dart' show InversionDetailScreen;
+import 'modal_verbs_screen.dart';
 import 'passive_voice_screen.dart';
 import 'relative_clauses_screen.dart';
 import 'reported_speech_screen.dart';
@@ -23,6 +24,10 @@ class GrammarHubScreen extends StatelessWidget {
           'title': 'Verb Forms (ကြိယာပုံစံများ)',
           'desc': 'V1, V2, V3, V4, V5 and Summary Table',
           'detailScreen': VerbFormsScreen(),
+        },  {
+          'title': 'Modal Verbs (အကူကြိယာများ)',
+          'desc': 'V1, V2, V3, V4, V5 and Summary Table',
+          'detailScreen': ModalVerbsScreen(),
         },
         {
           'title': 'Tenses (ကာလများ)',

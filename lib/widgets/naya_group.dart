@@ -34,7 +34,7 @@ class NayaGroup extends StatelessWidget {
                       onTap: null,
                       child: Image.asset(
                         'assets/images/naya_cover.jpg',
-                        width: MediaQuery.sizeOf(context).width * 0.5,
+                        width: MediaQuery.sizeOf(context).width * 0.8,
                       ),
                     ),
                   ),
@@ -45,7 +45,7 @@ class NayaGroup extends StatelessWidget {
                 right: 24,
                 child: IconButton.outlined(
                   onPressed: () => Navigator.pop(context),
-                  icon: Icon(Icons.close),
+                  icon: Icon(Icons.close,color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ),
             ],

@@ -107,7 +107,7 @@ class TenseMatrixScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                "💡 Swipe left/right to see all aspects. Tap a cell to study details.",
+                "💡 Swipe left/right to see all aspects.",
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   color: Colors.grey,
@@ -256,7 +256,7 @@ class TenseMatrixScreen extends StatelessWidget {
           Icon(icon, size: 18),
           const SizedBox(width: 8),
           Text("$title: ", style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(desc, style: const TextStyle(fontSize: 13)),
+          Expanded(child: Text(desc, style: const TextStyle(fontSize: 13))),
         ],
       ),
     );

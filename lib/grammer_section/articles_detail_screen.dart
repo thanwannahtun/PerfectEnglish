@@ -253,86 +253,80 @@ class ArticlesDetailScreen extends StatelessWidget {
         itemCount: articleRules.length,
         itemBuilder: (context, index) {
           final rule = articleRules[index];
-          return Container(
-            margin: const EdgeInsets.only(bottom: 24),
-            decoration: BoxDecoration(
-              color: colorScheme.onPrimary,
-              border: Border(
-                left: BorderSide(
-                  color: _getColor(colorScheme, index),
-                  width: 5,
-                ),
-              ),
-            ),
-            padding: const EdgeInsets.only(left: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  rule['title'],
-                  style: textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: _getColor(colorScheme, index),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  rule['usage'],
-                  style: textTheme.bodyMedium?.copyWith(
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: colorScheme.onPrimaryContainer.withAlpha(25),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Text(
-                    rule['formula'],
-                    style: textTheme.bodyLarge?.copyWith(
+          return Card(
+            margin: const EdgeInsets.only(bottom: 16),
+            color: Theme.of(context).colorScheme.onPrimary,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    rule['title'],
+                    style: textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'monospace',
-                      color: colorScheme.onPrimaryContainer,
+                      color: _getColor(colorScheme, index),
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                ...(rule['examples'] as List).map(
-                  (ex) => Padding(
-                    padding: const EdgeInsets.only(bottom: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          ex['word'],
-                          style: textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: colorScheme.secondary,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        _buildHighlightedExample(
-                          context,
-                          ex['sentence'],
-                          ex['word'].split(' ')[0],
-                        ),
-                        Text(
-                          ex['mm'],
-                          style: textTheme.bodySmall?.copyWith(
-                            fontStyle: FontStyle.italic,
-                            color: colorScheme.outline,
-                          ),
-                        ),
-                      ],
+                  const SizedBox(height: 8),
+                  Text(
+                    rule['usage'],
+                    style: textTheme.bodyMedium?.copyWith(
+                      fontStyle: FontStyle.italic,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: colorScheme.onPrimaryContainer.withAlpha(25),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      rule['formula'],
+                      style: textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'monospace',
+                        color: colorScheme.onPrimaryContainer,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  ...(rule['examples'] as List).map(
+                    (ex) => Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            ex['word'],
+                            style: textTheme.titleSmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: colorScheme.secondary,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          _buildHighlightedExample(
+                            context,
+                            ex['sentence'],
+                            ex['word'].split(' ')[0],
+                          ),
+                          Text(
+                            ex['mm'],
+                            style: textTheme.bodySmall?.copyWith(
+                              fontStyle: FontStyle.italic,
+                              color: colorScheme.outline,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },

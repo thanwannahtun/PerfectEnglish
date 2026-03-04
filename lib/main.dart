@@ -5,6 +5,7 @@ import 'package:perfect_english/widgets/app_drawer.dart';
 import 'certification/certification_quiz_screen.dart';
 import 'grammer_section/grammer_hub.dart';
 import 'splash_screen.dart';
+import 'spoken_pattern/spoken_pattern_screen.dart';
 import 'widgets/naya_group.dart';
 
 void main() async {
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
+      // themeMode: ThemeMode.system,
       theme: buildLightTheme(),
       darkTheme: buildDarkTheme(),
     );
@@ -117,50 +119,65 @@ class BaseApplication extends StatelessWidget {
           vertical: 16,
           horizontal: MediaQuery.sizeOf(context).width * 0.05,
         ),
-        child: Column(
-          children: [
-            ListTile(
-              title: Text(
-                "ဝါစင်္ဂ ၈ မျိုး (8 Parts Of Speech)",
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              trailing: Icon(Icons.chevron_right),
-              onTap: () => Navigator.of(
-                context,
-              ).push(MaterialPageRoute(builder: (context) => PartOfSpeechs())),
-            ),
-            Divider(height: 0.1, color: Colors.grey.shade800),
-            ListTile(
-              title: Text(
-                "သဒ္ဒါ (Grammar)",
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              trailing: Icon(Icons.chevron_right),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => GrammarHubScreen()),
-              ),
-            ),
-            // Divider(height: 0.1),
-            Divider(height: 0.1, color: Colors.grey.shade800),
-
-            ListTile(
-              title: Text(
-                "အောင်မှတ်လက်မှတ် စစ်ဆေးမှု (Certification Quiz)",
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              trailing: Icon(Icons.chevron_right),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => CertificationQuizScreen(),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ListTile(
+                title: Text(
+                  "ဝါစင်္ဂ ၈ မျိုး (8 Parts Of Speech)",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                trailing: Icon(Icons.chevron_right),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => PartOfSpeechs()),
                 ),
               ),
-            ),
-            // Divider(height: 0.1),
-            Divider(height: 0.1, color: Colors.grey.shade800),
+              Divider(height: 0.1, color: Colors.grey.shade800),
+              ListTile(
+                title: Text(
+                  "သဒ္ဒါ (Grammar)",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                trailing: Icon(Icons.chevron_right),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => GrammarHubScreen()),
+                ),
+              ),
+              // Divider(height: 0.1),
+              Divider(height: 0.1, color: Colors.grey.shade800),
 
-            Spacer(),
-            NayaGroup(),
-          ],
+              ListTile(
+                title: Text(
+                  "စကားပြောပုံစံများ (Spoken Patterns)",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                trailing: Icon(Icons.chevron_right),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SpokenPatternsScreen(),
+                  ),
+                ),
+              ),
+              // Divider(height: 0.1),
+              Divider(height: 0.1, color: Colors.grey.shade800),
+              ListTile(
+                title: Text(
+                  "အောင်မှတ်လက်မှတ် စစ်ဆေးမှု (Certification Quiz)",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                trailing: Icon(Icons.chevron_right),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CertificationQuizScreen(),
+                  ),
+                ),
+              ),
+              // Divider(height: 0.1),
+              Divider(height: 0.1, color: Colors.grey.shade800),
+              SizedBox(height: 24),
+              NayaGroup(),
+            ],
+          ),
         ),
       ),
     );

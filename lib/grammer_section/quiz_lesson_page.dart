@@ -173,167 +173,169 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
           vertical: 16,
           horizontal: MediaQuery.sizeOf(context).width * 0.05,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            LinearProgressIndicator(
-              value: (currentIdx + 1) / widget.quizData.length,
-              backgroundColor: colorScheme.surfaceVariant,
-              valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Chip(
-                  label: Text(quiz['type'] ?? 'Practice'),
-                  backgroundColor: colorScheme.secondaryContainer,
-                  labelStyle: textTheme.labelMedium?.copyWith(
-                    color: colorScheme.onSecondaryContainer,
-                  ),
-                ),
-                Text(
-                  "Question ${currentIdx + 1}/${widget.quizData.length}",
-                  style: textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
-              transitionBuilder: (child, animation) =>
-                  FadeTransition(opacity: animation, child: child),
-              child: Text(
-                quiz['q'] ?? "-",
-                key: ValueKey(quiz['q']),
-                style: textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              LinearProgressIndicator(
+                value: (currentIdx + 1) / widget.quizData.length,
+                backgroundColor: colorScheme.surfaceVariant,
+                valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
               ),
-            ),
-            const SizedBox(height: 10),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
-              transitionBuilder: (child, animation) =>
-                  FadeTransition(opacity: animation, child: child),
-              child: Text(
-                quiz['mm'] ?? "-",
-                key: ValueKey(quiz['mm']),
-                style: textTheme.bodySmall?.copyWith(
-                  color: colorScheme.onSurfaceVariant,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-            ),
-            const Spacer(),
-
-            // Options List
-            // Inside build -> Column
-            ...((quiz['options'] ?? []) as List).map((opt) {
-              final String correctAnswer = quiz['a'];
-              bool isSelected = (selectedOption == opt);
-              bool isCorrectAnswer = (opt == correctAnswer);
-              bool showFeedback = (selectedOption != null);
-
-              // Define colors based on state
-              // Color backgroundColor = colorScheme.surface;
-              Color backgroundColor = colorScheme.onPrimary;
-              Color borderColor = colorScheme.outline.withOpacity(0.3);
-              Color textColor = colorScheme.onSurface;
-
-              if (showFeedback) {
-                if (isCorrectAnswer) {
-                  backgroundColor = colorScheme.primaryContainer;
-                  borderColor = colorScheme.primary;
-                  textColor = colorScheme.onPrimaryContainer;
-                } else if (isSelected) {
-                  backgroundColor = colorScheme.errorContainer;
-                  borderColor = colorScheme.error;
-                  textColor = colorScheme.onErrorContainer;
-                }
-              }
-
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: GestureDetector(
-                  // Use GestureDetector for custom feedback
-                  onTap: () => checkAnswer(opt),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.easeInOut,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: backgroundColor,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: borderColor),
-                      boxShadow: isSelected
-                          ? [
-                              BoxShadow(
-                                color: borderColor.withOpacity(0.35),
-                                blurRadius: 8,
-                              ),
-                            ]
-                          : [],
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Chip(
+                    label: Text(quiz['type'] ?? 'Practice'),
+                    backgroundColor: colorScheme.secondaryContainer,
+                    labelStyle: textTheme.labelMedium?.copyWith(
+                      color: colorScheme.onSecondaryContainer,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            opt,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: isSelected
-                                  ? FontWeight.bold
-                                  : FontWeight.w500,
-                              color: textColor,
+                  ),
+                  Text(
+                    "Question ${currentIdx + 1}/${widget.quizData.length}",
+                    style: textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (child, animation) =>
+                    FadeTransition(opacity: animation, child: child),
+                child: Text(
+                  quiz['q'] ?? "-",
+                  key: ValueKey(quiz['q']),
+                  style: textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (child, animation) =>
+                    FadeTransition(opacity: animation, child: child),
+                child: Text(
+                  quiz['mm'] ?? "-",
+                  key: ValueKey(quiz['mm']),
+                  style: textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ),
+              // const Spacer(),
+              const SizedBox(height: 20),
+              // Options List
+              // Inside build -> Column
+              ...((quiz['options'] ?? []) as List).map((opt) {
+                final String correctAnswer = quiz['a'];
+                bool isSelected = (selectedOption == opt);
+                bool isCorrectAnswer = (opt == correctAnswer);
+                bool showFeedback = (selectedOption != null);
+          
+                // Define colors based on state
+                // Color backgroundColor = colorScheme.surface;
+                Color backgroundColor = colorScheme.onPrimary;
+                Color borderColor = colorScheme.outline.withOpacity(0.3);
+                Color textColor = colorScheme.onSurface;
+          
+                if (showFeedback) {
+                  if (isCorrectAnswer) {
+                    backgroundColor = colorScheme.primaryContainer;
+                    borderColor = colorScheme.primary;
+                    textColor = colorScheme.onPrimaryContainer;
+                  } else if (isSelected) {
+                    backgroundColor = colorScheme.errorContainer;
+                    borderColor = colorScheme.error;
+                    textColor = colorScheme.onErrorContainer;
+                  }
+                }
+          
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: GestureDetector(
+                    // Use GestureDetector for custom feedback
+                    onTap: () => checkAnswer(opt),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.easeInOut,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: backgroundColor,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: borderColor),
+                        boxShadow: isSelected
+                            ? [
+                                BoxShadow(
+                                  color: borderColor.withOpacity(0.35),
+                                  blurRadius: 8,
+                                ),
+                              ]
+                            : [],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              opt,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.w500,
+                                color: textColor,
+                              ),
                             ),
                           ),
-                        ),
-                        // Animated Fade-in for the Icons
-                        AnimatedOpacity(
-                          duration: const Duration(milliseconds: 500),
-                          opacity:
-                              showFeedback && (isCorrectAnswer || isSelected)
-                              ? 1.0
-                              : 0.0,
-                          child: Icon(
-                            isCorrectAnswer ? Icons.check_circle : Icons.cancel,
-                            color: isCorrectAnswer
-                                ? colorScheme.primary
-                                : colorScheme.error,
+                          // Animated Fade-in for the Icons
+                          AnimatedOpacity(
+                            duration: const Duration(milliseconds: 500),
+                            opacity:
+                                showFeedback && (isCorrectAnswer || isSelected)
+                                ? 1.0
+                                : 0.0,
+                            child: Icon(
+                              isCorrectAnswer ? Icons.check_circle : Icons.cancel,
+                              color: isCorrectAnswer
+                                  ? colorScheme.primary
+                                  : colorScheme.error,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            }),
-            const SizedBox(height: 20),
-            const Spacer(),
-
-            // Navigation Buttons Row
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (currentIdx > 0)
-                  TextButton.icon(
-                    onPressed: goToPrevious,
-                    icon: const Icon(Icons.navigate_before),
-                    label: const Text("Previous"),
-                  )
-                else
-                  const SizedBox.shrink(),
-
-                // Optional: You could add a manual "Next" button here
-                // if they want to skip the 2-second wait.
-              ],
-            ),
-          ],
+                );
+              }),
+              const SizedBox(height: 20),
+              // const Spacer(),
+          
+              // Navigation Buttons Row
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (currentIdx > 0)
+                    TextButton.icon(
+                      onPressed: goToPrevious,
+                      icon: const Icon(Icons.navigate_before),
+                      label: const Text("Previous"),
+                    )
+                  else
+                    const SizedBox.shrink(),
+          
+                  // Optional: You could add a manual "Next" button here
+                  // if they want to skip the 2-second wait.
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

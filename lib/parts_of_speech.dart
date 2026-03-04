@@ -702,6 +702,7 @@ class DetailPage extends StatelessWidget {
 
             ...examples.map(
               (ex) => Card(
+                color: Theme.of(context).colorScheme.onPrimary,
                 margin: const EdgeInsets.only(bottom: 8),
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
