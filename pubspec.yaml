@@ -17,6 +17,10 @@ dependencies:
   lottie: ^3.3.2
   dio: ^5.9.2
 
+  sherpa_onnx: ^1.12.36
+  path_provider: ^2.1.5
+  path: ^1.9.1
+
 
 dev_dependencies:
   flutter_test:

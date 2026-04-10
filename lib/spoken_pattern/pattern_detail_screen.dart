@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/speak_button.dart';
+
 class PatternDetailScreen extends StatelessWidget {
   final Map<String, dynamic> pattern;
 
@@ -62,9 +64,17 @@ class PatternDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              ex["english"] ?? "",
-              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    ex["english"] ?? "",
+                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                  ),
+                ),
+                SpeakButton(text: ex["english"] ?? ""),
+              ],
             ),
             const SizedBox(height: 6),
             Text(

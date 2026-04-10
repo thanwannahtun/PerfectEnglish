@@ -8,8 +8,22 @@ import 'splash_screen.dart';
 import 'spoken_pattern/spoken_pattern_screen.dart';
 import 'widgets/naya_group.dart';
 
+import 'package:sherpa_onnx/sherpa_onnx.dart' as sherpa;
+import 'services/kokoro_tts_service.dart';
+import 'widgets/speak_button.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  //Initialize sherpa_onnx native libraries
+  sherpa.initBindings();
+
+  // Try to initialize TTS if model already downloaded (non-blocking)
+  final tts = KokoroTtsService.instance;
+  if (await tts.isModelDownloaded()) {
+    await tts.initialize();
+  }
+
   await SoundService.init();
   runApp(const MyApp());
 }
@@ -172,6 +186,7 @@ class BaseApplication extends StatelessWidget {
                 ),
               ),
               // Divider(height: 0.1),
+              Divider(height: 0.1, color: Colors.grey.shade800),
               Divider(height: 0.1, color: Colors.grey.shade800),
               SizedBox(height: 24),
               NayaGroup(),
