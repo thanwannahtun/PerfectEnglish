@@ -3,6 +3,8 @@ import 'package:perfect_english/ui/screens/feedback_screen.dart';
 import 'package:perfect_english/ui/screens/need_custom_app_screen.dart';
 import 'package:perfect_english/ui/screens/privacy_screen.dart';
 
+import 'tts_settings_page.dart';
+
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
 
@@ -77,6 +79,11 @@ class Destination {
 
 const List<Destination> destinations = <Destination>[
   Destination(
+    Icons.privacy_tip_outlined,
+    'Tts Settings',
+    Icons.privacy_tip,
+    routeName: TtsSettingsPage(),
+  ),Destination(
     Icons.privacy_tip_outlined,
     'Privacy',
     Icons.privacy_tip,

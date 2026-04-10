@@ -4,6 +4,11 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:sherpa_onnx/sherpa_onnx.dart' as sherpa;
 
+import 'dart:async';
+import 'dart:isolate';
+import 'tts_isolate_worker.dart';
+import 'tts_sentence_splitter.dart';
+
 // ─── Model Info ───────────────────────────────────────────────────────────────
 // Single .tar.bz2 archive — this is the VERIFIED working URL from official docs:
 // https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/kokoro.html
@@ -50,6 +55,12 @@ class KokoroTtsService {
     final root = await _modelsRootDir;
     return p.join(root.path, _kModelFolder);
   }
+
+  /// Pipelined sentence-by-sentence TTS [streaming]
+  Isolate? _synthIsolate;
+  SendPort? _isolateSendPort;
+  bool _isolateReady = false;
+
 
   // ─── Status Check ────────────────────────────────────────────────────────
 
@@ -238,7 +249,8 @@ class KokoroTtsService {
 
       final ttsConfig = sherpa.OfflineTtsConfig(
         model: modelConfig,
-        maxNumSenetences: 2,
+        maxNumSenetences: 1,
+        // maxNumSenetences: 2,
       );
 
       _tts = sherpa.OfflineTts(ttsConfig);
@@ -295,6 +307,76 @@ class KokoroTtsService {
     );
 
     return success ? outPath : null;
+  }
+
+
+  /// Starts the background synthesis isolate (call once after initialize())
+  Future<void> startIsolate() async {
+    if (_isolateReady) return;
+
+    final receivePort = ReceivePort();
+    _synthIsolate = await Isolate.spawn(
+      ttsIsolateEntryPoint,
+      receivePort.sendPort,
+    );
+
+    // First message from isolate is its SendPort
+    _isolateSendPort = await receivePort.first as SendPort;
+    _isolateReady = true;
+  }
+
+  void stopIsolate() {
+    _isolateSendPort?.send('dispose');
+    _synthIsolate?.kill(priority: Isolate.immediate);
+    _synthIsolate = null;
+    _isolateSendPort = null;
+    _isolateReady = false;
+  }
+
+  /// Returns a Stream of WAV file paths, one per sentence.
+  /// Call `just_audio` ConcatenatingAudioSource to play them as they arrive.
+  ///
+  /// Usage pattern:
+  ///   final stream = service.synthesizeParagraph(text);
+  ///   stream.listen((path) => player.add(AudioSource.file(path)));
+  Stream<TtsSynthResult> synthesizeParagraph(
+      String text, {
+        int speakerId = 0,
+        double speed = 1.0,
+      }) async* {
+    if (!_initialized) await initialize();
+    final dirPath = await _modelDirPath;
+    final sentences = TtsSentenceSplitter.split(text);
+
+    for (final sentence in sentences) {
+      if (sentence.trim().isEmpty) continue;
+
+      // Each sentence gets its own reply port
+      final replyPort = ReceivePort();
+
+      if (_isolateReady && _isolateSendPort != null) {
+        // Fast path: use pre-warmed isolate
+        _isolateSendPort!.send(TtsSynthRequest(
+          text: sentence,
+          speakerId: speakerId,
+          speed: speed,
+          modelDir: dirPath,
+          replyPort: replyPort.sendPort,
+        ));
+        final result = await replyPort.first as TtsSynthResult;
+        replyPort.close();
+        yield result;
+      } else {
+        // Fallback: synthesize inline (no isolate)
+        final path = await synthesizeToFile(sentence,
+            speakerId: speakerId, speed: speed);
+        replyPort.close();
+        yield TtsSynthResult(
+          wavPath: path,
+          originalText: sentence,
+        );
+      }
+    }
   }
 
   // ─── Cleanup ──────────────────────────────────────────────────────────────
