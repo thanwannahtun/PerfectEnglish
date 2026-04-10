@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:perfect_english/services/sound_service.dart';
+import 'package:perfect_english/widgets/speak_button.dart';
 
 final List<Map<String, dynamic>> partsOfSpeech = const [
   {
@@ -710,16 +711,24 @@ class DetailPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            ex['en']!,
-                            style: Theme.of(context).textTheme.titleMedium,
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Text(
+                                  ex['en']!,
+                                  style: Theme.of(context).textTheme.titleMedium,
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  "(${ex['mm']!})",
+                                  style: Theme.of(context).textTheme.titleMedium,
+                                ),
+                              ],
+                            ),
                           ),
-                          const SizedBox(width: 10),
-                          Text(
-                            "(${ex['mm']!})",
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
+                          SpeakButton(text: ex['sentenceEn'] ?? ""),
                         ],
                       ),
                       const Padding(

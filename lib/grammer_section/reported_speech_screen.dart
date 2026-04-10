@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perfect_english/widgets/speak_button.dart';
 
 import 'quiz_lesson_page.dart';
 
@@ -378,40 +379,44 @@ class ReportedSpeechScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Text(
-                "Direct: ",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  // color: Colors.redAccent,
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  ex['direct'],
-                  style: const TextStyle(fontStyle: FontStyle.italic),
-                ),
-              ),
-            ],
-          ),
           const SizedBox(height: 6),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Indirect: ",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                ),
-              ),
               Expanded(
-                child: Text(
-                  ex['indirect'],
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                child: const Text(
+                  "Direct: ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    // color: Colors.redAccent,
+                  ),
                 ),
               ),
+              SpeakButton(text: ex['direct']),
             ],
+          ),
+          Text(
+            ex['direct'],
+            style: const TextStyle(fontStyle: FontStyle.italic),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: const Text(
+                  "Indirect: ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    // color: Colors.redAccent,
+                  ),
+                ),
+              ),
+              SpeakButton(text: ex['indirect']),
+            ],
+          ),
+          Text(
+            ex['indirect'],
+            style: const TextStyle(fontStyle: FontStyle.italic),
           ),
           const Divider(),
           Text(ex['mm'], style: TextStyle(fontSize: 13)),

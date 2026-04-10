@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perfect_english/widgets/speak_button.dart';
 
 import 'quiz_lesson_page.dart';
 
@@ -72,6 +73,100 @@ class RelativeClausesScreen extends StatelessWidget {
           'breakdown':
               'The restaurant [where we had dinner] was very expensive.',
           'mm': 'နော့်ရဲ့ ညစာစားခဲ့ကြတဲ့ အစားအသောက်ဆိုင်က အရမ်းစျေးကြီးတယ်။',
+        },
+      ],
+    },
+    {
+      'pronoun': 'When',
+      'use_for': 'Time (အချိန်များအတွက်)',
+      'desc': 'အချိန်ကာလတစ်ခုကို အထူးပြုလိုသောအခါ သုံးသည်။',
+      'examples': [
+        {
+          'en': 'I remember the day when we first met.',
+          'breakdown': 'I remember the day [when we first met].',
+          'mm': 'ငါတို့စတင်တွေ့ဆုံခဲ့တဲ့နေ့ကို ငါမှတ်မိနေတုန်းပဲ။',
+        },
+        {
+          'en': 'Summer is the season when the weather is hot.',
+          'breakdown': 'Summer is the season [when the weather is hot].',
+          'mm': 'နွေရာသီဟာ ရာသီဥတုပူတဲ့ အချိန်ဖြစ်ပါတယ်။',
+        },
+      ],
+    },
+    {
+      'pronoun': 'Why',
+      'use_for': 'Reason (အကြောင်းပြချက်)',
+      'desc':
+          'အကြောင်းပြချက်ကို ရှင်းပြလိုသောအခါ သုံးသည်။ (အများအားဖြင့် "the reason" ၏နောက်တွင် သုံးသည်)',
+      'examples': [
+        {
+          'en': 'Do you know the reason why she is crying?',
+          'breakdown': 'Do you know the reason [why she is crying]?',
+          'mm': 'သူမ ဘာလို့ငိုနေလဲဆိုတဲ့ အကြောင်းပြချက်ကို မင်းသိလား။',
+        },
+        {
+          'en': 'That is the reason why I am late.',
+          'breakdown': 'That is the reason [why I am late].',
+          'mm': 'အဲဒါ ကျွန်တော်နောက်ကျရတဲ့ အကြောင်းပြချက်ပါပဲ။',
+        },
+      ],
+    },
+  ];
+
+  final List<Map<String, dynamic>> thatClauseData = const [
+    {
+      'type': 'Relative Clause (Defining)',
+      'usage':
+          'Used to identify exactly which person or thing we are talking about. Can replace "Who" or "Which".',
+      'desc':
+          'သတ်မှတ်ချက်အတိအကျဖော်ပြလိုသော ဝါကျငယ်များတွင် Who သို့မဟုတ် Which အစား သုံးနိုင်သည်။',
+      'examples': [
+        {
+          'en': 'The car that I bought is very fast.',
+          'breakdown': 'The car [that I bought] is very fast.',
+          'mm': 'ကျွန်တော်ဝယ်ခဲ့တဲ့ ကားက အရမ်းမြန်တယ်။',
+        },
+        {
+          'en': 'Where is the girl that sells the flowers?',
+          'breakdown': 'Where is the girl [that sells the flowers]?',
+          'mm': 'ပန်းရောင်းတဲ့ မိန်းကလေး ဘယ်မှာလဲ။',
+        },
+      ],
+    },
+    {
+      'type': 'Noun Clause (Reporting)',
+      'usage':
+          'Used after mental action verbs (think, know, believe, say) to report information.',
+      'desc':
+          'သိသည်၊ ထင်သည်၊ ပြောသည် စသည့် စိတ်ကူး/ပြောဆိုချက်များကို ဖော်ပြရာတွင် သုံးသည်။',
+      'examples': [
+        {
+          'en': 'I think that it will rain today.',
+          'breakdown': 'I think [that it will rain today].',
+          'mm': 'ဒီနေ့ မိုးရွာလိမ့်မယ်လို့ ကျွန်တော်ထင်တယ်။',
+        },
+        {
+          'en': 'She said that she was tired.',
+          'breakdown': 'She said [that she was tired].',
+          'mm': 'သူမ ပင်ပန်းနေတယ်လို့ ပြောခဲ့တယ်။',
+        },
+      ],
+    },
+    {
+      'type': 'Adjective + That',
+      'usage': 'Used after adjectives expressing feelings (happy, sad, sure).',
+      'desc':
+          'ခံစားချက်ပြ နာမဝိသေသနများနောက်တွင် အကြောင်းရင်းကို ဖော်ပြရန် သုံးသည်။',
+      'examples': [
+        {
+          'en': 'I am happy that you passed the exam.',
+          'breakdown': 'I am happy [that you passed the exam].',
+          'mm': 'မင်း စာမေးပွဲအောင်တဲ့အတွက် ငါဝမ်းသာပါတယ်။',
+        },
+        {
+          'en': 'Are you sure that he is coming?',
+          'breakdown': 'Are you sure [that he is coming]?',
+          'mm': 'သူလာမှာ သေချာလို့လား။',
         },
       ],
     },
@@ -258,6 +353,19 @@ class RelativeClausesScreen extends StatelessWidget {
           _buildQuickReferenceTable(context),
           const SizedBox(height: 20),
           ...relativeData.map((data) => _buildClauseCard(data, context)),
+
+          // --- That Clauses Section ---
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.0),
+            child: Divider(thickness: 2),
+          ),
+          Text(
+            'Special: "That" Clauses',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(height: 12),
+          ...thatClauseData.map((data) => _buildThatClauseCard(data, context)),
+          _buildHiddenThatTip(context),
         ],
       ),
     );
@@ -345,23 +453,47 @@ class RelativeClausesScreen extends StatelessWidget {
                       color: Colors.grey,
                     ),
                   ),
-                  Text(
-                    ex['en'],
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          ex['en'],
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SpeakButton(text: ex['en'] ?? ""),
+                    ],
                   ),
+
                   const SizedBox(height: 8),
-                  const Text(
-                    "Structure Breakdown:",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.teal.withOpacity(0.05),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+
+                      children: [
+                        const Text(
+                          "Structure Breakdown:",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        _highlightClause(ex['breakdown'], data['pronoun'], context),
+                      ],
                     ),
                   ),
-                  _highlightClause(ex['breakdown'], data['pronoun'], context),
+
                   const SizedBox(height: 8),
                   Text(ex['mm'], style: TextStyle(fontStyle: FontStyle.italic)),
                 ],
@@ -393,6 +525,136 @@ class RelativeClausesScreen extends StatelessWidget {
               ),
             ),
             TextSpan(text: text.split(']')[1]),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildThatClauseCard(Map<String, dynamic> data, BuildContext context) {
+    final accentColor = Colors.teal.shade700;
+
+    return Card(
+      color: Theme.of(context).colorScheme.onPrimary,
+      margin: const EdgeInsets.only(bottom: 16),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.layers_outlined, color: accentColor, size: 20),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    data['type'],
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              data['usage'],
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              data['desc'],
+              style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
+            ),
+            const Divider(height: 32),
+            ...(data['examples'] as List).map((ex) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            ex['en'],
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.2,
+                            ),
+                          ),
+                        ),
+                        SpeakButton(text: ex['en'] ?? ""),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    // Breakdown Box
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.teal.withOpacity(0.05),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Clause Structure:",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          _highlightClause(ex['breakdown'], 'that', context),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      ex['mm'],
+                      style: const TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHiddenThatTip(BuildContext context) {
+    return Card(
+      color: Theme
+          .of(context)
+          .colorScheme
+          .onPrimary,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Icon(Icons.lightbulb, color: Colors.amber.shade900),
+                const SizedBox(width: 8),
+                const Text(
+                  "Pro Tip: Hidden 'That'",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              "In spoken English, we often remove 'that'. \nEx: 'I think (that) he is nice.'",
+              style: TextStyle(fontSize: 13, height: 1.4),
+            ),
           ],
         ),
       ),

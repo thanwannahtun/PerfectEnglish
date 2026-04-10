@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perfect_english/widgets/speak_button.dart';
 
 import 'quiz_lesson_page.dart';
 // Ensure this import matches your actual file path
@@ -315,46 +316,60 @@ class SubjectVerbAgreementScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          RichText(
-                            text: TextSpan(
-                              style: textTheme.bodyLarge?.copyWith(
-                                color: colorScheme.onSurface,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    RichText(
+                                      text: TextSpan(
+                                        style: textTheme.bodyLarge?.copyWith(
+                                          color: colorScheme.onSurface,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: ex['s'],
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: colorScheme.secondary,
+                                            ),
+                                          ),
+                                          const TextSpan(text: ' '),
+                                          TextSpan(
+                                            text: ex['v'],
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: colorScheme.error,
+                                              decoration: TextDecoration.underline,
+                                            ),
+                                          ),
+                                          const TextSpan(text: ' '),
+                                          TextSpan(
+                                            text: ex['rest'],
+                                            style: TextStyle(
+                                              color: colorScheme.onSurfaceVariant,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      ex['mm'],
+                                      style: textTheme.bodySmall?.copyWith(
+                                        fontStyle: FontStyle.italic,
+                                        color: colorScheme.outline,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              children: [
-                                TextSpan(
-                                  text: ex['s'],
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: colorScheme.secondary,
-                                  ),
-                                ),
-                                const TextSpan(text: ' '),
-                                TextSpan(
-                                  text: ex['v'],
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: colorScheme.error,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                ),
-                                const TextSpan(text: ' '),
-                                TextSpan(
-                                  text: ex['rest'],
-                                  style: TextStyle(
-                                    color: colorScheme.onSurfaceVariant,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              SpeakButton(text: "${ex['s']} ${ex['v']} ${ex['rest']}"),
+                            ],
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            ex['mm'],
-                            style: textTheme.bodySmall?.copyWith(
-                              fontStyle: FontStyle.italic,
-                              color: colorScheme.outline,
-                            ),
-                          ),
+
                         ],
                       ),
                     ),

@@ -308,7 +308,7 @@ class SpeakButton extends StatefulWidget {
   const SpeakButton({
     super.key,
     required this.text,
-    this.iconSize = 28,
+    this.iconSize = 25,
     this.color,
     this.speakerId = 0,
   });

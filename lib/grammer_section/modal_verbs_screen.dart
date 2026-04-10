@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:perfect_english/widgets/speak_button.dart';
 
 class ModalVerb {
   final String verb;
   final String burmeseMeaning;
   final String usage;
+
   // Updated from List<ModalExample> to List of Maps
   final List<Map<String, String>> examples;
 
@@ -766,6 +768,7 @@ class ModalVerbsScreen extends StatelessWidget {
 
 class ModalDetailScreen extends StatelessWidget {
   final ModalVerb modal;
+
   const ModalDetailScreen({super.key, required this.modal});
 
   @override
@@ -781,7 +784,7 @@ class ModalDetailScreen extends StatelessWidget {
           _buildInfoBox(context),
           const SizedBox(height: 25),
           const Text(
-            "Example Sentences",
+            "နမူနာဝါကျများ Example Sentences",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
@@ -823,18 +826,21 @@ class ModalDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: Chip(
-                color: WidgetStatePropertyAll(
-                  Theme.of(context).colorScheme.onPrimary,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Chip(
+                  color: WidgetStatePropertyAll(
+                    Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  label: Text(
+                    ex['context'] ?? '',
+                    style: const TextStyle(fontSize: 10),
+                  ),
+                  visualDensity: VisualDensity.compact,
                 ),
-                label: Text(
-                  ex['context'] ?? '',
-                  style: const TextStyle(fontSize: 10),
-                ),
-                visualDensity: VisualDensity.compact,
-              ),
+                SpeakButton(text: ex['sentenceEn'] ?? ''),
+              ],
             ),
             Text(
               ex['sentenceEn'] ?? '',

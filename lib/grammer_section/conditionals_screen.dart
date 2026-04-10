@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perfect_english/widgets/speak_button.dart';
 
 import 'quiz_lesson_page.dart';
 
@@ -383,14 +384,28 @@ class ConditionalsScreen extends StatelessWidget {
               (ex) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    ex['en'],
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              ex['en'],
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(ex['mm']),
+                          ],
+                        ),
+                      ),
+                      SpeakButton(text: ex['en']),
+                    ],
                   ),
-                  Text(ex['mm']),
+
                   Text(
                     "Note: ${ex['note']}",
                     style: TextStyle(

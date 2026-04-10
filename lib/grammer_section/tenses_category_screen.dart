@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perfect_english/widgets/speak_button.dart';
 
 import 'tense_matrix_data.dart';
 import 'quiz_lesson_page.dart';
@@ -3727,14 +3728,17 @@ class TenseDetailScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
             Text(
-              "Usage (အသုံးပြုပုံ)",
+              "အသုံးပြုပုံ (Usage)",
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
             Text(tense['usage'], style: const TextStyle(fontSize: 16)),
 
             const Divider(height: 40),
-            Text("Examples", style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              "နမူနာဝါကျများ (Examples Sentences)",
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 10),
 
             // Inside your TenseDetailScreen loop:
@@ -3751,39 +3755,50 @@ class TenseDetailScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      RichText(
-                        text: TextSpan(
-                          style: const TextStyle(fontSize: 17),
-                          children: [
-                            TextSpan(
-                              text: ex['s'] + " ",
-                              style: TextStyle(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.onPrimaryContainer,
-                                fontWeight: FontWeight.bold,
-                                // color: Colors.indigo,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: RichText(
+                              text: TextSpan(
+                                style: const TextStyle(fontSize: 17),
+                                children: [
+                                  TextSpan(
+                                    text: ex['s'] + " ",
+                                    style: TextStyle(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimaryContainer,
+                                      fontWeight: FontWeight.bold,
+                                      // color: Colors.indigo,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: ex['v'] + " ",
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.redAccent,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: ex['rest'],
+                                    style: TextStyle(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimaryContainer,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            TextSpan(
-                              text: ex['v'] + " ",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.redAccent,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                            TextSpan(
-                              text: ex['rest'],
-                              style: TextStyle(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.onPrimaryContainer,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                          SpeakButton(
+                            text: "${ex['s']} ${ex['v']} ${ex['rest']}",
+                          ),
+                        ],
                       ),
+
                       const SizedBox(height: 8),
                       Text(
                         ex['mm'],

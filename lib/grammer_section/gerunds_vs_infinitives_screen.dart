@@ -5,6 +5,7 @@
 // using the wrong one can make a sentence sound unnatural.
 
 import 'package:flutter/material.dart';
+import 'package:perfect_english/widgets/speak_button.dart';
 import 'quiz_lesson_page.dart';
 
 // Why this is "Advanced":
@@ -354,14 +355,23 @@ class GerundsVsInfinitivesScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      ex['en'],
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        // color: Colors.black87,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            ex['en'],
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              // color: Colors.black87,
+                            ),
+                          ),
+                        ),
+                        SpeakButton(text: ex['en']),
+                      ],
                     ),
+
                     const SizedBox(height: 4),
                     Text(
                       ex['mm'],

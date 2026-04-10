@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perfect_english/widgets/speak_button.dart';
 
 import 'quiz_lesson_page.dart';
 
@@ -309,17 +310,30 @@ class ArticlesDetailScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          _buildHighlightedExample(
-                            context,
-                            ex['sentence'],
-                            ex['word'].split(' ')[0],
-                          ),
-                          Text(
-                            ex['mm'],
-                            style: textTheme.bodySmall?.copyWith(
-                              fontStyle: FontStyle.italic,
-                              color: colorScheme.outline,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    _buildHighlightedExample(
+                                      context,
+                                      ex['sentence'],
+                                      ex['word'].split(' ')[0],
+                                    ),
+                                    Text(
+                                      ex['mm'],
+                                      style: textTheme.bodySmall?.copyWith(
+                                        fontStyle: FontStyle.italic,
+                                        color: colorScheme.outline,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SpeakButton(text: ex['sentence'] ?? ''),
+                            ],
                           ),
                         ],
                       ),

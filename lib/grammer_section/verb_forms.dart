@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perfect_english/grammer_section/quiz_lesson_page.dart';
+import 'package:perfect_english/widgets/speak_button.dart';
 
 /// Dataset: Summary table of verb examples (V1–V5) for quick comparison.
 final List<Map<String, dynamic>> verbExamples = const [
@@ -81,6 +82,20 @@ final List<Map<String, dynamic>> fiveFormsSections = const [
       {'en': 'speak', 'mm': 'ပြောသည်'},
       {'en': 'eat', 'mm': 'စားသည်'},
     ],
+    'sentence_examples': [
+      {
+        'en': 'I go to school every day.',
+        'mm': 'ကျွန်တော် နေ့တိုင်း ကျောင်းသွားပါတယ်။',
+      },
+      {
+        'en': 'You should speak English.',
+        'mm': 'မင်း အင်္ဂလိပ်စာ ပြောသင့်တယ်။',
+      },
+      {
+        'en': 'They eat breakfast at 7am.',
+        'mm': 'သူတို့ မနက်စာကို နံနက် ၇ နာရီမှာ စားတယ်။',
+      }
+    ],
   },
   {
     'title': 'V5: Third-Person Singular Present (-s/-es)',
@@ -92,6 +107,14 @@ final List<Map<String, dynamic>> fiveFormsSections = const [
       {'en': 'speaks', 'mm': 'ပြောသည် (သူ)'},
       {'en': 'studies', 'mm': 'သင်ယူသည် (သူ)'},
     ],
+    'sentence_examples': [
+      {'en': 'He goes to the gym.', 'mm': 'သူ အားကစားရုံ သွားပါတယ်။'},
+      {'en': 'She speaks very well.', 'mm': 'သူမ စကားပြော အရမ်းကောင်းပါတယ်။'},
+      {
+        'en': 'My brother studies at university.',
+        'mm': 'ကျွန်တော့်အစ်ကို တက္ကသိုလ်မှာ သင်ယူပါတယ်။',
+      },
+    ],
   },
   {
     'title': 'V2: Past Simple',
@@ -101,6 +124,13 @@ final List<Map<String, dynamic>> fiveFormsSections = const [
     'examples': [
       {'en': 'played (regular)', 'mm': 'ကစားခဲ့သည်'},
       {'en': 'went, spoke (irregular)', 'mm': 'သွားခဲ့သည်၊ ပြောခဲ့သည်'},
+    ],
+    'sentence_examples': [
+      {
+        'en': 'I played football yesterday.',
+        'mm': 'မနေ့က ကျွန်တော် ဘောလုံးကစားခဲ့တယ်။',
+      },
+      {'en': 'They went to Yangon.', 'mm': 'သူတို့ ရန်ကုန်ကို သွားခဲ့ကြတယ်။'},
     ],
   },
   {
@@ -113,6 +143,17 @@ final List<Map<String, dynamic>> fiveFormsSections = const [
       {'en': 'speaking', 'mm': 'ပြောနေသည်'},
       {'en': 'eating', 'mm': 'စားနေသည်'},
     ],
+    'sentence_examples': [
+      {'en': 'I am going now.', 'mm': 'ကျွန်တော် အခု သွားနေပြီ။'},
+      {
+        'en': 'Eating healthy is good.',
+        'mm': 'ကျန်းမာရေးနှင့်ညီညွတ်စွာ စားခြင်းသည် ကောင်းမွန်သည်။',
+      },
+      {
+        'en': 'She is speaking to her friend.',
+        'mm': 'သူမ သူမရဲ့ မိတ်ဆွေကို ပြောနေသည်။',
+      }
+    ],
   },
   {
     'title': 'V3: Past Participle',
@@ -123,6 +164,17 @@ final List<Map<String, dynamic>> fiveFormsSections = const [
       {'en': 'gone', 'mm': 'သွားပြီး'},
       {'en': 'spoken', 'mm': 'ပြောပြီး'},
       {'en': 'eaten', 'mm': 'စားပြီး'},
+    ],
+    'sentence_examples': [
+      {'en': 'He has gone to work.', 'mm': 'သူ အလုပ်သွားပြီ (ရောက်သွားပြီ)။'},
+      {
+        'en': 'The apple was eaten.',
+        'mm': 'ပန်းသီးကို စားလိုက်ပြီ (အစားခံလိုက်ရသည်)။',
+      },
+      {
+        'en': 'They have spoken to the teacher.',
+        'mm': 'သူတို့ ဆရာနဲ့ ပြောပြီး (ပြောဆွေးနွေးပြီး)။',
+      }
     ],
   },
 ];
@@ -138,6 +190,11 @@ final List<Map<String, dynamic>> regularVsIrregularData = const [
       {'v1': 'play', 'v2': 'played', 'v3': 'played'},
       {'v1': 'study', 'v2': 'studied', 'v3': 'studied'},
     ],
+    'sentence_examples': [
+      {'en': 'I work here. → I worked here yesterday.', 'mm': 'ကျွန်တော် ဒီမှာ အလုပ်လုပ်တယ်။ → မနေ့က ဒီမှာ အလုပ်လုပ်ခဲ့တယ်။'},
+      {'en': 'They play football. → They played football.', 'mm': 'သူတို့ ဘောလုံးကစားကြတယ်။ → သူတို့ ဘောလုံးကစားခဲ့ကြတယ်။'},
+      {'en': 'She studies hard. → She studied hard.', 'mm': 'သူမ စာကြိုးစားတယ်။ → သူမ စာကြိုးစားခဲ့တယ်။'},
+    ],
   },
   {
     'title': 'Irregular Verbs',
@@ -147,6 +204,11 @@ final List<Map<String, dynamic>> regularVsIrregularData = const [
       {'v1': 'begin', 'v2': 'began', 'v3': 'begun'},
       {'v1': 'bring', 'v2': 'brought', 'v3': 'brought'},
       {'v1': 'go', 'v2': 'went', 'v3': 'gone'},
+    ],
+    'sentence_examples': [
+      {'en': 'We begin the class. → We began the class.', 'mm': 'ကျွန်တော်တို့ အတန်းစတယ်။ → ကျွန်တော်တို့ အတန်းစခဲ့တယ်။'},
+      {'en': 'I bring water. → I brought water.', 'mm': 'ကျွန်တော် ရေယူလာတယ်။ → ကျွန်တော် ရေယူလာခဲ့တယ်။'},
+      {'en': 'He goes home. → He went home.', 'mm': 'သူ အိမ်ပြန်တယ်။ → သူ အိမ်ပြန်သွားခဲ့တယ်။'},
     ],
   },
 ];
@@ -476,6 +538,7 @@ class VerbFormsScreen extends StatelessWidget {
 
   Widget _buildFormCard(BuildContext context, Map<String, dynamic> section) {
     final examples = section['examples'] as List<dynamic>? ?? [];
+    final sentences = section['sentence_examples'] as List<dynamic>? ?? [];
     return Card(
       elevation: 0,
       margin: const EdgeInsets.only(bottom: 12),
@@ -536,6 +599,52 @@ class VerbFormsScreen extends StatelessWidget {
                 }).toList(),
               ),
             ],
+
+            // NEW: Sentence Examples Section
+            if (sentences.isNotEmpty) ...[
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: Divider(height: 1),
+              ),
+              ...sentences.map((s) {
+                final map = s as Map<String, dynamic>;
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withAlpha(15),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              map['en'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                            Text(
+                              map['mm'],
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.grey.shade600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SpeakButton(text: map['en'] as String),
+                    ],
+                  ),
+                );
+              }),
+            ],
           ],
         ),
       ),
@@ -543,10 +652,12 @@ class VerbFormsScreen extends StatelessWidget {
   }
 
   Widget _buildRegularIrregularCard(
-    BuildContext context,
-    Map<String, dynamic> data,
-  ) {
+      BuildContext context,
+      Map<String, dynamic> data,
+      ) {
     final examples = data['examples'] as List<dynamic>? ?? [];
+    final sentences = data['sentence_examples'] as List<dynamic>? ?? [];
+
     return Card(
       elevation: 0,
       margin: const EdgeInsets.only(bottom: 12),
@@ -562,15 +673,15 @@ class VerbFormsScreen extends StatelessWidget {
           children: [
             Text(
               data['title'] as String,
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 6),
             Text(
               data['usage'] as String,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(fontSize: 14),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 14),
             ),
+
+            // Verb Form Chips
             if (examples.isNotEmpty) ...[
               const SizedBox(height: 10),
               Wrap(
@@ -579,12 +690,62 @@ class VerbFormsScreen extends StatelessWidget {
                 children: examples.map<Widget>((e) {
                   final map = e as Map<String, dynamic>;
                   return Chip(
+                    backgroundColor: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
                     label: Text('${map['v1']} → ${map['v2']} → ${map['v3']}'),
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     visualDensity: VisualDensity.compact,
                   );
                 }).toList(),
               ),
+            ],
+
+            // Sentence Examples Section
+            if (sentences.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              const Text(
+                "Usage in Sentences:",
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.blueGrey),
+              ),
+              const SizedBox(height: 8),
+              ...sentences.map((s) {
+                final map = s as Map<String, dynamic>;
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withAlpha(15),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              map['en'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              map['mm'],
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey.shade700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SpeakButton(text: map['en'] as String),
+                    ],
+                  ),
+                );
+              })
             ],
           ],
         ),

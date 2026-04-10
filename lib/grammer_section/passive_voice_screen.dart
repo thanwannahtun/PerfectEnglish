@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perfect_english/widgets/speak_button.dart';
 
 import 'quiz_lesson_page.dart';
 
@@ -2047,14 +2048,17 @@ class PassiveVoiceDetailScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
             Text(
-              "Usage (အသုံးပြုပုံ)",
+              "အသုံးပြုပုံ (Usage)",
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
             Text(tense['usage'], style: const TextStyle(fontSize: 16)),
 
             const Divider(height: 40),
-            Text("Examples", style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              "နမူနာဝါကျများ (Examples Sentences)",
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 10),
 
             // Inside your TenseDetailScreen loop:
@@ -2072,13 +2076,21 @@ class PassiveVoiceDetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Active: ${ex['active']}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          // color: Colors.blue,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "Active: ${ex['active']}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                // color: Colors.blue,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                          SpeakButton(text: ex['active'] ?? ""),
+                        ],
                       ),
                       Text(
                         ex['active_mm'],
@@ -2088,13 +2100,22 @@ class PassiveVoiceDetailScreen extends StatelessWidget {
                         ),
                       ),
                       Divider(),
-                      Text(
-                        "Passive: ${ex['passive']}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "Passive: ${ex['passive']}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green,
+                              ),
+                            ),
+                          ),
+                          SpeakButton(text: ex['passive'] ?? ""),
+                        ],
                       ),
+
                       Text(
                         ex['passive_mm'],
                         style: TextStyle(
