@@ -5,6 +5,7 @@ import 'package:perfect_english/ui/screens/aung_san_suu_kyi_biography.dart';
 import 'package:perfect_english/widgets/app_drawer.dart';
 import 'certification/certification_quiz_screen.dart';
 import 'grammer_section/grammer_hub.dart';
+import 'services/tts_download_notification_service.dart';
 import 'splash_screen.dart';
 import 'spoken_pattern/spoken_pattern_screen.dart';
 import 'widgets/naya_group.dart';
@@ -15,6 +16,9 @@ import 'widgets/speak_button.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize notification service once at app start
+  await TtsDownloadNotificationService.instance.initialize();
 
   //Initialize sherpa_onnx native libraries
   sherpa.initBindings();
@@ -189,18 +193,18 @@ class BaseApplication extends StatelessWidget {
                 // Divider(height: 0.1),
               ),
               Divider(height: 0.1, color: Colors.grey.shade800),
-              ListTile(
-                title: Text(
-                  "အောင်ဆန်းစုကြည် (Aung San Suu Kyi)",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                trailing: Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => AungSanSuuKyiBiography(),
-                  ),
-                ),              ),
-              Divider(height: 0.1, color: Colors.grey.shade800),
+              // ListTile(
+              //   title: Text(
+              //     "အောင်ဆန်းစုကြည် (Aung San Suu Kyi)",
+              //     style: Theme.of(context).textTheme.titleMedium,
+              //   ),
+              //   trailing: Icon(Icons.chevron_right),
+              //   onTap: () => Navigator.of(context).push(
+              //     MaterialPageRoute(
+              //       builder: (context) => AungSanSuuKyiBiography(),
+              //     ),
+              //   ),              ),
+              // Divider(height: 0.1, color: Colors.grey.shade800),
               SizedBox(height: 24),
               NayaGroup(),
             ],
