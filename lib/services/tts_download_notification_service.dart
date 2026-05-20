@@ -21,7 +21,7 @@ class TtsDownloadNotificationService {
   Future<void> initialize() async {
     if (_initialized) return;
 
-    const android = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const android = AndroidInitializationSettings('@mipmap/launcher_icon');
     const ios = DarwinInitializationSettings(
       requestAlertPermission: false, // ask separately via permission_handler
       requestBadgePermission: false,

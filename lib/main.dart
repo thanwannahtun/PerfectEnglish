@@ -141,58 +141,88 @@ class BaseApplication extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              ListTile(
-                title: Text(
-                  "ဝါစင်္ဂ ၈ မျိုး (8 Parts Of Speech)",
-                  style: Theme.of(context).textTheme.titleMedium,
+              Card(
+                color: Theme.of(context).colorScheme.onPrimary,
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(color: Colors.grey.shade800),
                 ),
-                trailing: Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => PartOfSpeechs()),
-                ),
-              ),
-              Divider(height: 0.1, color: Colors.grey.shade800),
-              ListTile(
-                title: Text(
-                  "သဒ္ဒါ (Grammar)",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                trailing: Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => GrammarHubScreen()),
+                elevation: 0.0,
+                child: ListTile(
+                  title: Text(
+                    "ဝါစင်္ဂ ၈ မျိုး (8 Parts Of Speech)",
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  trailing: Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => PartOfSpeechs()),
+                  ),
                 ),
               ),
-              // Divider(height: 0.1),
-              Divider(height: 0.1, color: Colors.grey.shade800),
-
-              ListTile(
-                title: Text(
-                  "စကားပြောပုံစံများ (Spoken Patterns)",
-                  style: Theme.of(context).textTheme.titleMedium,
+              Card(
+                color: Theme.of(context).colorScheme.onPrimary,
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(color: Colors.grey.shade800),
                 ),
-                trailing: Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => SpokenPatternsScreen(),
+                elevation: 0.0,
+                child: ListTile(
+                  title: Text(
+                    "သဒ္ဒါ (Grammar)",
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  trailing: Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => GrammarHubScreen()),
+                  ),
+                ),
+              ),
+              Card(
+                color: Theme.of(context).colorScheme.onPrimary,
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(color: Colors.grey.shade800),
+                ),
+                elevation: 0.0,
+                child: ListTile(
+                  title: Text(
+                    "စကားပြောပုံစံများ (Spoken Patterns)",
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  trailing: Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => SpokenPatternsScreen(),
+                    ),
                   ),
                 ),
               ),
               // Divider(height: 0.1),
-              Divider(height: 0.1, color: Colors.grey.shade800),
-              ListTile(
-                title: Text(
-                  "အောင်မှတ်လက်မှတ် စစ်ဆေးမှု (Certification Quiz)",
-                  style: Theme.of(context).textTheme.titleMedium,
+              Card(
+                color: Theme.of(context).colorScheme.onPrimary,
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(color: Colors.grey.shade800),
                 ),
-                trailing: Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => CertificationQuizScreen(),
+                elevation: 0.0,
+                child: ListTile(
+                  title: Text(
+                    "အောင်မှတ်လက်မှတ် စစ်ဆေးမှု (Certification Quiz)",
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
+                  trailing: Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => CertificationQuizScreen(),
+                    ),
+                  ),
+                  // Divider(height: 0.1),
                 ),
-                // Divider(height: 0.1),
               ),
-              Divider(height: 0.1, color: Colors.grey.shade800),
               // ListTile(
               //   title: Text(
               //     "အောင်ဆန်းစုကြည် (Aung San Suu Kyi)",
