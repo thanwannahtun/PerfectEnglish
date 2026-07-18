@@ -58,13 +58,22 @@ class _TtsSettingsPageState extends State<TtsSettingsPage> {
       appBar: AppBar(title: const Text('Voice Settings')),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: _checking
-            ? const Center(child: CircularProgressIndicator())
-            : _isModelReady
-            ? _buildReadyView()
-            : TtsModelDownloader(onModelReady: () {
-          setState(() => _isModelReady = true);
-        }),
+        child: ListenableBuilder(
+          listenable: _service,
+          builder: (context, _) {
+            if (_checking) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (_service.status == TtsModelStatus.ready || _isModelReady) {
+              return _buildReadyView();
+            }
+            return TtsModelDownloader(
+              onModelReady: () {
+                if (mounted) setState(() => _isModelReady = true);
+              },
+            );
+          },
+        ),
       ),
     );
   }

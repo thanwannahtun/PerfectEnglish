@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:sherpa_onnx/sherpa_onnx.dart' as sherpa;
+import 'package:flutter/foundation.dart';
 
 import 'dart:async';
 import 'dart:isolate';
@@ -23,7 +24,7 @@ const kModelTotalSizeMb = 336; // uncompressed ~336MB, tar.bz2 ~170MB download
 
 enum TtsModelStatus { notDownloaded, downloading, extracting, ready, error }
 
-class KokoroTtsService {
+class KokoroTtsService extends ChangeNotifier {
   KokoroTtsService._();
   static final KokoroTtsService instance = KokoroTtsService._();
 
@@ -77,12 +78,17 @@ class KokoroTtsService {
   /// Downloads the single tar.bz2 and extracts it.
   /// [onProgress] 0.0–1.0 covering download phase (extraction has no progress).
   Future<void> downloadModel({
-    required void Function(double progress) onProgress,
+    void Function(double progress)? onProgress,
     void Function(String error)? onError,
   }) async {
+    if (_status == TtsModelStatus.downloading || _status == TtsModelStatus.extracting) {
+      return; // Prevent multiple concurrent downloads
+    }
+
     _status = TtsModelStatus.downloading;
     _downloadProgress = 0.0;
     _errorMessage = null;
+    notifyListeners();
 
     try {
       final root = await _modelsRootDir;
@@ -105,7 +111,8 @@ class KokoroTtsService {
         onReceiveProgress: (received, total) {
           if (total > 0) {
             _downloadProgress = received / total;
-            onProgress(_downloadProgress * 0.9); // Reserve 10% for extraction
+            onProgress?.call(_downloadProgress * 0.9); // Reserve 10% for extraction
+            notifyListeners();
           }
         },
       );
@@ -116,10 +123,11 @@ class KokoroTtsService {
 
       // ── Extract ───────────────────────────────────────────────────────────
       _status = TtsModelStatus.extracting;
-      onProgress(0.92);
+      onProgress?.call(0.92);
+      notifyListeners();
 
       await _extractArchive(archiveFile, root);
-      onProgress(1.0);
+      onProgress?.call(1.0);
 
       // Verify extraction succeeded
       final modelOk = await isModelDownloaded();
@@ -129,10 +137,12 @@ class KokoroTtsService {
 
       _status = TtsModelStatus.ready;
       _downloadProgress = 1.0;
+      notifyListeners();
     } catch (e) {
       _status = TtsModelStatus.error;
       _errorMessage = _friendlyError(e.toString());
       onError?.call(_errorMessage!);
+      notifyListeners();
     }
   }
 
@@ -402,5 +412,6 @@ class KokoroTtsService {
     _initialized = false;
     _status = TtsModelStatus.notDownloaded;
     _downloadProgress = 0.0;
+    notifyListeners();
   }
 }
