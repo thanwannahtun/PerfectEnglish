@@ -1,8 +1,13 @@
 import 'dart:math';
 import 'dart:async';
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:perfect_english/services/sound_service.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CertificationQuizScreen extends StatefulWidget {
   const CertificationQuizScreen({super.key});
@@ -223,7 +228,24 @@ class _CertificationQuizScreenState extends State<CertificationQuizScreen> {
   @override
   Widget build(BuildContext context) {
     if (quizCompleted) {
-      return CertificateView(score: score, total: masterQuestions.length);
+      double percentage = (score / masterQuestions.length) * 100;
+      if (percentage >= 80) {
+        return CertificateView(score: score, total: masterQuestions.length);
+      } else {
+        return FailedView(
+          score: score,
+          total: masterQuestions.length,
+          onRetry: () {
+            setState(() {
+              currentQuestionIndex = 0;
+              score = 0;
+              quizCompleted = false;
+              selectedOption = null;
+              isCorrect = null;
+            });
+          },
+        );
+      }
     }
 
     final currentQ = masterQuestions[currentQuestionIndex];
@@ -382,106 +404,192 @@ class _CertificationQuizScreenState extends State<CertificationQuizScreen> {
 // If the user scores above 80%, they get the Gold Certificate.
 // Below that, they get a Completion Certificate.
 
-class CertificateView extends StatelessWidget {
+class CertificateView extends StatefulWidget {
   final int score;
   final int total;
 
   const CertificateView({super.key, required this.score, required this.total});
 
   @override
+  State<CertificateView> createState() => _CertificateViewState();
+}
+
+class _CertificateViewState extends State<CertificateView> {
+  final ScreenshotController screenshotController = ScreenshotController();
+  bool isSharing = false;
+
+  void _shareCertificate() async {
+    setState(() => isSharing = true);
+    try {
+      final image = await screenshotController.capture(delay: const Duration(milliseconds: 10));
+      if (image == null) return;
+      
+      final directory = await getTemporaryDirectory();
+      final imagePath = await File('${directory.path}/certificate.png').create();
+      await imagePath.writeAsBytes(image);
+
+      final percentage = (widget.score / widget.total) * 100;
+      await Share.shareXFiles(
+        [XFile(imagePath.path)],
+        text: 'I just scored ${percentage.toStringAsFixed(0)}% on the Perfect English Final Exam!',
+      );
+    } catch (e) {
+      debugPrint('Error sharing certificate: $e');
+    } finally {
+      if (mounted) setState(() => isSharing = false);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     SoundService.playAchievement();
-    double percentage = (score / total) * 100;
-    bool isExcellent = percentage >= 80;
+    double percentage = (widget.score / widget.total) * 100;
+    
+    final now = DateTime.now();
+    final months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    final todayDate = '${months[now.month - 1]} ${now.day}, ${now.year}';
 
     return Stack(
       children: [
         Theme(
           data: ThemeData(),
           child: Scaffold(
-            body: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.indigo.shade900, Colors.black],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
+            backgroundColor: Colors.indigo.shade900,
+            body: SafeArea(
               child: Center(
-                child: Container(
-                  margin: const EdgeInsets.all(20),
-                  padding: const EdgeInsets.all(30),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.amber, width: 8),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.verified, size: 80, color: Colors.amber),
-                      const SizedBox(height: 20),
-                      const Text(
-                        "CERTIFICATE OF MERIT",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                      const Divider(thickness: 2),
-                      const SizedBox(height: 20),
-                      const Text(
-                        "This is to certify that the user of",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      const Text(
-                        "PERFECT ENGLISH APP",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.indigo,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      const Text(
-                        "Has successfully mastered English Grammar including",
-                        textAlign: TextAlign.center,
-                      ),
-                      const Text(
-                        "TENSES, PASSIVE VOICE, & INVERSION",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Screenshot(
+                          controller: screenshotController,
+                          child: Container(
+                            color: Colors.white,
+                            padding: const EdgeInsets.all(16),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFDFBF7),
+                                border: Border.all(color: Colors.amber.shade700, width: 8),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  // Watermark
+                                  Opacity(
+                                    opacity: 0.08,
+                                    child: Image.asset(
+                                      'assets/images/perfect_english_logo.png',
+                                      width: 250,
+                                      height: 250,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(24.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/perfect_english_logo.png', 
+                                          height: 70,
+                                          errorBuilder: (context, error, stackTrace) => const Icon(Icons.school, size: 70, color: Colors.indigo),
+                                        ),
+                                        const SizedBox(height: 15),
+                                        Text(
+                                          "CERTIFICATE OF MERIT",
+                                          style: TextStyle(
+                                            fontSize: 26,
+                                            fontFamily: 'serif',
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.indigo.shade900,
+                                            letterSpacing: 2,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(height: 15),
+                                        const Text(
+                                          "This is proudly presented to the user of",
+                                          style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic, color: Colors.black87),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(height: 8),
+                                        const Text(
+                                          "PERFECT ENGLISH APP",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.amber,
+                                            letterSpacing: 1.5,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(height: 20),
+                                        const Text(
+                                          "For successfully mastering English Grammar\nwith an outstanding score of:",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(fontSize: 14, height: 1.5, color: Colors.black87),
+                                        ),
+                                        const SizedBox(height: 15),
+                                        Text(
+                                          "${percentage.toStringAsFixed(0)}%",
+                                          style: TextStyle(
+                                            fontSize: 40,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.indigo.shade800,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20),
+                                        Text(
+                                          "Awarded on $todayDate",
+                                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black87),
+                                        ),
+                                        const SizedBox(height: 30),
+                                        // Signatures
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Container(width: 80, height: 1, color: Colors.black),
+                                                const SizedBox(height: 5),
+                                                const Text("Director", style: TextStyle(fontSize: 12, color: Colors.black87)),
+                                              ],
+                                            ),
+                                            const Icon(Icons.verified, size: 50, color: Colors.amber),
+                                            Column(
+                                              children: [
+                                                Container(width: 80, height: 1, color: Colors.black),
+                                                const SizedBox(height: 5),
+                                                const Text("Instructor", style: TextStyle(fontSize: 12, color: Colors.black87)),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 30),
-                      Text(
-                        "Final Score: $percentage%",
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: isExcellent ? Colors.green : Colors.orange,
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                      const Text(
-                        "Date: February 24, 2026",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      const SizedBox(height: 20),
                       ElevatedButton.icon(
-                        onPressed: () {
-                          /* Add screenshot share logic here */
-                        },
-                        icon: const Icon(Icons.share),
-                        label: const Text("Share Your Achievement"),
+                        onPressed: isSharing ? null : _shareCertificate,
+                        icon: isSharing ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)) : const Icon(Icons.share),
+                        label: Text(isSharing ? "Preparing..." : "Share Your Achievement"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber,
                           foregroundColor: Colors.black,
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
@@ -489,18 +597,79 @@ class CertificateView extends StatelessWidget {
             ),
           ),
         ),
-        // certificate UI
+        // Confetti / Balloons
         ...List.generate(12, (_) => const Balloon(color: Colors.pink)),
         const Firework(),
         Positioned(
-          top: 25,
-          left: 25,
-          child: IconButton.outlined(
+          top: 40,
+          left: 20,
+          child: IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: Icon(Icons.close, color: Colors.white),
+            icon: const Icon(Icons.close, color: Colors.white, size: 30),
           ),
         ),
       ],
+    );
+  }
+}
+
+class FailedView extends StatelessWidget {
+  final int score;
+  final int total;
+  final VoidCallback onRetry;
+
+  const FailedView({super.key, required this.score, required this.total, required this.onRetry});
+
+  @override
+  Widget build(BuildContext context) {
+    double percentage = (score / total) * 100;
+
+    return Scaffold(
+      backgroundColor: Colors.indigo.shade900,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+             mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.sentiment_dissatisfied, size: 80, color: Colors.amber),
+              const SizedBox(height: 20),
+              const Text(
+                "Keep Learning!",
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "You scored ${percentage.toStringAsFixed(0)}%.",
+                style: const TextStyle(fontSize: 20, color: Colors.white70),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "You need at least 80% to earn the Certificate of Merit.\nReview the lessons and try again!",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16, color: Colors.white70, height: 1.5),
+              ),
+              const SizedBox(height: 40),
+              ElevatedButton.icon(
+                onPressed: onRetry,
+                icon: const Icon(Icons.refresh),
+                label: const Text("Retry Exam"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.amber,
+                  foregroundColor: Colors.black,
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+              const SizedBox(height: 15),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Back to Home", style: TextStyle(color: Colors.white)),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
