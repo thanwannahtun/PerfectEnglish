@@ -151,12 +151,6 @@ class _TtsModelDownloaderState extends State<TtsModelDownloader> {
   final _service = KokoroTtsService.instance;
   final _notif = TtsDownloadNotificationService.instance;
 
-  double _progress = 0.0;
-  bool _isDownloading = false;
-  String? _error;
-  TtsModelStatus _phase = TtsModelStatus.notDownloaded;
-
-
   Future<void> _startDownload() async {
     await _notif.requestPermission();
 
@@ -166,31 +160,11 @@ class _TtsModelDownloaderState extends State<TtsModelDownloader> {
       body: 'Starting download…',
     );
 
-    if (mounted) {
-      setState(() {
-        _isDownloading = true;
-        _error = null;
-        _progress = 0.0;
-        _phase = TtsModelStatus.downloading;
-      });
-    }
-
-    // Check mounted before using context to show SnackBar or Pop
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text("Downloading in background..."),
-          backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
-        ),
-      );
-      Navigator.of(context).pop(); // <--- This makes the widget "Defunct"
-    }
-
+    // Call service download, relying on ListenableBuilder for UI updates
     await _service.downloadModel(
       onProgress: (prog) {
-        // Logic for notifications (Does NOT need mounted check as it's a global service)
-        _phase = _service.status;
-        if (_phase == TtsModelStatus.extracting) {
+        final phase = _service.status;
+        if (phase == TtsModelStatus.extracting) {
           _notif.showProgress(
             progress: null,
             title: 'Installing AI Voice',
@@ -204,46 +178,23 @@ class _TtsModelDownloaderState extends State<TtsModelDownloader> {
             body: '$pct% • ${(prog * 170).toStringAsFixed(0)} / 170 MB',
           );
         }
-
-        // CRITICAL FIX: Only update UI if the user hasn't closed the sheet
-        if (mounted) {
-          setState(() {
-            _progress = prog;
-          });
-        }
       },
       onError: (e) {
         _notif.showError(e);
-        // CRITICAL FIX: Only update UI if the user hasn't closed the sheet
-        if (mounted) {
-          setState(() {
-            _error = e;
-            _isDownloading = false;
-            _phase = TtsModelStatus.error;
-          });
-        }
       },
     );
 
     if (_service.status == TtsModelStatus.ready) {
       await _service.initialize();
       await _notif.showComplete();
-
-      // widget.onModelReady() should still be safe to call as it's a callback,
-      // but check mounted just in case it triggers UI updates elsewhere.
       widget.onModelReady();
-    } else {
-      // Final mounted check for the end of the function
-      if (mounted) {
-        setState(() => _isDownloading = false);
-      }
     }
   }
 
-  String get _statusLabel {
-    switch (_phase) {
+  String _getStatusLabel(TtsModelStatus phase, double progress) {
+    switch (phase) {
       case TtsModelStatus.downloading:
-        return 'Downloading… ${(_progress * 100).toStringAsFixed(0)}%';
+        return 'Downloading… ${(progress * 100).toStringAsFixed(0)}%';
       case TtsModelStatus.extracting:
         return 'Extracting model files…';
       case TtsModelStatus.ready:
@@ -256,8 +207,16 @@ class _TtsModelDownloaderState extends State<TtsModelDownloader> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      margin: const EdgeInsets.all(16),
+    return ListenableBuilder(
+      listenable: _service,
+      builder: (context, child) {
+        final phase = _service.status;
+        final progress = _service.downloadProgress;
+        final error = _service.errorMessage;
+        final isDownloading = phase == TtsModelStatus.downloading || phase == TtsModelStatus.extracting;
+
+        return Container(
+          margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: theme.colorScheme.surfaceContainerHighest,
@@ -290,13 +249,13 @@ class _TtsModelDownloaderState extends State<TtsModelDownloader> {
             ),
           ),
           const SizedBox(height: 16),
-          if (_isDownloading) ...[
+          if (isDownloading) ...[
             LinearProgressIndicator(
-              value: _phase == TtsModelStatus.extracting ? null : _progress,
+              value: phase == TtsModelStatus.extracting ? null : progress,
               borderRadius: BorderRadius.circular(4),
             ),
             const SizedBox(height: 8),
-            Text(_statusLabel, style: theme.textTheme.bodySmall),
+            Text(_getStatusLabel(phase, progress), style: theme.textTheme.bodySmall),
             const SizedBox(height: 8),
             // Let user close sheet manually too
             TextButton(
@@ -304,7 +263,7 @@ class _TtsModelDownloaderState extends State<TtsModelDownloader> {
               child: const Text('Continue browsing'),
             ),
           ] else ...[
-            if (_error != null) ...[
+            if (error != null) ...[
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -312,7 +271,7 @@ class _TtsModelDownloaderState extends State<TtsModelDownloader> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  _error!,
+                  error,
                   style: TextStyle(
                     color: theme.colorScheme.onErrorContainer,
                     fontSize: 12,
@@ -326,7 +285,7 @@ class _TtsModelDownloaderState extends State<TtsModelDownloader> {
               onPressed: _startDownload,
               icon: const Icon(Icons.download_rounded),
               label: Text(
-                _error != null ? 'Retry Download' : 'Download AI Voice',
+                error != null ? 'Retry Download' : 'Download AI Voice',
               ),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
@@ -338,6 +297,8 @@ class _TtsModelDownloaderState extends State<TtsModelDownloader> {
           ],
         ],
       ),
+    );
+      },
     );
   }
 }

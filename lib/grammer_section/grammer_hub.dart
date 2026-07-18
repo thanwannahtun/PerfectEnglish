@@ -4,6 +4,7 @@ import 'package:perfect_english/grammer_section/tenses_category_screen.dart';
 import 'package:perfect_english/grammer_section/verb_forms.dart';
 
 import 'articles_detail_screen.dart';
+import 'causative_structure.dart';
 import 'conditionals_screen.dart' show ConditionalsScreen;
 import 'gerunds_vs_infinitives_screen.dart' show GerundsVsInfinitivesScreen;
 import 'inversion_detail_screen.dart' show InversionDetailScreen;
@@ -65,6 +66,10 @@ class GrammarHubScreen extends StatelessWidget {
           'title': 'Conditionals (If Clauses)',
           'desc': 'Zero, First, and Second conditionals',
           'detailScreen': ConditionalsScreen(),
+        },{
+          'title': 'Causative Structures',
+          'desc': 'Let, Make, Have, Get, Help, etc.',
+          'detailScreen': CausativeStructure(),
         },
       ],
     },

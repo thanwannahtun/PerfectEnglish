@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perfect_english/parts_of_speech.dart';
 import 'package:perfect_english/services/sound_service.dart';
-import 'package:perfect_english/ui/screens/aung_san_suu_kyi_biography.dart';
 import 'package:perfect_english/widgets/app_drawer.dart';
 import 'certification/certification_quiz_screen.dart';
 import 'grammer_section/grammer_hub.dart';
@@ -12,7 +11,6 @@ import 'widgets/naya_group.dart';
 
 import 'package:sherpa_onnx/sherpa_onnx.dart' as sherpa;
 import 'services/kokoro_tts_service.dart';
-import 'widgets/speak_button.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

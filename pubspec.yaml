@@ -39,6 +39,12 @@ flutter:
     - assets/images/
     - assets/sounds/
     - assets/lottie/
+    - assets/fonts/
+
+  fonts:
+    - family: Pyidaungsu
+      fonts:
+        - asset: assets/fonts/Pyidaungsu.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
