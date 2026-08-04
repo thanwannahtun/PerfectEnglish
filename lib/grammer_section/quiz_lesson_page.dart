@@ -186,13 +186,20 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Chip(
-                    label: Text(quiz['type'] ?? 'Practice'),
-                    backgroundColor: colorScheme.secondaryContainer,
-                    labelStyle: textTheme.labelMedium?.copyWith(
-                      color: colorScheme.onSecondaryContainer,
+                  Expanded(
+                    child: Chip(
+                      label: Text(
+                        quiz['type'] ?? 'Practice',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      backgroundColor: colorScheme.secondaryContainer,
+                      labelStyle: textTheme.labelMedium?.copyWith(
+                        color: colorScheme.onSecondaryContainer,
+                      ),
                     ),
                   ),
+                  const SizedBox(width: 8),
                   Text(
                     "Question ${currentIdx + 1}/${widget.quizData.length}",
                     style: textTheme.bodyMedium?.copyWith(
@@ -238,13 +245,13 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
                 bool isSelected = (selectedOption == opt);
                 bool isCorrectAnswer = (opt == correctAnswer);
                 bool showFeedback = (selectedOption != null);
-          
+
                 // Define colors based on state
                 // Color backgroundColor = colorScheme.surface;
                 Color backgroundColor = colorScheme.onPrimary;
                 Color borderColor = colorScheme.outline.withOpacity(0.3);
                 Color textColor = colorScheme.onSurface;
-          
+
                 if (showFeedback) {
                   if (isCorrectAnswer) {
                     backgroundColor = colorScheme.primaryContainer;
@@ -256,7 +263,7 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
                     textColor = colorScheme.onErrorContainer;
                   }
                 }
-          
+
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 12),
                   child: GestureDetector(
@@ -302,7 +309,9 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
                                 ? 1.0
                                 : 0.0,
                             child: Icon(
-                              isCorrectAnswer ? Icons.check_circle : Icons.cancel,
+                              isCorrectAnswer
+                                  ? Icons.check_circle
+                                  : Icons.cancel,
                               color: isCorrectAnswer
                                   ? colorScheme.primary
                                   : colorScheme.error,
@@ -316,7 +325,7 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
               }),
               const SizedBox(height: 20),
               // const Spacer(),
-          
+
               // Navigation Buttons Row
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -329,7 +338,7 @@ class _QuizLessonPageState extends State<QuizLessonPage> {
                     )
                   else
                     const SizedBox.shrink(),
-          
+
                   // Optional: You could add a manual "Next" button here
                   // if they want to skip the 2-second wait.
                 ],

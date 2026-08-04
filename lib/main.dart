@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:perfect_english/parts_of_speech.dart';
 import 'package:perfect_english/services/sound_service.dart';
+import 'package:perfect_english/speaking/speaking_categories.dart';
 import 'package:perfect_english/widgets/app_drawer.dart';
 import 'certification/certification_quiz_screen.dart';
 import 'grammer_section/grammer_hub.dart';
@@ -194,6 +195,27 @@ class BaseApplication extends StatelessWidget {
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => SpokenPatternsScreen(),
+                    ),
+                  ),
+                ),
+              ),
+              Card(
+                color: Theme.of(context).colorScheme.onPrimary,
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(color: Colors.grey.shade800),
+                ),
+                elevation: 0.0,
+                child: ListTile(
+                  title: Text(
+                    "မှတ်သားစရာများ (Speakings Essentials)",
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  trailing: Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => SpeakingCategories(),
                     ),
                   ),
                 ),
