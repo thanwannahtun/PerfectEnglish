@@ -62,7 +62,6 @@ class KokoroTtsService extends ChangeNotifier {
   SendPort? _isolateSendPort;
   bool _isolateReady = false;
 
-
   // ─── Status Check ────────────────────────────────────────────────────────
 
   /// Returns true only when model.onnx exists and is > 300MB (full model)
@@ -81,7 +80,8 @@ class KokoroTtsService extends ChangeNotifier {
     void Function(double progress)? onProgress,
     void Function(String error)? onError,
   }) async {
-    if (_status == TtsModelStatus.downloading || _status == TtsModelStatus.extracting) {
+    if (_status == TtsModelStatus.downloading ||
+        _status == TtsModelStatus.extracting) {
       return; // Prevent multiple concurrent downloads
     }
 
@@ -96,13 +96,15 @@ class KokoroTtsService extends ChangeNotifier {
       final archiveFile = File(archivePath);
 
       // ── Download ──────────────────────────────────────────────────────────
-      final dio = Dio(BaseOptions(
-        connectTimeout: const Duration(seconds: 30),
-        receiveTimeout: const Duration(minutes: 15),
-        followRedirects: true,       // ✅ Required — GitHub redirects to CDN
-        maxRedirects: 10,            // ✅ Allow multiple redirects
-        validateStatus: (status) => status != null && status < 400,
-      ));
+      final dio = Dio(
+        BaseOptions(
+          connectTimeout: const Duration(seconds: 30),
+          receiveTimeout: const Duration(minutes: 15),
+          followRedirects: true, // ✅ Required — GitHub redirects to CDN
+          maxRedirects: 10, // ✅ Allow multiple redirects
+          validateStatus: (status) => status != null && status < 400,
+        ),
+      );
 
       await dio.download(
         _kModelArchiveUrl,
@@ -111,7 +113,9 @@ class KokoroTtsService extends ChangeNotifier {
         onReceiveProgress: (received, total) {
           if (total > 0) {
             _downloadProgress = received / total;
-            onProgress?.call(_downloadProgress * 0.9); // Reserve 10% for extraction
+            onProgress?.call(
+              _downloadProgress * 0.9,
+            ); // Reserve 10% for extraction
             notifyListeners();
           }
         },
@@ -132,7 +136,9 @@ class KokoroTtsService extends ChangeNotifier {
       // Verify extraction succeeded
       final modelOk = await isModelDownloaded();
       if (!modelOk) {
-        throw Exception('Extraction failed — model.onnx not found or too small.');
+        throw Exception(
+          'Extraction failed — model.onnx not found or too small.',
+        );
       }
 
       _status = TtsModelStatus.ready;
@@ -151,11 +157,12 @@ class KokoroTtsService extends ChangeNotifier {
   Future<void> _extractArchive(File archive, Directory destDir) async {
     // Try system tar first (available on Android 5+, iOS, macOS, Linux)
     try {
-      final result = await Process.run(
-        'tar',
-        ['-xjf', archive.path, '-C', destDir.path],
-        runInShell: false,
-      );
+      final result = await Process.run('tar', [
+        '-xjf',
+        archive.path,
+        '-C',
+        destDir.path,
+      ], runInShell: false);
       if (result.exitCode == 0) {
         await archive.delete();
         return;
@@ -181,29 +188,31 @@ class KokoroTtsService extends ChangeNotifier {
       ['-f', '-k', archive.path], // -k = keep original
     );
     // bunzip2 creates file without .bz2 extension in same dir
-    final decompressedTar = File(
-      archive.path.replaceAll('.bz2', ''),
-    );
+    final decompressedTar = File(archive.path.replaceAll('.bz2', ''));
 
     if (bz2Result.exitCode != 0 || !decompressedTar.existsSync()) {
       // Last resort: try xz/gzip style with shell
-      final shellResult = await Process.run(
-        '/bin/sh',
-        ['-c', 'cd "${destDir.path}" && tar xjf "${archive.path}"'],
-      );
+      final shellResult = await Process.run('/bin/sh', [
+        '-c',
+        'cd "${destDir.path}" && tar xjf "${archive.path}"',
+      ]);
       if (shellResult.exitCode != 0) {
-        throw Exception('All extraction methods failed. '
-            'bunzip2: ${bz2Result.stderr}, shell tar: ${shellResult.stderr}');
+        throw Exception(
+          'All extraction methods failed. '
+          'bunzip2: ${bz2Result.stderr}, shell tar: ${shellResult.stderr}',
+        );
       }
       await archive.delete();
       return;
     }
 
     // Step 2: extract .tar
-    final tarResult = await Process.run(
-      'tar',
-      ['-xf', decompressedTar.path, '-C', destDir.path],
-    );
+    final tarResult = await Process.run('tar', [
+      '-xf',
+      decompressedTar.path,
+      '-C',
+      destDir.path,
+    ]);
     if (tarResult.exitCode == 0) {
       await archive.delete();
       await decompressedTar.delete();
@@ -276,19 +285,15 @@ class KokoroTtsService extends ChangeNotifier {
 
   /// Returns raw GeneratedAudio (has .samples Float32List and .sampleRate int)
   Future<sherpa.GeneratedAudio?> synthesize(
-      String text, {
-        int speakerId = 0,   // 0=af_sky (female), 10=af_sky, 11=am_adam (male)
-        double speed = 1.0,
-      }) async {
+    String text, {
+    int speakerId = 0, // 0=af_sky (female), 10=af_sky, 11=am_adam (male)
+    double speed = 1.0,
+  }) async {
     if (!_initialized) await initialize();
     if (_tts == null) return null;
     if (text.trim().isEmpty) return null;
 
-    return _tts!.generate(
-      text: text.trim(),
-      sid: speakerId,
-      speed: speed,
-    );
+    return _tts!.generate(text: text.trim(), sid: speakerId, speed: speed);
   }
 
   /// Synthesizes to a WAV file and returns the file path.
@@ -296,10 +301,10 @@ class KokoroTtsService extends ChangeNotifier {
   ///
   /// ✅ FIX: audio.save() does NOT exist. Use sherpa.writeWave() instead.
   Future<String?> synthesizeToFile(
-      String text, {
-        int speakerId = 0,
-        double speed = 1.0,
-      }) async {
+    String text, {
+    int speakerId = 0,
+    double speed = 1.0,
+  }) async {
     final audio = await synthesize(text, speakerId: speakerId, speed: speed);
     if (audio == null) return null;
 
@@ -312,13 +317,12 @@ class KokoroTtsService extends ChangeNotifier {
     // ✅ CORRECT API — top-level writeWave function from sherpa_onnx package
     final success = sherpa.writeWave(
       filename: outPath,
-      samples: audio.samples,      // Float32List
+      samples: audio.samples, // Float32List
       sampleRate: audio.sampleRate, // int (24000 for Kokoro)
     );
 
     return success ? outPath : null;
   }
-
 
   /// Starts the background synthesis isolate (call once after initialize())
   Future<void> startIsolate() async {
@@ -350,10 +354,10 @@ class KokoroTtsService extends ChangeNotifier {
   ///   final stream = service.synthesizeParagraph(text);
   ///   stream.listen((path) => player.add(AudioSource.file(path)));
   Stream<TtsSynthResult> synthesizeParagraph(
-      String text, {
-        int speakerId = 0,
-        double speed = 1.0,
-      }) async* {
+    String text, {
+    int speakerId = 0,
+    double speed = 1.0,
+  }) async* {
     if (!_initialized) await initialize();
     final dirPath = await _modelDirPath;
     final sentences = TtsSentenceSplitter.split(text);
@@ -366,25 +370,27 @@ class KokoroTtsService extends ChangeNotifier {
 
       if (_isolateReady && _isolateSendPort != null) {
         // Fast path: use pre-warmed isolate
-        _isolateSendPort!.send(TtsSynthRequest(
-          text: sentence,
-          speakerId: speakerId,
-          speed: speed,
-          modelDir: dirPath,
-          replyPort: replyPort.sendPort,
-        ));
+        _isolateSendPort!.send(
+          TtsSynthRequest(
+            text: sentence,
+            speakerId: speakerId,
+            speed: speed,
+            modelDir: dirPath,
+            replyPort: replyPort.sendPort,
+          ),
+        );
         final result = await replyPort.first as TtsSynthResult;
         replyPort.close();
         yield result;
       } else {
         // Fallback: synthesize inline (no isolate)
-        final path = await synthesizeToFile(sentence,
-            speakerId: speakerId, speed: speed);
-        replyPort.close();
-        yield TtsSynthResult(
-          wavPath: path,
-          originalText: sentence,
+        final path = await synthesizeToFile(
+          sentence,
+          speakerId: speakerId,
+          speed: speed,
         );
+        replyPort.close();
+        yield TtsSynthResult(wavPath: path, originalText: sentence);
       }
     }
   }
